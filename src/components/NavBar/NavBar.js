@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
     AppBar,
-    Button,
     Tab,
     Tabs,
     Toolbar,
@@ -13,6 +12,7 @@ import {
     Divider
 } from '@material-ui/core'
 
+//React-icons
 import { FiBookOpen } from 'react-icons/fi'
 import { RiMoneyPoundCircleFill } from 'react-icons/ri'
 import {
@@ -21,9 +21,13 @@ import {
 } from 'react-icons/bs'
 import { ImHappy } from 'react-icons/im'
 import { FaCss3Alt } from "react-icons/fa";
+
+//Components
 import DrawerComponent from './DrawerComponent/DrawerComponent'
 import Logindialog from '../dialog/Logindialog';
-import Login from '../Login'
+import Login from '../pages/Login'
+import Registerdialog from '../dialog/Registerdialog';
+import Register from '../pages/Register'
 
 const useStyles = makeStyles((theme) => ({
     icons: {
@@ -33,20 +37,9 @@ const useStyles = makeStyles((theme) => ({
         color: 'yellow',
         fontSize: '3rem'
     },
-    accountButton: {
-        height: '55px',
-        width: '80px',
-        marginLeft: 'auto',
-        '&:hover': {
-            background: '#4877c2',
-        }
-    },
     navContainer: {
-        paddingLeft: '8%',
-        paddingRight: '8%'
-    },
-    tabContainer: {
-
+        maxWidth: '1200px',
+        width: '1190px'
     }
 }))
 export default function NavBar() {
@@ -65,16 +58,16 @@ export default function NavBar() {
     };
 
     return (
-        <div>
+        <Grid container alignContent='center' alignitem='center' justify='center'>
             <Grid className={classes.navContainer}>
-                <AppBar color='primary' position='static'>
+                <AppBar color='primary' position='sticky'>
                     <Toolbar>
                         <Typography>
                             <FaCss3Alt className={classes.iconLogo} />
                         </Typography>
                         <Typography style={{ marginLeft: '10px', fontSize: '20px' }}>
                             Rendezvous
-                    </Typography>
+                        </Typography>
                         {isMatch ? <DrawerComponent /> : (
                             <>
                                 <Tabs onChange={handleClickTab} indicatorColor='secondary' value={value}>
@@ -109,22 +102,22 @@ export default function NavBar() {
                                         label="About"
                                     />
                                 </Tabs>
-                                <Logindialog title="Register Here">
-                                    <Login />
-                                </Logindialog>
-                                <Divider orientation="vertical" flexItem style={{ marginLeft: 'auto' }} />
-                                <Button
-                                    disableRipple
-                                    color='inherit'
-                                    className={classes.accountButton}
-                                >
-                                    Signup
-                                </Button>
+                                <Grid style={{marginRight: 'auto'}}>
+                                    <Logindialog title="Login Here">
+                                        <Login />
+                                    </Logindialog>
+                                </Grid>  
+                                <Divider orientation="vertical" flexItem style={{ margin: '10px', backgroundColor: 'white' }}/>               
+                                <Grid style={{marginLeft: 'auto'}}>
+                                    <Registerdialog title="Register Here">
+                                        <Register />
+                                    </Registerdialog>
+                                </Grid>
                             </>
                         )}
                     </Toolbar>
                 </AppBar>
             </Grid>
-        </div>
+        </Grid>
     )
 }
