@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = (theme) => ({
     root: {
         margin: 0,
-        padding: theme.spacing(2),
+        width: '85%'
     },
     closeButton: {
         position: 'absolute',
