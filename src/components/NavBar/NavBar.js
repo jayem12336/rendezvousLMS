@@ -10,6 +10,7 @@ import {
     useTheme,
     Grid,
     Divider,
+    Button,
 } from '@material-ui/core'
 
 //React router
@@ -28,11 +29,10 @@ import { FaCss3Alt } from "react-icons/fa";
 //Components
 import DrawerComponent from './DrawerComponent/DrawerComponent'
 import Login from '../../pages/Login'
+import Signup from '../../pages/Signup'
 
 //Popup dialog
-import Logindialog from '../dialog/Logindialog'
-import Registerdialog from '../dialog/Registerdialog'
-import Signup from '../../pages/Signup'
+import { useLocalContext } from '../../context/context'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,9 +67,38 @@ const useStyles = makeStyles((theme) => ({
         height: '20px',
         color: '#000000',
         borderBlockStart: ''
+    },
+    accountButton: {
+        height: '55px',
+        width: '80px',
+        marginLeft: 'auto',
+        '&:hover': {
+            background: '#4877c2',
+        }
     }
+
 }))
 export default function NavBar() {
+
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClose = () => setAnchorEl(null);
+
+    const {
+        setCreateLoginDialog,
+        setCreateRegisterDialog,
+    } = useLocalContext();
+
+    const handleLogin = () => {
+        handleClose()
+        setCreateLoginDialog(true)
+        
+    }
+
+    const handleRegister = () => {
+        handleClose()
+        setCreateRegisterDialog(true)
+    }
 
     //BreakPoint
     const theme = useTheme();
@@ -118,8 +147,8 @@ export default function NavBar() {
                         </Typography>
                         {isMatch ? <DrawerComponent /> : (
                             <>
-                            {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
-                                <Tabs style={{marginLeft: '100px'}}>
+                                {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
+                                <Tabs style={{ marginLeft: '100px' }}>
                                     <Tab
                                         style={{ fontSize: '10px', fontWeight: 'bold' }}
                                         icon={<FiBookOpen className={classes.icons} />}
@@ -161,21 +190,31 @@ export default function NavBar() {
                                         to='/nonuserabout'
                                     />
                                 </Tabs>
-                                <Grid style={{marginLeft: '50px'}}>
-                                    <Logindialog title="Please Login">
-                                        <Login />
-                                    </Logindialog>
+                                <Grid style={{ marginLeft: '50px' }}>
+                                    <Button
+                                        color="inherit"
+                                        className={classes.accountButton}
+                                        onClick={handleLogin}
+                                    >
+                                        Login
+                                    </Button>
                                 </Grid>
                                 <Divider orientation="vertical" flexItem style={{ margin: '10px', backgroundColor: 'black' }} />
                                 <Grid>
-                                    <Registerdialog title="Signup">
-                                        <Signup />
-                                    </Registerdialog>
+                                    <Button
+                                        color="inherit"
+                                        className={classes.accountButton}
+                                        onClick={handleRegister}
+                                    >
+                                        Sign Up
+                                    </Button>
                                 </Grid>
                             </>
                         )}
                     </Toolbar>
-                </AppBar>            
+                </AppBar>
+                <Login />
+                <Signup />
             </Grid>
         </Grid>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +16,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import DrawerList from '../userdashboard/DrawerList'
 
+import { Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda } from '@syncfusion/ej2-react-schedule';
 const drawerWidth = 90
 
 const useStyles = makeStyles((theme) => ({
@@ -44,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '3rem'
     },
     PaperStyle: {
-        height: "200px",
-        width: "200px"
-    }
+        height: "600px",
+        width: "700px"
+    },
 }));
 
 function Simplemenu() {
@@ -115,59 +116,9 @@ function ClippedDrawer() {
             <main className={classes.content}>
                 <Toolbar />
                 <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item>
-                        <Paper className={classes.PaperStyle}>
-                            <Typography>DashBoard</Typography>
-                        </Paper>
-                    </Grid>
+                    <ScheduleComponent>
+                        <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
+                    </ScheduleComponent>
                 </Grid>
             </main>
         </div>

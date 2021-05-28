@@ -2,13 +2,13 @@
 import React from 'react'
 
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
-import NavBar from '../components/navbar/NavBar'
+import NavBar from '../components/NavBar/NavBar'
 
 import imageEbook from '../components/assets/Ebooks-PNG.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#0973b5',
+        backgroundColor: '#fff',
         paddingBottom: '20px',
         maxWidth: '2000px'
     },
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "14px",
         paddingTop: 10,
         paddingBottom: 10,
-        color: "white",
+        color: "black",
         borderWidth: '3px'
     }
 

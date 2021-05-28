@@ -5,7 +5,7 @@ export default function PublicRoute({component: Component, isAuthenticated,restr
     
     return (
         <Route {...rest} component={(props)=> 
-        isAuthenticated && restricted ?  <Redirect to="/home"/> : <Component {...props} />
+        isAuthenticated && restricted ?  <Redirect to="/userdashboard"/> : <Component {...props} />
         }/>
     ) 
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState, useEffect } from 'react'
+import firebase from './utils/firebase'
 
 //router
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
@@ -7,6 +8,9 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { ThemeProvider } from '@material-ui/core'
 import theme from './utils/theme'
 
+/** Router */
+import PrivateRoute from './routers/PrivateRoute'
+import PublicRoute from './routers/PublicRoute'
 //Non user Pages
 import nonUserHome from './nonuserhomepage/Home'
 import nonUserAbout from './nonuserhomepage/About'
@@ -23,69 +27,109 @@ import FaqsContent from './userdashboard/FaqsContent'
 import GuideContent from './userdashboard/GuideContent'
 import SmileContent from './userdashboard/SmileContent'
 
-function App() {
+function App({ isAuthenticated }) {
+  const [values, setValues] = useState({
+    isAuthenticated: false,
+    isLoading: true
+  })
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        setValues({ isAuthenticated: true, isLoading: false });
+      } else {
+        // No user is signed in.
+        setValues({ isAuthenticated: false, isLoading: false });
+      }
+      console.log("useEffect", user);
+    });
+  }, [])
+
+  if (values.isLoading) {
+    return <h1>Loading...</h1>
+  }
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
           <Route path="/" exact >
-            <Redirect to="/dashboardcontent" />
+            <Redirect to="/nonuserhome" />
           </Route>
-          <Route
+          <PublicRoute
             component={nonUserHome}
             path='/nonuserhome'
+            isAuthenticated={values.isAuthenticated}
+            restricted={true}
           />
-          <Route
+          <PublicRoute
             component={nonUserAbout}
             path='/nonuserabout'
+            isAuthenticated={values.isAuthenticated}
+            restricted={true}
           />
-          <Route
+          <PublicRoute
             component={nonUserFaqs}
             path='/nonuserfaqs'
+            isAuthenticated={values.isAuthenticated}
+            restricted={true}
           />
-          <Route
+          <PublicRoute
             component={nonUserGuide}
             path='/nonuserguide'
+            isAuthenticated={values.isAuthenticated}
+            restricted={true}
           />
-          <Route
+          <PublicRoute
             component={nonUserSmile}
             path='/nonusersmile'
+            isAuthenticated={values.isAuthenticated}
+            restricted={true}
           />
-          <Route
+          <PrivateRoute
             component={UserDashboard}
             path='/userdashboard'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={DashboardContent}
             path='/dashboardcontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={ClassContent}
             path='/classcontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={CalendarContent}
             path='/calendarcontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={FileContent}
             path='/filecontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={AboutContent}
             path='/aboutcontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={FaqsContent}
             path='/faqscontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={GuideContent}
             path='/guidecontent'
+            isAuthenticated={values.isAuthenticated}
           />
-          <Route
+          <PrivateRoute
             component={SmileContent}
             path='/smilecontent'
+            isAuthenticated={values.isAuthenticated}
           />
         </Switch>
       </Router>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import firebase from '../utils/firebase'
+import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +16,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import DrawerList from '../userdashboard/DrawerList'
+
 
 const drawerWidth = 90
 
@@ -48,6 +51,8 @@ function Simplemenu() {
 
     const classes = useStyles();
 
+    const history = useHistory();
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -56,6 +61,16 @@ function Simplemenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const logout = () => {
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            history.push('/nonuserhome');
+
+        }).catch((error) => {
+            // An error happened.
+        });
+
+    }
     return (
         <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
@@ -67,11 +82,11 @@ function Simplemenu() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                style={{marginTop:"40px"}}
+                style={{ marginTop: "40px" }}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
         </div>
     );
@@ -109,7 +124,7 @@ function ClippedDrawer() {
             </Drawer>
             <main className={classes.content}>
                 <Toolbar />
-                
+
             </main>
         </div>
     );

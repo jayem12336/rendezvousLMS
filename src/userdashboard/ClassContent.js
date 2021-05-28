@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Material-ui components
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,13 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import DrawerList from '../userdashboard/DrawerList'
 
+import CreateClass from './CreateClass/CreateClass'
+import Form from './CreateClass/Form'
+
+import { useLocalContext } from '../context/context'
+
 const drawerWidth = 90
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 function Simplemenu() {
 
     const classes = useStyles();
@@ -64,10 +72,13 @@ function Simplemenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
     return (
         <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
                 <AccountCircleIcon className={classes.iconLogo} />
+
             </Button>
             <Menu
                 id="simple-menu"
@@ -75,43 +86,59 @@ function Simplemenu() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                style={{marginTop:"40px"}}
+                style={{ marginTop: "40px" }}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}>My Account</MenuItem>
+                <MenuItem onClick={handleClose}>Log Out</MenuItem>
             </Menu>
         </div>
     );
 }
 function Classroom() {
+    const classes = useStyles()
 
-    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = useState(null)
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClose = () => setAnchorEl(null);
+
+    const {
+        setCreateClassDialog,
+        setJoinClassDialog,
+    } = useLocalContext();
+
+    const handleCreate = () => {
+        handleClose()
+        setCreateClassDialog(true)
+    }
+
+    const handleJoin = () => {
+        handleClose()
+        setJoinClassDialog(true)
+    }
+
+
     return (
         <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
                 <BsPlusCircle className={classes.iconLogoplus} />
+
             </Button>
             <Menu
-                id="simple-menu"
+                id='simple-menu'
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                style={{marginTop:"40px"}}
             >
-                <MenuItem onClick={handleClose}>Join Class</MenuItem>
-                <MenuItem onClick={handleClose}>Create Class</MenuItem>
-                <MenuItem onClick={handleClose}>Create School</MenuItem>
+                <MenuItem onClick={handleJoin}>
+                    Join Class
+                            </MenuItem>
+                <MenuItem onClick={handleCreate}>
+                    Create Class
+                            </MenuItem>
             </Menu>
         </div>
     );
@@ -124,7 +151,7 @@ function ClippedDrawer() {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                
+
                 <Toolbar>
                     <Typography>
                         <FaCss3Alt className={classes.iconLogo} />
@@ -151,15 +178,17 @@ function ClippedDrawer() {
             </Drawer>
             <main className={classes.content}>
                 <Toolbar />
-                <AppBar style={{marginTop:'60px', width:'100%', maxWidth:'100%'}}>
-                <Toolbar>
-                    <Typography style={{ marginLeft: '90px', fontSize: '20px' }}>
-                        Class
+                <AppBar style={{ marginTop: '60px', width: '100%', maxWidth: '100%' }}>
+                    <Toolbar>
+                        <Typography style={{ marginLeft: '90px', fontSize: '20px' }}>
+                            Class
                     </Typography>
-                    <Classroom />
-                </Toolbar>
-            </AppBar>
+                        <Classroom />
+                    </Toolbar>
+                </AppBar>
             </main>
+            <CreateClass />
+
         </div>
     );
 }
@@ -168,6 +197,7 @@ export default function ClassContent() {
     return (
         <div>
             <ClippedDrawer />
+
         </div>
     )
 }
