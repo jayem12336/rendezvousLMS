@@ -113,7 +113,7 @@ export default function Login() {
                     //var user = userCredential.user;
                     // ...
                     setValues({ ...values, errors: "", isLoading: false })
-                    history.push('/userdashboard')
+                    history.push('/dashboardcontent')
                     setCreateLoginDialog(false);
 
                 })
@@ -128,7 +128,7 @@ export default function Login() {
     if (values.isLoading) {
         return (
             <div className={classes.root}>
-                <CircularProgress color="primary" size={200} />
+                <CircularProgress color="black" size={200} />
             </div>
         );
     }

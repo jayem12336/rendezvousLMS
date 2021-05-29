@@ -1,15 +1,11 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { FaCss3Alt } from "react-icons/fa";
-import DrawerList from './DrawerList'
-import Simplemenu from '../SImpleMenu/SimpleMenu'
 
-const drawerWidth = 90
+import { makeStyles } from '@material-ui/core/styles';
+
+import Drawer from '@material-ui/core/Drawer';
+import DrawerList from './DrawerList'
+
+const drawerWidth = 75
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,13 +51,12 @@ function ClippedDrawer() {
                 </div>
             </Drawer>
             <main className={classes.content}>
-                <h1>About</h1>
             </main>
         </div>
     );
 }
 
-export default function AboutContent() {
+export default function UserDrawer() {
     return (
         <div>
             <ClippedDrawer />

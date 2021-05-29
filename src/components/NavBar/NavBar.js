@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import {
     AppBar,
     Tab,
@@ -11,6 +12,7 @@ import {
     Grid,
     Divider,
     Button,
+    Icon    
 } from '@material-ui/core'
 
 //React router
@@ -24,7 +26,6 @@ import {
     BsFillBrightnessHighFill
 } from 'react-icons/bs'
 import { ImHappy } from 'react-icons/im'
-import { FaCss3Alt } from "react-icons/fa";
 
 //Components
 import DrawerComponent from './DrawerComponent/DrawerComponent'
@@ -34,6 +35,8 @@ import Signup from '../../pages/Signup'
 //Popup dialog
 import { useLocalContext } from '../../context/context'
 
+//Logo 
+import Logo from '../assets/RendezvousLogo.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.5rem'
     },
     iconLogo: {
-        color: 'yellow',
-        fontSize: '3rem'
+        height: '80px',
+        width: '100px'
     },
     navContainer: {
         maxWidth: '1400px',
@@ -107,12 +110,6 @@ export default function NavBar() {
 
     const classes = useStyles();
 
-    const [value, setValue] = useState(0);
-
-    const handleClickTab = (e, newValue) => {
-        setValue(newValue);
-    };
-
     const [navBackground, setNavBackground] = useState('appBarTransparent');
 
     const navRef = React.useRef();
@@ -133,29 +130,30 @@ export default function NavBar() {
         }
     }, [])
 
-
     return (
         <Grid container alignContent='center' alignitem='center' justify='center' className={classes.root}>
             <Grid className={classes.navContainer}>
                 <AppBar color='primary' position="static" className={classes[navRef.current]}>
                     <Toolbar className={classes.customizeToolbar}>
                         <Typography>
-                            <FaCss3Alt className={classes.iconLogo} />
+                            <Icon>
+                                <img src={Logo} alt="logo" className={classes.iconLogo}/>
+                            </Icon>
                         </Typography>
-                        <Typography style={{ marginLeft: '10px', fontSize: '20px' }}>
+                        <Typography style={{ fontSize: '20px' }}>
                             Rendezvous
                         </Typography>
                         {isMatch ? <DrawerComponent /> : (
                             <>
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
-                                <Tabs style={{ marginLeft: '100px' }}>
+                                <Tabs style={{ marginLeft: '70px' }}>
                                     <Tab
                                         style={{ fontSize: '10px', fontWeight: 'bold' }}
                                         icon={<FiBookOpen className={classes.icons} />}
                                         disableRipple
                                         label="Home"
                                         component={Link}
-                                        to='/nonuserhome'
+                                        to='/home'
                                     />
                                     <Tab
                                         style={{ fontSize: '10px', fontWeight: 'bold' }}
@@ -163,14 +161,14 @@ export default function NavBar() {
                                         disableRipple
                                         label="Faqs"
                                         component={Link}
-                                        to='/nonuserfaqs'
+                                        to='/faqs'
                                     />
                                     <Tab
                                         style={{ fontSize: '10px', fontWeight: 'bold' }}
                                         icon={<BsFillPersonPlusFill className={classes.icons} />}
                                         label="Guide"
                                         component={Link}
-                                        to='/nonuserguide'
+                                        to='/guide'
 
                                     />
                                     <Tab
@@ -179,7 +177,7 @@ export default function NavBar() {
                                         disableRipple
                                         label="Smile"
                                         component={Link}
-                                        to='/nonusersmile'
+                                        to='/smile'
                                     />
                                     <Tab
                                         style={{ fontSize: '10px', fontWeight: 'bold' }}
@@ -187,7 +185,7 @@ export default function NavBar() {
                                         disableRipple
                                         label="About"
                                         component={Link}
-                                        to='/nonuserabout'
+                                        to='/about'
                                     />
                                 </Tabs>
                                 <Grid style={{ marginLeft: '50px' }}>
@@ -215,6 +213,7 @@ export default function NavBar() {
                 </AppBar>
                 <Login />
                 <Signup />
+                {isMatch ?  '' : <hr></hr>}
             </Grid>
         </Grid>
     )

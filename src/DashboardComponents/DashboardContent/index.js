@@ -1,0 +1,8 @@
+export { default as DashboardAbout } from './DashboardAbout/AboutContent'
+export { default as DashboardCalendar } from './DashboardCalendar/CalendarContent'
+export { default as DashboardClass } from './DashboardClass/ClassContent'
+export { default as DashboardFaqs } from './DashboardFaqs/FaqsContent'
+export { default as DashboardFile } from './DashboardFile/FileContent'
+export { default as DashboardGuide } from './DashboardGuide/GuideContent'
+export { default as DashboardSmile } from './DashboardSmile/SmileContent'
+export { default as DashboardContent } from './DashboardContent/DashboardContent'

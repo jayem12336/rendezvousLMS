@@ -5,7 +5,7 @@ export default function PrivateRoute({component: Component, isAuthenticated, ...
     
     return (
         <Route {...rest} component={(props)=> 
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/nonuserhome" />
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/home" />
         }/>
     ) 
 }

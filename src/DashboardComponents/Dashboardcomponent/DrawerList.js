@@ -10,7 +10,9 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ClassIcon from '@material-ui/icons/Class';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import HistoryIcon from '@material-ui/icons/History';
-import { FaCss3Alt } from 'react-icons/fa';
+
+//Logo 
+import Logo from '../../components/assets/RendezvousLogo.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,33 +25,36 @@ const useStyles = makeStyles((theme) => ({
     },
     listItemIcon: {
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
+        marginLeft: '-10px',
         flexDirection: 'column'
     },
     iconLogo: {
         color: 'skyblue',
         fontSize: '3rem'
     },
+    iconLogo: {
+        marginTop: '-25px',
+        marginLeft: '-16px',
+        height: '80px',
+        width: '70px'
+    },
 }));
 
 function NestedList() {
+
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
 
     return (
         <Grid container>
             <List
                 component="nav"
-                aria-labelledby="nested-list-subheader"
                 className={classes.root}
             >
                 <ListItem button
                     component={Link}
                     to='/dashboardcontent'>
-                    <ListItemIcon className={classes.listItemIcon} >
-                        <FaCss3Alt className={classes.iconLogo} />
-                    </ListItemIcon>
+                    <img src={Logo} alt="logo" className={classes.iconLogo} />
                 </ListItem>
                 <ListItem button
                     component={Link}
@@ -61,7 +66,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/classcontent'
+                    to='/dashboardclass'
                 >
                     <ListItemIcon className={classes.listItemIcon}>
                         <ClassIcon />
@@ -70,7 +75,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/calendarcontent'>
+                    to='/dashboardcalendar'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <CalendarTodayIcon />
                         Calendar
@@ -78,7 +83,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/filecontent'>
+                    to='/dashboardfile'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <HistoryIcon />
                         File
@@ -86,7 +91,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/aboutcontent'>
+                    to='/dashboardabout'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <DashboardIcon />
                             About
@@ -94,7 +99,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/faqscontent'>
+                    to='/dashboardfaqs'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <ClassIcon />
                             Faqs
@@ -102,7 +107,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/guidecontent'>
+                    to='/dashboardguide'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <CalendarTodayIcon />
                             Guide
@@ -110,7 +115,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem button
                     component={Link}
-                    to='/smilecontent'>
+                    to='/dashboardsmile'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <HistoryIcon />
                             Smile

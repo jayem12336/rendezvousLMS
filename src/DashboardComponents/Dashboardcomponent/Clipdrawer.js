@@ -1,18 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Divider, Grid, IconButton, TextField, Toolbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import DrawerList from './DrawerList'
-import { BsPlusCircle } from 'react-icons/bs';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AddIcon from '@material-ui/icons/Add';
-const drawerWidth = 90
+import DrawerList from '../Dashboardcomponent/DrawerList'
+
+const drawerWidth = 70
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ClippedDrawer() {
+export default function ClipDrawer( {children} ) {
+
     const classes = useStyles();
 
     return (
@@ -78,27 +72,8 @@ function ClippedDrawer() {
                 </div>
             </Drawer>
             <main className={classes.content}>
-                <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <Typography variant="h6" className={classes.title}>
-                                DashBoard
-                         </Typography>
-                         <AddIcon className={classes.dashboariconStyle}/>
-                         <NotificationsIcon className={classes.dashboariconStyle}/>
-                         <MoreVertIcon className={classes.dashboariconStyle}/>
-                        </Toolbar>
-                    </AppBar>
-                </Grid>
+                {children}
             </main>
-        </div>
-    );
-}
-
-export default function DashboardContent() {
-    return (
-        <div>
-            <ClippedDrawer />
         </div>
     )
 }

@@ -5,33 +5,38 @@ import firebase, { db } from './utils/firebase'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 //theme
-import { ThemeProvider } from '@material-ui/core'
+import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import theme from './utils/theme'
 
 /** Router */
 import PrivateRoute from './routers/PrivateRoute'
 import PublicRoute from './routers/PublicRoute'
-//Non user Pages
-import nonUserHome from './nonuserhomepage/Home'
-import nonUserAbout from './nonuserhomepage/About'
-import nonUserFaqs from './nonuserhomepage/Faqs'
-import nonUserGuide from './nonuserhomepage/Guide'
-import nonUserSmile from './nonuserhomepage/Smile'
-import UserDashboard from './userdashboard/dashboard/UserDrawer'
-import DashboardContent from './userdashboard/dashboard/DashboardContent'
-import ClassContent from './userdashboard/dashboard/ClassContent'
-import CalendarContent from './userdashboard/dashboard/CalendarContent'
-import FileContent from './userdashboard/dashboard/FileContent'
-import AboutContent from './userdashboard/dashboard/AboutContent'
-import FaqsContent from './userdashboard/dashboard/FaqsContent'
-import GuideContent from './userdashboard/dashboard/GuideContent'
-import SmileContent from './userdashboard/dashboard/SmileContent'
-import Main from './Main/Main'
-import { useLocalContext } from './context/context'
-import JoinedClasses from './userdashboard/JoinedClasses/JoinedClasses'
 
+//Homepage Components
+import { About, Faqs, Guide, Home, Smile } from './homepage'
+
+//Non user Pages
+import UserDashboard from './DashboardComponents/Dashboardcomponent/UserDrawer'
+import Main from './main/Main'
+
+//Context Dialog
+import { useLocalContext } from './context/context'
+import JoinedClasses from './DashboardComponents/JoinedClasses/JoinedClasses'
+
+//DashBoard Components
+import {
+  DashboardAbout,
+  DashboardCalendar,
+  DashboardClass,
+  DashboardContent,
+  DashboardFaqs,
+  DashboardFile,
+  DashboardGuide,
+  DashboardSmile,
+} from './DashboardComponents/DashboardContent'
 
 function App({ isAuthenticated }) {
+
   const { loggedInMail } = useLocalContext();
 
   const [createdClasses, setCreatedClasses] = useState([]);
@@ -87,8 +92,19 @@ function App({ isAuthenticated }) {
 
 
   if (values.isLoading) {
-    return <h1>Loading...</h1>
+    return (
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        // flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <CircularProgress color="black" size={200} />
+      </div>
+    );
   }
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -96,47 +112,47 @@ function App({ isAuthenticated }) {
           {createdClasses.map((item, index) => (
 
             <Route key={index} exact path={`/${item.id}`}>
-              <ClassContent />
-              <Main classData={item}/>
+              <DashboardClass />
+              <Main classData={item} />
             </Route>
           ))}
           {joinedClasses.map((item, index) => (
 
             <Route key={index} exact path={`/${item.id}`}>
-              <ClassContent />
-              <Main classData={item}/>
+              <DashboardClass />
+              <Main classData={item} />
             </Route>
           ))}
           <Route path="/" exact >
-            <Redirect to="/nonuserhome" />
+            <Redirect to="/home" />
           </Route>
           <PublicRoute
-            component={nonUserHome}
-            path='/nonuserhome'
+            component={Home}
+            path='/home'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
           <PublicRoute
-            component={nonUserAbout}
-            path='/nonuserabout'
+            component={About}
+            path='/about'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
           <PublicRoute
-            component={nonUserFaqs}
-            path='/nonuserfaqs'
+            component={Faqs}
+            path='/faqs'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
           <PublicRoute
-            component={nonUserGuide}
-            path='/nonuserguide'
+            component={Guide}
+            path='/guide'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
           <PublicRoute
-            component={nonUserSmile}
-            path='/nonusersmile'
+            component={Smile}
+            path='/smile'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
@@ -152,12 +168,12 @@ function App({ isAuthenticated }) {
           />
           <PrivateRoute
             user={loggedInMail}
-            component={ClassContent}
-            path='/classcontent'
+            component={DashboardClass}
+            path='/dashboardclass'
             isAuthenticated={values.isAuthenticated}
             exact
           >
-            <ClassContent />
+            <DashboardClass />
             <ol className="joined">
               {createdClasses.map((item) => (
                 <JoinedClasses classData={item} />
@@ -169,33 +185,33 @@ function App({ isAuthenticated }) {
 
           </PrivateRoute>
           <PrivateRoute
-            component={CalendarContent}
-            path='/calendarcontent'
+            component={DashboardCalendar}
+            path='/dashboardcalendar'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
-            component={FileContent}
-            path='/filecontent'
+            component={DashboardFile}
+            path='/dashboardfile'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
-            component={AboutContent}
-            path='/aboutcontent'
+            component={DashboardAbout}
+            path='/dashboardabout'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
-            component={FaqsContent}
-            path='/faqscontent'
+            component={DashboardFaqs}
+            path='/dashboardfaqs'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
-            component={GuideContent}
-            path='/guidecontent'
+            component={DashboardGuide}
+            path='/dashboardguide'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
-            component={SmileContent}
-            path='/smilecontent'
+            component={DashboardSmile}
+            path='/dashboardsmile'
             isAuthenticated={values.isAuthenticated}
           />
         </Switch>

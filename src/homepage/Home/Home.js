@@ -1,10 +1,13 @@
-
 import React from 'react'
 
+//Material ui
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
-import NavBar from '../components/NavBar/NavBar'
 
-import imageEbook from '../components/assets/Ebooks-PNG.png'
+//Component Navbar
+import NavBar from '../../components/NavBar/NavBar'
+
+//Image
+import imageEbook from '../../components/assets/Ebooks-PNG.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
