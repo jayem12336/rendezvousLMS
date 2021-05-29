@@ -17,8 +17,9 @@ import { useLocalContext } from '../../../context/context'
 import { Grid } from '@material-ui/core';
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
 
-const drawerWidth = 90
-
+//Create and Join Class
+import CreateClass from '../../CreateClass/CreateClass'
+import JoinClass from '../../JoinClass/JoinClass'
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -84,7 +85,7 @@ export default function ClassContent() {
         <div>
             <ClipDrawer>
                 <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={6}>
-                    <AppBar position="static">
+                    <AppBar position="static" color='white'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
                                 Class
@@ -93,6 +94,8 @@ export default function ClassContent() {
                         </Toolbar>
                     </AppBar>
                 </Grid>
+                <CreateClass />
+                <JoinClass />
             </ClipDrawer>
         </div>
     )

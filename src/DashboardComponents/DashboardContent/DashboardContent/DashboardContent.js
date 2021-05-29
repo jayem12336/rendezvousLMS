@@ -29,7 +29,7 @@ export default function DashboardContent() {
         <div>
             <ClipDrawer>
                 <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
-                    <AppBar position="static">
+                    <AppBar position="static" color='white'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
                                 DashBoard

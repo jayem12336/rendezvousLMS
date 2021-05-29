@@ -17,7 +17,7 @@ import { About, Faqs, Guide, Home, Smile } from './homepage'
 
 //Non user Pages
 import UserDashboard from './DashboardComponents/Dashboardcomponent/UserDrawer'
-import Main from './main/Main'
+import Main from './DashboardComponents/main/Main'
 
 //Context Dialog
 import { useLocalContext } from './context/context'

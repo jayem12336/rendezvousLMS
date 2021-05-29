@@ -13,7 +13,6 @@ import {
     InputLabel,
     InputAdornment,
     IconButton,
-    CircularProgress,
     Dialog
 } from '@material-ui/core'
 
@@ -83,7 +82,6 @@ export default function Login() {
         password: "",
         showPassword: false,
         errors: "",
-        isLoading: false,
 
     })
 
@@ -124,13 +122,6 @@ export default function Login() {
                     setValues({ ...values, errors: errorMessage, isLoading: false })
                 });
         };
-    }
-    if (values.isLoading) {
-        return (
-            <div className={classes.root}>
-                <CircularProgress color="black" size={200} />
-            </div>
-        );
     }
     return (
         <Dialog
