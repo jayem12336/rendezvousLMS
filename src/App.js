@@ -1,5 +1,5 @@
-import React,{useState, useEffect } from 'react'
-import firebase from './utils/firebase'
+import React, { useState, useEffect } from 'react'
+import firebase, { db } from './utils/firebase'
 
 //router
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
@@ -17,21 +17,60 @@ import nonUserAbout from './nonuserhomepage/About'
 import nonUserFaqs from './nonuserhomepage/Faqs'
 import nonUserGuide from './nonuserhomepage/Guide'
 import nonUserSmile from './nonuserhomepage/Smile'
-import UserDashboard from './userdashboard/UserDrawer'
-import DashboardContent from './userdashboard/DashboardContent'
-import ClassContent from './userdashboard/ClassContent'
-import CalendarContent from './userdashboard/CalendarContent'
-import FileContent from './userdashboard/FileContent'
-import AboutContent from './userdashboard/AboutContent'
-import FaqsContent from './userdashboard/FaqsContent'
-import GuideContent from './userdashboard/GuideContent'
-import SmileContent from './userdashboard/SmileContent'
+import UserDashboard from './userdashboard/dashboard/UserDrawer'
+import DashboardContent from './userdashboard/dashboard/DashboardContent'
+import ClassContent from './userdashboard/dashboard/ClassContent'
+import CalendarContent from './userdashboard/dashboard/CalendarContent'
+import FileContent from './userdashboard/dashboard/FileContent'
+import AboutContent from './userdashboard/dashboard/AboutContent'
+import FaqsContent from './userdashboard/dashboard/FaqsContent'
+import GuideContent from './userdashboard/dashboard/GuideContent'
+import SmileContent from './userdashboard/dashboard/SmileContent'
+import Main from './Main/Main'
+import { useLocalContext } from './context/context'
+import JoinedClasses from './userdashboard/JoinedClasses/JoinedClasses'
+
 
 function App({ isAuthenticated }) {
+  const { loggedInMail } = useLocalContext();
+
+  const [createdClasses, setCreatedClasses] = useState([]);
+
+  const [joinedClasses, setJoinedClasses] = useState([]);
+
   const [values, setValues] = useState({
     isAuthenticated: false,
     isLoading: true
   })
+
+  useEffect(() => {
+    if (loggedInMail) {
+      let unsubscribe = db
+        .collection('CreatedClasses').doc(loggedInMail)
+        .collection('classes')
+        .onSnapshot((snapshot) => {
+          setCreatedClasses(snapshot.docs.map((doc) => doc.data()))
+        })
+
+      return () => unsubscribe();
+    }
+
+  }, [loggedInMail])
+
+  useEffect(() => {
+    if (loggedInMail) {
+      let unsubscribe = db
+        .collection("JoinedClasses")
+        .doc(loggedInMail)
+        .collection("classes")
+        .onSnapshot((snapshot) => {
+          setJoinedClasses(snapshot.docs.map((doc) => doc.data().joinedData));
+        });
+
+      return () => unsubscribe();
+    }
+  }, [loggedInMail]);
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -46,6 +85,7 @@ function App({ isAuthenticated }) {
     });
   }, [])
 
+
   if (values.isLoading) {
     return <h1>Loading...</h1>
   }
@@ -53,6 +93,20 @@ function App({ isAuthenticated }) {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
+          {createdClasses.map((item, index) => (
+
+            <Route key={index} exact path={`/${item.id}`}>
+              <ClassContent />
+              <Main classData={item}/>
+            </Route>
+          ))}
+          {joinedClasses.map((item, index) => (
+
+            <Route key={index} exact path={`/${item.id}`}>
+              <ClassContent />
+              <Main classData={item}/>
+            </Route>
+          ))}
           <Route path="/" exact >
             <Redirect to="/nonuserhome" />
           </Route>
@@ -97,10 +151,23 @@ function App({ isAuthenticated }) {
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
+            user={loggedInMail}
             component={ClassContent}
             path='/classcontent'
             isAuthenticated={values.isAuthenticated}
-          />
+            exact
+          >
+            <ClassContent />
+            <ol className="joined">
+              {createdClasses.map((item) => (
+                <JoinedClasses classData={item} />
+              ))}
+              {joinedClasses.map((item) => (
+                <JoinedClasses classData={item} />
+              ))}
+            </ol>
+
+          </PrivateRoute>
           <PrivateRoute
             component={CalendarContent}
             path='/calendarcontent'

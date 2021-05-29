@@ -11,18 +11,19 @@ import Button from '@material-ui/core/Button';
 
 //React-icons
 import { FaCss3Alt } from "react-icons/fa";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { BsPlusCircle } from "react-icons/bs";
 
 //size of sidevar drawer
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import DrawerList from '../userdashboard/DrawerList'
+import DrawerList from './DrawerList'
+import Simplemenu from '../SImpleMenu/SimpleMenu'
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
-import CreateClass from './CreateClass/CreateClass'
-import Form from './CreateClass/Form'
-
-import { useLocalContext } from '../context/context'
+import CreateClass from '../CreateClass/CreateClass'
+import JoinClass from '../JoinClass/JoinClass'
+import { useLocalContext } from '../../context/context'
+import { Grid } from '@material-ui/core';
 
 const drawerWidth = 90
 
@@ -49,52 +50,23 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     iconLogoplus: {
-        color: 'skyblue',
-        fontSize: '2.5rem',
+        color: 'black',
+        fontSize: '1.9rem',
     },
     iconLogo: {
         color: 'skyblue',
         fontSize: '3rem',
     },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    }
+
 }));
 
 
-
-function Simplemenu() {
-
-    const classes = useStyles();
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-
-    return (
-        <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
-                <AccountCircleIcon className={classes.iconLogo} />
-
-            </Button>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                style={{ marginTop: "40px" }}
-            >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
-            </Menu>
-        </div>
-    );
-}
 function Classroom() {
     const classes = useStyles()
 
@@ -124,7 +96,6 @@ function Classroom() {
         <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
                 <BsPlusCircle className={classes.iconLogoplus} />
-
             </Button>
             <Menu
                 id='simple-menu'
@@ -135,10 +106,10 @@ function Classroom() {
             >
                 <MenuItem onClick={handleJoin}>
                     Join Class
-                            </MenuItem>
+                </MenuItem>
                 <MenuItem onClick={handleCreate}>
                     Create Class
-                            </MenuItem>
+                </MenuItem>
             </Menu>
         </div>
     );
@@ -149,20 +120,6 @@ function ClippedDrawer() {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-
-                <Toolbar>
-                    <Typography>
-                        <FaCss3Alt className={classes.iconLogo} />
-                    </Typography>
-                    <Typography style={{ marginLeft: '10px', fontSize: '20px' }}>
-                        Rendezvous
-                    </Typography>
-
-                    <Simplemenu />
-                </Toolbar>
-            </AppBar>
 
             <Drawer
                 className={classes.drawer}
@@ -171,23 +128,25 @@ function ClippedDrawer() {
                     paper: classes.drawerPaper,
                 }}
             >
-                <Toolbar />
                 <div className={classes.drawerContainer}>
                     <DrawerList />
                 </div>
             </Drawer>
             <main className={classes.content}>
-                <Toolbar />
-                <AppBar style={{ marginTop: '60px', width: '100%', maxWidth: '100%' }}>
-                    <Toolbar>
-                        <Typography style={{ marginLeft: '90px', fontSize: '20px' }}>
-                            Class
-                    </Typography>
-                        <Classroom />
-                    </Toolbar>
-                </AppBar>
+                <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={6}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <Typography variant="h6" className={classes.title}>
+                                Class
+                         </Typography>
+                            <Classroom />
+                        </Toolbar>
+                    </AppBar>
+                </Grid>
+
             </main>
             <CreateClass />
+            <JoinClass />
 
         </div>
     );

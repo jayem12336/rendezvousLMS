@@ -5,10 +5,12 @@ import {
     DialogActions,
     DialogContent,
   } from "@material-ui/core";
+
   import React, { useState } from "react";
   import { useLocalContext } from "../../context/context";
   import Form from "./Form";
   import "./style.css";
+  
   const CreateClass = () => {
     const { createClassDialog, setCreateClassDialog } = useLocalContext();
     const [check, setChecked] = useState(false);

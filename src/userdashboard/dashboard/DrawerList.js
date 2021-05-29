@@ -6,14 +6,11 @@ import { makeStyles, Grid } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Collapse from '@material-ui/core/Collapse';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ClassIcon from '@material-ui/icons/Class';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import HistoryIcon from '@material-ui/icons/History';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-
-import { Notifications } from '@material-ui/icons';
+import { FaCss3Alt } from 'react-icons/fa';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,16 +26,16 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
-    }
+    },
+    iconLogo: {
+        color: 'skyblue',
+        fontSize: '3rem'
+    },
 }));
 
 function NestedList() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
 
     return (
         <Grid container>
@@ -47,6 +44,13 @@ function NestedList() {
                 aria-labelledby="nested-list-subheader"
                 className={classes.root}
             >
+                <ListItem button
+                    component={Link}
+                    to='/dashboardcontent'>
+                    <ListItemIcon className={classes.listItemIcon} >
+                        <FaCss3Alt className={classes.iconLogo} />
+                    </ListItemIcon>
+                </ListItem>
                 <ListItem button
                     component={Link}
                     to='/dashboardcontent'>
@@ -80,45 +84,38 @@ function NestedList() {
                         File
                     </ListItemIcon>
                 </ListItem>
-                <ListItem button onClick={handleClick}>
+                <ListItem button
+                    component={Link}
+                    to='/aboutcontent'>
                     <ListItemIcon className={classes.listItemIcon}>
-                        <MoreHorizIcon />
-                    </ListItemIcon>
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <ListItem button
-                        component={Link}
-                        to='/aboutcontent'>
-                        <ListItemIcon className={classes.listItemIcon}>
-                            <DashboardIcon />
+                        <DashboardIcon />
                             About
                         </ListItemIcon>
-                    </ListItem>
-                    <ListItem button
-                        component={Link}
-                        to='/faqscontent'>
-                        <ListItemIcon className={classes.listItemIcon}>
-                            <ClassIcon />
+                </ListItem>
+                <ListItem button
+                    component={Link}
+                    to='/faqscontent'>
+                    <ListItemIcon className={classes.listItemIcon}>
+                        <ClassIcon />
                             Faqs
                         </ListItemIcon>
-                    </ListItem>
-                    <ListItem button
-                        component={Link}
-                        to='/guidecontent'>
-                        <ListItemIcon className={classes.listItemIcon}>
-                            <CalendarTodayIcon />
+                </ListItem>
+                <ListItem button
+                    component={Link}
+                    to='/guidecontent'>
+                    <ListItemIcon className={classes.listItemIcon}>
+                        <CalendarTodayIcon />
                             Guide
                         </ListItemIcon>
-                    </ListItem>
-                    <ListItem button
-                        component={Link}
-                        to='/smilecontent'>
-                        <ListItemIcon className={classes.listItemIcon}>
-                            <HistoryIcon />
+                </ListItem>
+                <ListItem button
+                    component={Link}
+                    to='/smilecontent'>
+                    <ListItemIcon className={classes.listItemIcon}>
+                        <HistoryIcon />
                             Smile
                         </ListItemIcon>
-                    </ListItem>
-                </Collapse>
+                </ListItem>
             </List>
         </Grid>
     );
