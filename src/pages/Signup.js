@@ -1,10 +1,26 @@
 import React, { useState } from 'react'
+
+import firebase, { db } from '../utils/firebase'
+import { v4 as uuidV4 } from "uuid";
+
 import { useHistory } from 'react-router-dom'
 
-import firebase from '../utils/firebase'
-
 import { makeStyles } from '@material-ui/core/styles'
-import { Card, Button, FormControl, TextField, Typography, OutlinedInput, InputLabel, InputAdornment, IconButton, Dialog } from '@material-ui/core'
+
+import {
+    Card,
+    Button,
+    FormControl,
+    TextField,
+    Typography,
+    OutlinedInput,
+    InputLabel,
+    InputAdornment,
+    IconButton,
+    Dialog,
+    CircularProgress
+} from '@material-ui/core'
+
 import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
 
 import { useLocalContext } from '../context/context'
@@ -13,6 +29,14 @@ import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        display: 'flex',
+        flexDirection: 'column',
+        // flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: "100vh"
+    },
+    pageWrapper: {
         display: 'flex',
         flexDirection: 'column',
         // flexWrap: 'wrap',
@@ -59,9 +83,7 @@ export default function Signup() {
 
     const history = useHistory();
 
-    const { createLoginDialog, setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
-
-    const [check, setChecked] = useState(false);
+    const { setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
 
     const [showForm, setShowForm] = useState(false);
 
@@ -71,7 +93,10 @@ export default function Signup() {
         password: "",
         confirmPassword: "",
         showPassword: false,
+        isLoading: false,
         errors: "",
+        firstname: "",
+        lastname: ""
     })
 
     const handleChange = (prop) => (e) => {
@@ -87,7 +112,7 @@ export default function Signup() {
     }
 
     const signup = () => {
-        if (!values.email || !values.password || !values.confirmPassword) {
+        if (!values.email || !values.password || !values.confirmPassword || !values.firstname || !values.lastname) {
             setValues({ ...values, errors: "Please Complete all fields" })
         } else if (values.password !== values.confirmPassword) {
             setValues({ ...values, errors: "Password do not match!" })
@@ -105,6 +130,20 @@ export default function Signup() {
                     //console.log(user);
 
                     // ...
+                    const id = uuidV4();
+
+                    db.collection("users").doc(id).set({
+                        email: values.email,
+                        first_name: values.firstname,
+                        last_name: values.lastname
+                    })
+                    .then(() => {
+                        console.log("Document successfully written!");
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
+                    });
+
                     history.push('/userdashboard')
                     setCreateRegisterDialog(false);
                 })
@@ -116,6 +155,16 @@ export default function Signup() {
                 });
         }
     }
+
+    if (values.isLoading) {
+        return (
+            <div className={classes.root}>
+                <CircularProgress color="black" size={200} />
+            </div>
+        );
+    }
+
+
     return (
         <Dialog
             aria-labelledby="customized-dialog-title"
@@ -123,7 +172,7 @@ export default function Signup() {
             maxWidth={showForm ? "lg" : "xs"}
             className="form__dialog"
         >
-            <div className={classes.root}>
+            <div className={classes.pageWrapper}>
                 <div className={classes.container}>
                     <div className={classes.closebtnContainer}>
                         <Typography className={classes.textStyle}>Register Here</Typography>
@@ -138,6 +187,24 @@ export default function Signup() {
                         </Alert>)}
                     <Card>
                         <form className={classes.loginForm}>
+                            <TextField
+                                className={classes.fields}
+                                id="firstname"
+                                label="First Name"
+                                variant="outlined"
+                                color="secondary"
+                                value={values.firstname}
+                                onChange={handleChange("firstname")}
+                            />
+                            <TextField
+                                className={classes.fields}
+                                id="lastname"
+                                label="Last Name"
+                                variant="outlined"
+                                color="secondary"
+                                value={values.lastname}
+                                onChange={handleChange("lastname")}
+                            />
                             <TextField
                                 className={classes.fields}
                                 id="email"

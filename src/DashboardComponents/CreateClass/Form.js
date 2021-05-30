@@ -31,6 +31,7 @@ const Form = () => {
         setCreateClassDialog(false);
       });
   };
+  
   return (
     <div className="form">
       <p className="class__title">Create Class</p>

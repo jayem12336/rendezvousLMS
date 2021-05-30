@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Material ui
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
+import {
+    Grid,
+    makeStyles,
+    Paper,
+    Typography,
+    Tabs,
+    Tab,
+    useMediaQuery,
+    useTheme
+} from '@material-ui/core'
 
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'
 
-//Image
-import imageEbook from '../../components/assets/Ebooks-PNG.png'
-
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: '#fff',
-        paddingBottom: '20px',
-        maxWidth: '2000px'
+        maxWidth: '2000px',
+        flexGrow: 1
     },
     textMargin: {
         marginTop: '15px'
@@ -27,45 +33,59 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: 10,
         color: "black",
         borderWidth: '3px'
+    },
+    gridContainer: {
+        justifyContent: 'space-around',
+        paddingBottom: '250px',
+        maxWidth: '1700px',
+        backgroundColor: '#80baed',
+        paddingTop: '20px',
+        maxHeight: '800px'
+    },
+    paperContainer: {
+        justifyContent: 'space-around',
+        maxWidth: '1700px',
+        backgroundColor: 'gray',
+        paddingTop: '20px',
+        height: '200px'
     }
 
 }));
 
 export default function Home() {
 
+    const theme = useTheme();
+
+    const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+
     const classes = useStyles();
+
+    const [value, setValue] = React.useState(2);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <Grid container alignContent='center' alignitem='center' justify='center'>
+            <NavBar />
+            <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '90px', marginBottom: '20px' }}>
+                <Typography variant='h6'>We build community here in Rendezvous</Typography>
+                <Grid container alignContent='center' alignitem='center' justify='center'>
+                    <Typography variant='caption'>Users: 232   Classrooms: 4233    Schools: 4     Activities: 34324 </Typography>
+                </Grid>
+            </Grid>
             <Grid className={classes.root} container alignContent='center' alignitem='center' justify='center'>
-                <NavBar />
-                <Grid container alignContent='center' alignitem='center' justify='center' style={{ paddingTop: '100px', justifyContent: 'space-around', paddingBottom: '250px', maxWidth: '1600px' }}>
-                    <Grid item >
-                        <Typography variant='h4' color='white'>PowerSchool is Here</Typography>
-                        <Typography variant='h4' className={classes.textMargin}>To Help</Typography>
-                        <Typography variant='h6' className={classes.textMargin}>PowerSchool School is doing everything we can to make is</Typography>
-                        <Typography variant='h6'>easy for districts to get up and running with distance learning.</Typography>
-                        <Button variant='outlined' className={classes.learnButton} >
-                            Learn More
-                        </Button>
-                    </Grid>
-                    <Grid item >
-                        <img src={imageEbook} alt='Ebook' style={{ height: '250px', width: '300px' }} />
+                <Grid container alignContent='center' alignitem='center' justify='center' className={classes.gridContainer}>
+                    <Grid container container alignContent='center' alignitem='center' justify={isMatch ? 'center' : 'flex-start'} style={{ padding: '100px' }}>
+                        <Typography variant='h3' color='primary'>RENDEZVOUS</Typography>
+                        <Grid container style={{ marginTop: '20px' }}>
+                            <Typography variant='subtitle1' color='primary'>A online learning management platform for new normal education system and make appointment for school activities.</Typography>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid container alignContent='center' alignitem='center' justify='center' style={{justifyContent: 'space-around', paddingBottom: '290px', maxWidth: '1600px' }}>
-                    <Grid item >
-                        <Typography variant='h4' color='white'>PowerSchool is Here</Typography>
-                        <Typography variant='h4' className={classes.textMargin}>To Help</Typography>
-                        <Typography variant='h6' className={classes.textMargin}>PowerSchool School is doing everything we can to make is</Typography>
-                        <Typography variant='h6'>easy for districts to get up and running with distance learning.</Typography>
-                        <Button variant='outlined' className={classes.learnButton} >
-                            Learn More
-                        </Button>
-                    </Grid>
-                    <Grid item >
-                        <img src={imageEbook} alt='Ebook' style={{ height: '250px', width: '300px' }} />
-                    </Grid>
+                <Grid container container alignContent='center' alignitem='center' justify='center' className={classes.paperContainer}>
+
                 </Grid>
             </Grid>
         </Grid>

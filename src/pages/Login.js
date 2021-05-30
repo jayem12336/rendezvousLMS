@@ -70,9 +70,7 @@ export default function Login() {
     const classes = useStyles();
     const history = useHistory();
 
-    const { createLoginDialog, setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
-
-    const [check, setChecked] = useState(false);
+    const { createLoginDialog, setCreateLoginDialog, setCreateRegisterDialog } = useLocalContext();
 
     const [showForm, setShowForm] = useState(false);
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Toolbar, Typography } from '@material-ui/core'
+import { Grid, Toolbar, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -8,6 +8,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/NotificationsActiveTwoTone'
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
+
+import firebase from '../../../utils/firebase'
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -25,6 +27,14 @@ export default function DashboardContent() {
 
     const classes = useStyles();
 
+    const logout = () => {
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
+
     return (
         <div>
             <ClipDrawer>
@@ -39,6 +49,9 @@ export default function DashboardContent() {
                             <MoreVertIcon className={classes.dashboariconStyle} />
                         </Toolbar>
                     </AppBar>
+                    <Button onClick={logout}>
+                        Logout
+                    </Button>
                 </Grid>
             </ClipDrawer>
         </div>

@@ -11,9 +11,10 @@ const theme = createMuiTheme(
         main: "#2679ff",
         light: '#f8324526'
       },
-      background: {
-        default: "#f4f5fd"
-      },
+      inherit: {
+        main: "#ffffff",
+        light: '#ffffff'
+      }
     },
     overrides: {
       MuiAppBar: {

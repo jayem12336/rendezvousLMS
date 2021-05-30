@@ -1,13 +1,14 @@
 import firebase from 'firebase'
 import 'firebase/firestore'
-var firebaseConfig = {
-  apiKey: "AIzaSyCzbQFDXd66J_ySAKKbGZqB2XFz5eE11hc",
-  authDomain: "sample-f269e.firebaseapp.com",
-  projectId: "sample-f269e",
-  storageBucket: "sample-f269e.appspot.com",
-  messagingSenderId: "446632942715",
-  appId: "1:446632942715:web:ceccc17fa45d002769d6de",
-  measurementId: "G-YZZCGY7BMG"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCBaA0LXvacmXOkfAWmig7sWnGL3X0WL_M",
+  authDomain: "rendezvous-8a6ae.firebaseapp.com",
+  projectId: "rendezvous-8a6ae",
+  storageBucket: "rendezvous-8a6ae.appspot.com",
+  messagingSenderId: "954172740891",
+  appId: "1:954172740891:web:2f73fffff9c0652c0bafbe",
+  measurementId: "G-TTYY37RW5S"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

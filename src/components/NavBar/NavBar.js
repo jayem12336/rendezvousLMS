@@ -54,27 +54,24 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         maxHeight: '100px',
         position: 'fixed',
-    },
-    appBarTransparent: {
-        background: 'transparent',
-        boxShadow: 'none',
-        transitionDuration: 'ease-in',
-        transition: '0.5s',
-    },
-    appBarSolid: {
-        backgroundColor: 'white',
-        transitionDuration: 'ease-in',
-        transition: '0.5s',
+        backgroundColor: "#fff"
     },
     customizeToolbar: {
         height: '20px',
         color: '#000000',
-        borderBlockStart: ''
+        borderBlockStart: '',
     },
     accountButton: {
         height: '55px',
         width: '80px',
         marginLeft: 'auto',
+        '&:hover': {
+            background: '#4877c2',
+        }
+    },
+    textTabs: {
+        fontSize: '15px',
+        fontWeight: 'bold',
         '&:hover': {
             background: '#4877c2',
         }
@@ -110,30 +107,10 @@ export default function NavBar() {
 
     const classes = useStyles();
 
-    const [navBackground, setNavBackground] = useState('appBarTransparent');
-
-    const navRef = React.useRef();
-    navRef.current = navBackground
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const show = window.scrollY > 50
-            if (show) {
-                setNavBackground('appBarSolid')
-            } else {
-                setNavBackground('appBarTransparent')
-            }
-        }
-        document.addEventListener('scroll', handleScroll)
-        return () => {
-            document.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
-
     return (
         <Grid container alignContent='center' alignitem='center' justify='center' className={classes.root}>
             <Grid className={classes.navContainer}>
-                <AppBar color='primary' position="static" className={classes[navRef.current]}>
+                <AppBar color='primary' position="static" /**className={classes[navRef.current]} */ style={{ backgroundColor: 'white' }}> 
                     <Toolbar className={classes.customizeToolbar}>
                         <Typography>
                             <Icon>
@@ -148,7 +125,7 @@ export default function NavBar() {
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
                                 <Tabs style={{ marginLeft: '70px' }}>
                                     <Tab
-                                        style={{ fontSize: '10px', fontWeight: 'bold' }}
+                                        className={classes.textTabs}
                                         icon={<FiBookOpen className={classes.icons} />}
                                         disableRipple
                                         label="Home"
@@ -156,7 +133,7 @@ export default function NavBar() {
                                         to='/home'
                                     />
                                     <Tab
-                                        style={{ fontSize: '10px', fontWeight: 'bold' }}
+                                        className={classes.textTabs}
                                         icon={<RiMoneyPoundCircleFill className={classes.icons} />}
                                         disableRipple
                                         label="Faqs"
@@ -164,7 +141,7 @@ export default function NavBar() {
                                         to='/faqs'
                                     />
                                     <Tab
-                                        style={{ fontSize: '10px', fontWeight: 'bold' }}
+                                        className={classes.textTabs}
                                         icon={<BsFillPersonPlusFill className={classes.icons} />}
                                         label="Guide"
                                         component={Link}
@@ -172,7 +149,7 @@ export default function NavBar() {
 
                                     />
                                     <Tab
-                                        style={{ fontSize: '10px', fontWeight: 'bold' }}
+                                        className={classes.textTabs}
                                         icon={<ImHappy className={classes.icons} />}
                                         disableRipple
                                         label="Smile"
@@ -180,7 +157,7 @@ export default function NavBar() {
                                         to='/smile'
                                     />
                                     <Tab
-                                        style={{ fontSize: '10px', fontWeight: 'bold' }}
+                                        className={classes.textTabs}
                                         icon={<BsFillBrightnessHighFill className={classes.icons} />}
                                         disableRipple
                                         label="About"
@@ -213,7 +190,6 @@ export default function NavBar() {
                 </AppBar>
                 <Login />
                 <Signup />
-                {isMatch ?  '' : <hr></hr>}
             </Grid>
         </Grid>
     )

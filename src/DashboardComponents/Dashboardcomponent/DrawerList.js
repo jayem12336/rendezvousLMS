@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     listItemIcon: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '-10px',
+        marginLeft: '-5px',
         flexDirection: 'column'
     },
     iconLogo: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '-25px',
         marginLeft: '-16px',
         height: '80px',
-        width: '70px'
+        width: '80px'
     },
 }));
 

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import DrawerList from '../Dashboardcomponent/DrawerList'
 
-const drawerWidth = 70
+const drawerWidth = 80
 
 const useStyles = makeStyles((theme) => ({
     root: {
