@@ -10,6 +10,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ClassIcon from '@material-ui/icons/Class';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import HistoryIcon from '@material-ui/icons/History';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 //Logo 
 import Logo from '../../components/assets/RendezvousLogo.png'
@@ -28,10 +29,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginLeft: '-5px',
         flexDirection: 'column'
-    },
-    iconLogo: {
-        color: 'skyblue',
-        fontSize: '3rem'
     },
     iconLogo: {
         marginTop: '-25px',
@@ -56,7 +53,17 @@ function NestedList() {
                     to='/dashboardcontent'>
                     <img src={Logo} alt="logo" className={classes.iconLogo} />
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
+                    component={Link}
+                    to='/dashboardcontent'>
+                    <ListItemIcon className={classes.listItemIcon} >
+                        <AccountCircleIcon />
+                        Account
+                    </ListItemIcon>
+                </ListItem>
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardcontent'>
                     <ListItemIcon className={classes.listItemIcon} >
@@ -64,7 +71,8 @@ function NestedList() {
                         Dash
                     </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardclass'
                 >
@@ -73,7 +81,8 @@ function NestedList() {
                         Class
                     </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardcalendar'>
                     <ListItemIcon className={classes.listItemIcon}>
@@ -81,7 +90,8 @@ function NestedList() {
                         Calendar
                     </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardfile'>
                     <ListItemIcon className={classes.listItemIcon}>
@@ -89,7 +99,8 @@ function NestedList() {
                         File
                     </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardabout'>
                     <ListItemIcon className={classes.listItemIcon}>
@@ -97,7 +108,8 @@ function NestedList() {
                             About
                         </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardfaqs'>
                     <ListItemIcon className={classes.listItemIcon}>
@@ -105,7 +117,8 @@ function NestedList() {
                             Faqs
                         </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardguide'>
                     <ListItemIcon className={classes.listItemIcon}>
@@ -113,7 +126,8 @@ function NestedList() {
                             Guide
                         </ListItemIcon>
                 </ListItem>
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardsmile'>
                     <ListItemIcon className={classes.listItemIcon}>

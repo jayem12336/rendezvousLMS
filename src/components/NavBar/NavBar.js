@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import {
     AppBar,
@@ -125,7 +125,7 @@ export default function NavBar() {
                         {isMatch ? <DrawerComponent /> : (
                             <>
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
-                                <Tabs style={{ marginLeft: '70px' }}>
+                                <Tabs style={{ marginLeft: '70px' }} value={1}>
                                     <Tab
                                         className={classes.textTabs}
                                         icon={<FiBookOpen className={classes.icons} />}

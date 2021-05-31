@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Classroom() {
-    const classes = useStyles()
 
     const [anchorEl, setAnchorEl] = useState(null)
 

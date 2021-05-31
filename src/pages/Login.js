@@ -80,7 +80,7 @@ export default function Login() {
         password: "",
         showPassword: false,
         errors: "",
-
+        isLoading: true,
     })
 
     const handleChange = (prop) => (e) => {
@@ -96,6 +96,7 @@ export default function Login() {
     }
 
     const login = () => {
+
         setValues({ ...values, isLoading: true });
 
         if (!values.email || !values.password) {

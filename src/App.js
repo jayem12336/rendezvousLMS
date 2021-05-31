@@ -99,8 +99,11 @@ function App({ isAuthenticated }) {
         // flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
+        justifyItems: 'center',
+        height: '100vh',
+        width: '100vw'
       }}>
-        <CircularProgress color="black" size={200} />
+        <CircularProgress color="primary" size={200} />
       </div>
     );
   }
@@ -110,7 +113,6 @@ function App({ isAuthenticated }) {
       <Router>
         <Switch>
           {createdClasses.map((item, index) => (
-
             <Route key={index} exact path={`/${item.id}`}>
               <DashboardClass />
               <Main classData={item} />

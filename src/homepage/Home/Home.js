@@ -4,10 +4,7 @@ import React, { useState } from 'react'
 import {
     Grid,
     makeStyles,
-    Paper,
     Typography,
-    Tabs,
-    Tab,
     useMediaQuery,
     useTheme
 } from '@material-ui/core'
@@ -84,12 +81,6 @@ export default function Home() {
 
     const classes = useStyles();
 
-    const [value, setValue] = React.useState(2);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
     return (
         <Grid container alignContent='center' alignitem='center' justify='center'>
             <NavBar />
@@ -112,7 +103,7 @@ export default function Home() {
                     <Grid item >
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer} >
-                                <img src={Graduation} className={classes.imageStyle} />
+                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad'/>
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Graduation</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
@@ -122,7 +113,7 @@ export default function Home() {
                     <Grid item>
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer}>
-                                <img src={Graduation} className={classes.imageStyle} />
+                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad'/>
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Graduation</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
@@ -132,7 +123,7 @@ export default function Home() {
                     <Grid item>
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer}>
-                                <img src={Chart} className={classes.imageStyle} />
+                                <img src={Chart} className={classes.imageStyle} alt='ssadsad'/>
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Chart</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to track Learner progress and create a report

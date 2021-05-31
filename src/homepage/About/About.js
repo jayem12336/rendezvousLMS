@@ -4,10 +4,7 @@ import React from 'react'
 import {
     Grid,
     makeStyles,
-    Paper,
     Typography,
-    Tabs,
-    Tab,
 } from '@material-ui/core'
 
 //Component Navbar
@@ -48,12 +45,6 @@ const useStyles = makeStyles((theme) => ({
 export default function About() {
 
     const classes = useStyles();
-
-    const [value, setValue] = React.useState(2);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return (
         <Grid container alignContent='center' alignitem='center' justify='center'>
