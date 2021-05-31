@@ -50,16 +50,18 @@ const useStyles = makeStyles((theme) => ({
         width: '100px'
     },
     navContainer: {
-        maxWidth: '1400px',
         width: '100%',
         maxHeight: '100px',
         position: 'fixed',
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+
     },
     customizeToolbar: {
         height: '20px',
         color: '#000000',
         borderBlockStart: '',
+        maxWidth: '6400px',
+        justifyContent: 'center',
     },
     accountButton: {
         height: '55px',

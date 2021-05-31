@@ -15,6 +15,9 @@ import {
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'
 
+import Graduation from '../../components/assets/graduation.png'
+import Chart from '../../components/assets/chart.jpg'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: '#fff',
@@ -37,17 +40,38 @@ const useStyles = makeStyles((theme) => ({
     gridContainer: {
         justifyContent: 'space-around',
         paddingBottom: '250px',
-        maxWidth: '1700px',
+        maxWidth: '1800px',
         backgroundColor: '#80baed',
         paddingTop: '20px',
         maxHeight: '800px'
     },
     paperContainer: {
         justifyContent: 'space-around',
-        maxWidth: '1700px',
+        maxWidth: '1800px',
         backgroundColor: 'gray',
         paddingTop: '20px',
-        height: '200px'
+        height: '400px'
+    },
+    gridStyle: {
+        width: "300px",
+        padding: "10px",
+        backgroundColor: "white"
+
+
+    },
+    imageStyle: {
+        height: "200px",
+        width: "200px",
+        marginTop: "10px",
+        marginBottom:"10px",
+        borderRadius: "50px"
+
+    },
+    imageContainer: {
+        alignContent: "center",
+        alignitem: "center",
+        justifyContent: "center",
+        backgroundColor: "lightblue"
     }
 
 }));
@@ -84,8 +108,37 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid container container alignContent='center' alignitem='center' justify='center' className={classes.paperContainer}>
-
+                <Grid container alignContent='center' alignitem='center' justify='center' className={classes.paperContainer}>
+                    <Grid item >
+                        <Grid className={classes.gridStyle}>
+                            <Grid container className={classes.imageContainer} >
+                                <img src={Graduation} className={classes.imageStyle} />
+                            </Grid>
+                            <Typography style={{ textAlign: "center" }}>Graduation</Typography>
+                            <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
+                            staff training programmer or choose from over 3000</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <Grid className={classes.gridStyle}>
+                            <Grid container className={classes.imageContainer}>
+                                <img src={Graduation} className={classes.imageStyle} />
+                            </Grid>
+                            <Typography style={{ textAlign: "center" }}>Graduation</Typography>
+                            <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
+                            staff training programmer or choose from over 3000</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <Grid className={classes.gridStyle}>
+                            <Grid container className={classes.imageContainer}>
+                                <img src={Chart} className={classes.imageStyle} />
+                            </Grid>
+                            <Typography style={{ textAlign: "center" }}>Chart</Typography>
+                            <Typography style={{ textAlign: "center" }}>Use Enable to track Learner progress and create a report
+                            to monitor training with our customable LMS Reporting</Typography>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
