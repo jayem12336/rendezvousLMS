@@ -73,7 +73,7 @@ export default function Login() {
 
     const { createLoginDialog, setCreateLoginDialog, setCreateRegisterDialog } = useLocalContext();
 
-    const [showForm] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
 
     const [values, setValues] = useState({

@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function NavBar() {
 
-    const [setAnchorEl] = useState(null)
+    const [anchorEl, setAnchorEl] = useState(null)
 
     const handleClose = () => setAnchorEl(null);
 

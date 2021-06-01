@@ -86,7 +86,7 @@ export default function Signup() {
 
     const { setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
 
-    const [showForm] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     const [values, setValues] = useState({
         email: "",
