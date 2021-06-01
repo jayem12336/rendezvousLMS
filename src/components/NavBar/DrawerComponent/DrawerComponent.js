@@ -45,7 +45,7 @@ export default function DrawerComponent() {
 
     const [openDrawer, setOpenDrawer] = useState(false);
 
-    const [setAnchorEl] = useState(null)
+    const [anchorEl, setAnchorEl] = useState(null)
 
     const handleClose = () => setAnchorEl(null);
 

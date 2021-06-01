@@ -59,13 +59,23 @@ const useStyles = makeStyles((theme) => ({
     },
     fields: {
         margin: theme.spacing(1),
+        "@media (max-width: 600px)": {
+            fontSize: "1rem",
+            width: '240px',
+            minWidth: '100px',
+            marginLeft: '80px'
+        },
     },
     closebtn: {
         position: "absolute",
         top: "20px",
-        right: "8px",
-        cursor: "pointer"
-
+        right: "5px",
+        cursor: "pointer",
+        "@media (max-width: 600px)": {
+            position: "absolute",
+            top: "30px",
+            right: "15px"
+        },
     },
     closebtnContainer: {
         display: "flex",
@@ -74,7 +84,23 @@ const useStyles = makeStyles((theme) => ({
         padding: "0 10px"
     },
     textStyle: {
-        fontSize: "20px"
+        fontSize: "20px",
+        "@media (max-width: 600px)": {
+            fontSize: "1.5 rem",
+            width: '240px',
+            minWidth: '100px',
+            marginLeft: '80px',
+        },
+    },
+    dialogContainer: {
+        width: '100%',
+        maxWidth: '100vw',
+        maxHeight: '100%',
+        position: 'fixed',
+        top: '80%',
+        left: '0',
+        transform: 'translate(0, 0)',
+        overflowY: 'auto'
     }
 }))
 
@@ -85,8 +111,6 @@ export default function Signup() {
     const history = useHistory();
 
     const { setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
-
-    const [showForm, setShowForm] = useState(false);
 
     const [values, setValues] = useState({
         email: "",
@@ -143,7 +167,7 @@ export default function Signup() {
                     .catch((error) => {
                         console.error("Error writing document: ", error);
                     });
-
+                    setValues({ isLoading: false});
                     history.push('/userdashboard')
                     setCreateRegisterDialog(false);
                 })
@@ -151,7 +175,7 @@ export default function Signup() {
                     //var errorCode = error.code;
                     var errorMessage = error.message;
                     // ..
-                    setValues({ ...values, errors: errorMessage })
+                    setValues({ ...values, errors: errorMessage, isLoading: false })
                 });
         }
     }
@@ -159,7 +183,7 @@ export default function Signup() {
     if (values.isLoading) {
         return (
             <div className={classes.root}>
-                <CircularProgress color="black" size={200} />
+                <CircularProgress color="primary" size={200} />
             </div>
         );
     }
@@ -169,13 +193,11 @@ export default function Signup() {
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createRegisterDialog}
-            maxWidth={showForm ? "lg" : "xs"}
-            minWidth="xs"
-            className="form__dialog"
+            className={classes.dialogContainer}
         >
             <Grid className={classes.pageWrapper}>
                 <Grid className={classes.container}>
-                    <Grid className={classes.closebtnContainer}>
+                    <Grid container className={classes.closebtnContainer}>
                         <Typography className={classes.textStyle}>Register Here</Typography>
                         <Close
                             className={classes.closebtn}

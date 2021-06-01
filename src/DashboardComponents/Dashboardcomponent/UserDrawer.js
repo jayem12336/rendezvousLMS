@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ClippedDrawer() {
+    
     const classes = useStyles();
 
     return (

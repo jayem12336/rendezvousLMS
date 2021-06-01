@@ -23,27 +23,30 @@ export default function Form() {
     e.preventDefault();
     const id = uuidV4();
 
-    db.collection("CreatedClasses")
-      .doc(loggedInMail)
-      .collection("classes")
-      .doc(id)
-      .set({
-        owner: loggedInMail,
-        className: className,
-        section: Section,
-        room: Room,
-        id: id,
-      })
-      .then(() => {
-        setCreateClassDialog(false);
-        history.push(`/${id}`);
-      });
+    if (className === "" || Section === "" || Room === "" || Subject === "") {
+      alert("please fill up the following fields")
+    } else {
+      db.collection("CreatedClasses")
+        .doc(loggedInMail)
+        .collection("classes")
+        .doc(id)
+        .set({
+          owner: loggedInMail,
+          className: className,
+          section: Section,
+          room: Room,
+          id: id,
+        })
+        .then(() => {
+          setCreateClassDialog(false);
+          history.push(`/${id}`);
+        });
+    }
   };
 
   return (
     <div className="form">
       <p className="class__title">Create Class</p>
-
       <div className="form__inputs">
         <TextField
           id="filled-basic"

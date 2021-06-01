@@ -13,7 +13,8 @@ import {
     InputLabel,
     InputAdornment,
     IconButton,
-    Dialog
+    Dialog,
+    Grid
 } from '@material-ui/core'
 
 import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
@@ -31,29 +32,37 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     container: {
-        maxWidth: "700px",
-        width: '400px',
-        minWidth: '300px',
-        maxHeight: '1000px',
-        padding: "10px 10px 20px 10px"
-
+        padding: "10px 10px 20px 10px",
     },
     errorMessage: {
         margin: "10px "
     },
     loginForm: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        maxWidth: "700px",
+        width: '400px',
+        minWidth: '300px',
+        maxHeight: '1000px',
     },
     fields: {
         margin: theme.spacing(1),
+        "@media (max-width: 600px)": {
+            fontSize: "1rem",
+            width: '240px',
+            minWidth: '100px',
+            marginLeft: '80px'
+        },
     },
     closebtn: {
         position: "absolute",
         top: "20px",
-        right: "8px",
-        cursor: "pointer"
-
+        right: "5px",
+        cursor: "pointer",
+        "@media (max-width: 600px)": {
+            position: "absolute",
+            right: "25px"
+        },
     },
     closebtnContainer: {
         display: "flex",
@@ -62,19 +71,33 @@ const useStyles = makeStyles((theme) => ({
         padding: "0 10px"
     },
     textStyle: {
-        fontSize: "20px"
+        fontSize: "20px",
+        "@media (max-width: 600px)": {
+            fontSize: "1.5 rem",
+            width: '240px',
+            minWidth: '100px',
+            marginLeft: '80px'
+        },
+    },
+    dialogContainer: {
+        width: '100%',
+        maxWidth: '100vw',
+        maxHeight: '100%',
+        position: 'fixed',
+        top: '80%',
+        left: '0',
+        transform: 'translate(0, 0)',
+        overflowY: 'auto'
     }
 }))
 
 export default function Login() {
 
     const classes = useStyles();
+
     const history = useHistory();
 
     const { createLoginDialog, setCreateLoginDialog, setCreateRegisterDialog } = useLocalContext();
-
-    const [showForm, setShowForm] = useState(false);
-
 
     const [values, setValues] = useState({
         email: "",
@@ -127,34 +150,36 @@ export default function Login() {
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createLoginDialog}
-            maxWidth={showForm ? "lg" : "xs"}
-            className="form__dialog"
+            className={classes.dialogContainer}
         >
-            <div className={classes.root}>
-                <div className={classes.container}>
-                    <div className={classes.closebtnContainer}>
+            <Grid className={classes.root}>
+                <Grid className={classes.container}>
+                    <Grid container className={classes.closebtnContainer}>
                         <Typography className={classes.textStyle}>Login Here</Typography>
                         <Close
                             className={classes.closebtn}
                             onClick={() => setCreateLoginDialog(false)}
                         />
-                    </div>
-
+                    </Grid>
                     {values.errors && (
                         <Alert className={classes.errorMessage} severity="error">
                             {values.errors}
-                        </Alert>)}
+                        </Alert>)
+                    }
                     <Card>
                         <form className={classes.loginForm}>
-                            <TextField
-                                className={classes.fields}
-                                id="email"
-                                label="Email Address"
-                                variant="outlined"
-                                color="secondary"
-                                value={values.email}
-                                onChange={handleChange("email")}
-                            />
+                            <Grid container>
+                                <TextField
+                                    className={classes.fields}
+                                    id="email"
+                                    label="Email Address"
+                                    variant="outlined"
+                                    color="secondary"
+                                    value={values.email}
+                                    fullWidth
+                                    onChange={handleChange("email")}
+                                />
+                            </Grid>
                             <FormControl className={classes.fields} variant="outlined">
                                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
@@ -204,8 +229,8 @@ export default function Login() {
                             >Signup</Button>
                         </form>
                     </Card>
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         </Dialog>
     )
 }
