@@ -48,7 +48,8 @@ function NestedList() {
                 component="nav"
                 className={classes.root}
             >
-                <ListItem button
+                <ListItem
+                    button
                     component={Link}
                     to='/dashboardcontent'>
                     <img src={Logo} alt="logo" className={classes.iconLogo} />

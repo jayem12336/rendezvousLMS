@@ -5,7 +5,7 @@ import { v4 as uuidV4 } from "uuid";
 
 import { useHistory } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Grid } from '@material-ui/core'
 
 import {
     Card,
@@ -18,7 +18,8 @@ import {
     InputAdornment,
     IconButton,
     Dialog,
-    CircularProgress
+    CircularProgress,
+    Slide
 } from '@material-ui/core'
 
 import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
@@ -51,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     },
     loginForm: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        minWidth: '100px'
     },
     errorMessage: {
         margin: "10px "
@@ -85,8 +87,11 @@ export default function Signup() {
 
     const { setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
 
-    const [showForm, setShowForm] = useState(false);
+    const Transition = React.forwardRef(function Transition(props, ref) {
+        return <Slide direction="up" ref={ref} {...props} />;
+      });
 
+    const [showForm, setShowForm] = useState(false);
 
     const [values, setValues] = useState({
         email: "",
@@ -170,23 +175,26 @@ export default function Signup() {
             aria-labelledby="customized-dialog-title"
             open={createRegisterDialog}
             maxWidth={showForm ? "lg" : "xs"}
+            minWidth="xs"
             className="form__dialog"
+            TransitionComponent={Transition}
+            keepMounted
         >
-            <div className={classes.pageWrapper}>
-                <div className={classes.container}>
-                    <div className={classes.closebtnContainer}>
+            <Grid className={classes.pageWrapper}>
+                <Grid className={classes.container}>
+                    <Grid className={classes.closebtnContainer}>
                         <Typography className={classes.textStyle}>Register Here</Typography>
                         <Close
                             className={classes.closebtn}
                             onClick={() => setCreateRegisterDialog(false)}
                         />
-                    </div>
+                    </Grid>
                     {values.errors && (
                         <Alert className={classes.errorMessage} severity="error">
                             {values.errors}
                         </Alert>)}
                     <Card>
-                        <form className={classes.loginForm}>
+                        <Grid className={classes.loginForm}>
                             <TextField
                                 className={classes.fields}
                                 id="firstname"
@@ -283,10 +291,10 @@ export default function Signup() {
                                     setCreateLoginDialog(true);
                                 }}
                             >Log In</Button>
-                        </form>
+                        </Grid>
                     </Card>
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         </Dialog>
     )
 }

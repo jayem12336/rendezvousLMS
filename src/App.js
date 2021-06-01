@@ -22,6 +22,7 @@ import Main from './DashboardComponents/main/Main'
 //Context Dialog
 import { useLocalContext } from './context/context'
 import JoinedClasses from './DashboardComponents/JoinedClasses/JoinedClasses'
+import ClipDrawer from './DashboardComponents/Dashboardcomponent/Clipdrawer'
 
 //DashBoard Components
 import {
@@ -59,7 +60,6 @@ function App({ isAuthenticated }) {
 
       return () => unsubscribe();
     }
-
   }, [loggedInMail])
 
   useEffect(() => {
@@ -114,15 +114,16 @@ function App({ isAuthenticated }) {
         <Switch>
           {createdClasses.map((item, index) => (
             <Route key={index} exact path={`/${item.id}`}>
-              <DashboardClass />
-              <Main classData={item} />
+              <ClipDrawer>
+                <Main classData={item} />
+              </ClipDrawer>
             </Route>
           ))}
           {joinedClasses.map((item, index) => (
-
             <Route key={index} exact path={`/${item.id}`}>
-              <DashboardClass />
-              <Main classData={item} />
+              <ClipDrawer>
+                <Main classData={item} />
+              </ClipDrawer>
             </Route>
           ))}
           <Route path="/" exact >

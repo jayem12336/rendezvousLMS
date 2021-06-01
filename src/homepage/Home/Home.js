@@ -53,14 +53,12 @@ const useStyles = makeStyles((theme) => ({
         width: "300px",
         padding: "10px",
         backgroundColor: "white"
-
-
     },
     imageStyle: {
         height: "200px",
         width: "200px",
         marginTop: "10px",
-        marginBottom:"10px",
+        marginBottom: "10px",
         borderRadius: "50px"
 
     },
@@ -92,10 +90,10 @@ export default function Home() {
             </Grid>
             <Grid className={classes.root} container alignContent='center' alignitem='center' justify='center'>
                 <Grid container alignContent='center' alignitem='center' justify='center' className={classes.gridContainer}>
-                    <Grid container container alignContent='center' alignitem='center' justify={isMatch ? 'center' : 'flex-start'} style={{ padding: '100px' }}>
-                        <Typography variant='h3' color='primary'>RENDEZVOUS</Typography>
+                    <Grid container alignContent='center' alignitem='center' justify={isMatch ? 'center' : 'flex-start'} style={{ padding: '100px' }}>
+                        <Typography variant='h3'>RENDEZVOUS</Typography>
                         <Grid container style={{ marginTop: '20px' }}>
-                            <Typography variant='subtitle1' color='primary'>A online learning management platform for new normal education system and make appointment for school activities.</Typography>
+                            <Typography variant='subtitle1'>A online learning management platform for new normal education system and make appointment for school activities.</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -103,7 +101,7 @@ export default function Home() {
                     <Grid item >
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer} >
-                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad'/>
+                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad' />
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Graduation</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
@@ -113,7 +111,7 @@ export default function Home() {
                     <Grid item>
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer}>
-                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad'/>
+                                <img src={Graduation} className={classes.imageStyle} alt='ssadsad' />
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Graduation</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to create and manage your own
@@ -123,7 +121,7 @@ export default function Home() {
                     <Grid item>
                         <Grid className={classes.gridStyle}>
                             <Grid container className={classes.imageContainer}>
-                                <img src={Chart} className={classes.imageStyle} alt='ssadsad'/>
+                                <img src={Chart} className={classes.imageStyle} alt='ssadsad' />
                             </Grid>
                             <Typography style={{ textAlign: "center" }}>Chart</Typography>
                             <Typography style={{ textAlign: "center" }}>Use Enable to track Learner progress and create a report

@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         maxWidth: "700px",
         width: '400px',
+        minWidth: '300px',
         maxHeight: '1000px',
         padding: "10px 10px 20px 10px"
 
