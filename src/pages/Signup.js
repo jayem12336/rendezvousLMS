@@ -19,7 +19,6 @@ import {
     IconButton,
     Dialog,
     CircularProgress,
-    Slide
 } from '@material-ui/core'
 
 import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
@@ -87,11 +86,7 @@ export default function Signup() {
 
     const { setCreateLoginDialog, createRegisterDialog, setCreateRegisterDialog } = useLocalContext();
 
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-      });
-
-    const [showForm, setShowForm] = useState(false);
+    const [showForm] = useState(false);
 
     const [values, setValues] = useState({
         email: "",
@@ -177,8 +172,6 @@ export default function Signup() {
             maxWidth={showForm ? "lg" : "xs"}
             minWidth="xs"
             className="form__dialog"
-            TransitionComponent={Transition}
-            keepMounted
         >
             <Grid className={classes.pageWrapper}>
                 <Grid className={classes.container}>

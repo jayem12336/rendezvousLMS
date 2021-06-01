@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+//React router
+import { Link } from 'react-router-dom'
+
+//Material ui Components
 import {
     AppBar,
     Tab,
@@ -14,9 +18,6 @@ import {
     Button,
     Icon    
 } from '@material-ui/core'
-
-//React router
-import { Link } from 'react-router-dom'
 
 //React-icons
 import { FiBookOpen } from 'react-icons/fi'
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function NavBar() {
 
-    const [anchorEl, setAnchorEl] = useState(null)
+    const [setAnchorEl] = useState(null)
 
     const handleClose = () => setAnchorEl(null);
 

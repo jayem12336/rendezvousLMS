@@ -51,10 +51,10 @@ export default function Guide() {
             <NavBar />
             <Grid className={classes.root} container alignContent='center' alignitem='center' justify='center'>
                 <Grid container alignContent='center' alignitem='center' justify='center' className={classes.gridContainer}>
-                    <Grid container container alignContent='center' alignitem='center' justify='center' style={{ padding: '100px' }}>
+                    <Grid container alignContent='center' alignitem='center' justify='center' style={{ padding: '100px' }}>
                         <Typography variant='h3' color='primary'>Guide</Typography>
                         <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '20px' }}>
-                            <Typography variant='subtitle1' color='primary'>
+                            <Typography variant='subtitle1'>
                                 Step 1: Make sure to create your account first.
                             </Typography>
                         </Grid>
@@ -64,17 +64,17 @@ export default function Guide() {
                             </Typography>
                         </Grid>
                         <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '5px' }}>
-                            <Typography variant='subtitle1' color='primary'>
+                            <Typography variant='subtitle1'>
                                 If you are a teacher, make a classroom and invite your students.
                             </Typography>
                         </Grid>
                         <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '5px' }}>
-                            <Typography variant='subtitle1' color='primary'>
+                            <Typography variant='subtitle1'>
                                 If you are a school admin, you can request a schoolroom in the website and start making appointments to your school.
                             </Typography>
                         </Grid>
                         <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '20px' }}>
-                            <Typography variant='subtitle1' color='primary'>
+                            <Typography variant='subtitle1'>
                                 Step 2: A online learning management platform for new normal education system and make appointment for school activities.
                             </Typography>
                         </Grid>

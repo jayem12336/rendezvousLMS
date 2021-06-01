@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { useHistory } from 'react-router-dom'
+
 import { Avatar, Button, Dialog, Slide, TextField } from "@material-ui/core";
 import { useLocalContext } from "../../context/context";
 import { Close } from "@material-ui/icons";
@@ -9,7 +12,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const JoinClass = () => {
+export default function JoinClass(){
+
+  const history = useHistory();
+
   const {
     joinClassDialog,
     setJoinClassDialog,
@@ -52,9 +58,11 @@ const JoinClass = () => {
         })
         .then(() => {
           setJoinClassDialog(false);
+          history.push(`/${classCode}`);
         });
     }
   };
+
   return (
     <div>
       <Dialog
@@ -139,4 +147,3 @@ const JoinClass = () => {
     </div>
   );
 };
-export default JoinClass;

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
-import { BrowserRouter as Router, Route, Redirect, Switch, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { Button, DialogActions, TextField } from "@material-ui/core";
 import { v4 as uuidV4 } from "uuid";
 import { db } from "../../utils/firebase";
 
 import { useLocalContext } from "../../context/context";
-import ClipDrawer from '../Dashboardcomponent/Clipdrawer';
-import Main from '../main/Main';
 
 export default function Form() {
 
@@ -20,22 +18,6 @@ export default function Form() {
   const [Subject, setSubject] = useState("");
 
   const { loggedInMail, setCreateClassDialog } = useLocalContext();
-
-  const [createdClasses, setCreatedClasses] = useState([]);
-
-  useEffect(() => {
-    if (loggedInMail) {
-      let unsubscribe = db
-        .collection('CreatedClasses').doc(loggedInMail)
-        .collection('classes')
-        .onSnapshot((snapshot) => {
-          setCreatedClasses(snapshot.docs.map((doc) => doc.data()))
-        })
-
-      return () => unsubscribe();
-    }
-  }, [loggedInMail])
-
 
   const addClass = (e) => {
     e.preventDefault();
@@ -54,13 +36,7 @@ export default function Form() {
       })
       .then(() => {
         setCreateClassDialog(false);
-        {createdClasses.map((item, index) => (
-          <Route key={index} exact path={`/${item.id}`}>
-            <ClipDrawer>
-              <Main classData={item} />
-            </ClipDrawer>
-          </Route>
-        ))}
+        history.push(`/${id}`);
       });
   };
 

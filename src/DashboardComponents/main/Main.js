@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 
-import { db, storage } from "../../utils/firebase";
-import firebase from "firebase";
-
 import { useLocalContext } from "../../context/context";
 
 import { Avatar, Button, TextField } from "@material-ui/core";
 import "./style.css";
 
-const Main = ({ classData }) => {
+import { db, storage } from "../../utils/firebase";
+import firebase from "firebase";
+
+export default function Main({ classData }){
     const { loggedInMail } = useLocalContext();
 
     const [showInput, setShowInput] = useState(false);
@@ -122,5 +122,3 @@ const Main = ({ classData }) => {
         </div>
     );
 };
-
-export default Main;

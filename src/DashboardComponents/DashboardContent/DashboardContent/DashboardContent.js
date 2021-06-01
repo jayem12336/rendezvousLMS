@@ -1,12 +1,13 @@
 import React from 'react'
 
+// Material ui Components
 import { Grid, Toolbar, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/NotificationsActiveTwoTone'
+
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
 
 import firebase from '../../../utils/firebase'
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         fontSize: '1.9rem',
         marginRight: "15px",
-
     }
 }));
 

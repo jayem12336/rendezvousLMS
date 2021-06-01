@@ -1,10 +1,11 @@
+import React from "react";
+
 import { Avatar } from "@material-ui/core";
 import { FolderOpen, PermContactCalendar } from "@material-ui/icons";
-import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-const JoinedClasses = ( {classData } ) => {
+export default function JoinedClasses( {classData } ){
     return (
         <li className="joined__list">
             <div className="joined__wrapper">
@@ -30,5 +31,3 @@ const JoinedClasses = ( {classData } ) => {
         </li>
     )
 }
-
-export default JoinedClasses
