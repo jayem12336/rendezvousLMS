@@ -8,20 +8,20 @@ import { useHistory } from 'react-router-dom'
 import { makeStyles, Grid } from '@material-ui/core'
 
 import {
-    Card,
     Button,
-    FormControl,
     TextField,
     Typography,
-    OutlinedInput,
-    InputLabel,
     InputAdornment,
-    IconButton,
     Dialog,
     CircularProgress,
+    Link
 } from '@material-ui/core'
 
-import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
+import { Close } from "@material-ui/icons"
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import { FcGoogle } from 'react-icons/fc';
 
 import { useLocalContext } from '../context/context'
 
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '100px'
     },
     errorMessage: {
-        margin: "10px "
+        fontSize: 12,
     },
     fields: {
         margin: theme.spacing(1),
@@ -68,18 +68,17 @@ const useStyles = makeStyles((theme) => ({
     },
     closebtn: {
         position: "absolute",
-        top: "20px",
-        right: "5px",
+        top: "15px",
+        right: "20px",
         cursor: "pointer",
         "@media (max-width: 600px)": {
             position: "absolute",
-            top: "30px",
+            top: "15px",
             right: "15px"
         },
     },
     closebtnContainer: {
         display: "flex",
-        height: "40px",
         marginTop: "15px",
         padding: "0 10px"
     },
@@ -93,14 +92,27 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     dialogContainer: {
-        width: '100%',
-        maxWidth: '100vw',
-        maxHeight: '100%',
-        position: 'fixed',
-        top: '80%',
-        left: '0',
-        transform: 'translate(0, 0)',
-        overflowY: 'auto'
+        padding: 20,
+        margin: "40px auto",
+        borderColor: 'none',
+        height: '500px',
+    },
+    dialog: {
+        borderRadius: '40px',
+        padding: 20,
+        height: '730px',
+        margin: "-50px auto",
+        width: 370,
+        "@media (max-width: 600px)": {
+            width: 300,
+        },
+    },
+    margin: {
+        marginTop: 15
+    },
+    googleBtn: {
+        marginTop: 20,
+        fontSize: 12
     }
 }))
 
@@ -161,13 +173,13 @@ export default function Signup() {
                         first_name: values.firstname,
                         last_name: values.lastname
                     })
-                    .then(() => {
-                        console.log("Document successfully written!");
-                    })
-                    .catch((error) => {
-                        console.error("Error writing document: ", error);
-                    });
-                    setValues({ isLoading: false});
+                        .then(() => {
+                            console.log("Document successfully written!");
+                        })
+                        .catch((error) => {
+                            console.error("Error writing document: ", error);
+                        });
+                    setValues({ isLoading: false });
                     history.push('/userdashboard')
                     setCreateRegisterDialog(false);
                 })
@@ -193,121 +205,181 @@ export default function Signup() {
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createRegisterDialog}
-            className={classes.dialogContainer}
+            className={classes.dialog}
+            PaperProps={{
+                style: { borderRadius: 30, }
+            }}
         >
-            <Grid className={classes.pageWrapper}>
-                <Grid className={classes.container}>
+            <Grid container justify='center' alignItems='center' alignContent='center'>
+                <Grid className={classes.dialogContainer}>
                     <Grid container className={classes.closebtnContainer}>
-                        <Typography className={classes.textStyle}>Register Here</Typography>
                         <Close
                             className={classes.closebtn}
                             onClick={() => setCreateRegisterDialog(false)}
                         />
                     </Grid>
+                    <Grid align='center'>
+                        <h2 style={{ color: 'blue', marginTop: -40, marginBottom: 20 }}>
+                            Create Account <br />
+                            <Typography variant='caption' style={{ color: 'black' }}>Create new account</Typography>
+                        </h2>
+                    </Grid>
                     {values.errors && (
                         <Alert className={classes.errorMessage} severity="error">
                             {values.errors}
                         </Alert>)}
-                    <Card>
-                        <Grid className={classes.loginForm}>
+                    <Grid container justify='center' alignItems='center' alignContent='center'>
+                        <form>
                             <TextField
-                                className={classes.fields}
-                                id="firstname"
-                                label="First Name"
+                                className={classes.margin}
+                                label="FIRST NAME"
+                                placeholder="First Name"
                                 variant="outlined"
-                                color="secondary"
-                                value={values.firstname}
                                 onChange={handleChange("firstname")}
-                            />
-                            <TextField
-                                className={classes.fields}
-                                id="lastname"
-                                label="Last Name"
-                                variant="outlined"
-                                color="secondary"
-                                value={values.lastname}
-                                onChange={handleChange("lastname")}
-                            />
-                            <TextField
-                                className={classes.fields}
-                                id="email"
-                                label="Email Address"
-                                variant="outlined"
-                                color="secondary"
-                                value={values.email}
-                                onChange={handleChange("email")}
-                            />
-                            <FormControl className={classes.fields} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    id="password"
-                                    color="secondary"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
+                                value={values.firstname}
+                                size="small"
+                                margin="normal"
+                                autoFocus={true}
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PermIdentityIcon style={{ color: 'blue' }} />
                                         </InputAdornment>
-                                    }
-                                    labelWidth={70}
-                                />
-                            </FormControl>
-                            <FormControl className={classes.fields} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                                <OutlinedInput
-                                    id="confirmPassword"
-                                    color="secondary"
-                                    label="Confirm Password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.confirmPassword}
-                                    onChange={handleChange('confirmPassword')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    labelWidth={70}
-                                />
-                            </FormControl>
-                            <Button
-                                className={classes.fields}
-                                variant="contained"
-                                color="secondary"
-                                onClick={signup}
-                            >Signup</Button>
-                            <Typography
-                                variant="h6"
-                                color="textPrimary"
-                                align="center"
-                            >OR</Typography>
-                            <Button
-                                className={classes.fields}
-                                variant="contained"
-                                color="inherit"
-                                //component={Link}
-                                to="/login"
-                                onClick={() => {
-                                    setCreateRegisterDialog(false);
-                                    setCreateLoginDialog(true);
+                                    ),
+                                    className: classes.textSize
                                 }}
-                            >Log In</Button>
-                        </Grid>
-                    </Card>
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <TextField
+                                className={classes.margin}
+                                label="LAST NAME"
+                                placeholder="Last Name"
+                                variant="outlined"
+                                onChange={handleChange("lastname")}
+                                value={values.lastname}
+                                size="small"
+                                margin="normal"
+                                autoFocus={true}
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PermIdentityIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    className: classes.textSize
+                                }}
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <TextField
+                                className={classes.margin}
+                                label="EMAIL"
+                                placeholder="Email"
+                                variant="outlined"
+                                onChange={handleChange("email")}
+                                value={values.email}
+                                size="small"
+                                margin="normal"
+                                autoFocus={true}
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    className: classes.textSize
+                                }}
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <TextField
+                                className={classes.margin}
+                                label="PASSWORD"
+                                type="password"
+                                placeholder="Password"
+                                variant="outlined"
+                                onChange={handleChange("password")}
+                                value={values.password}
+                                size="small"
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    className: classes.textSize
+                                }}
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <TextField
+                                className={classes.margin}
+                                label="CONFIRM PASSWORD"
+                                type="password"
+                                placeholder="Confirm Password"
+                                variant="outlined"
+                                onChange={handleChange("confirmPassword")}
+                                value={values.confirmPassword}
+                                size="small"
+                                margin="normal"
+                                autoFocus={true}
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    className: classes.textSize
+                                }}
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.margin}
+                                onClick={signup}
+                                fullWidth
+                            >
+                                CREATE ACCOUNT
+                            </Button>
+                            <Button
+                                variant="contained"
+                                className={classes.googleBtn}
+                                startIcon={<FcGoogle />}
+                                fullWidth
+                            >
+                                Sign in with google
+                            </Button>
+                            <Typography style={{ textAlign: 'center', fontSize: '12px', marginTop: '20px' }} >
+                                Already have a account?
+                            <Link
+                                    to="/login"
+                                    onClick={() => {
+                                        setCreateLoginDialog(true);
+                                        setCreateRegisterDialog(false);
+                                    }}
+                                    style={{ textDecoration: 'none' }}>
+                                    <span style={{
+                                        color: 'blue',
+                                        fontSize: '12px',
+                                        cursor: 'pointer'
+                                    }}>Login</span>
+                                </Link>
+                            </Typography>
+                        </form>
+                    </Grid>
                 </Grid>
             </Grid>
         </Dialog>

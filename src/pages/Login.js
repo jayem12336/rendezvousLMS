@@ -4,20 +4,20 @@ import { useHistory } from 'react-router-dom'
 import firebase from '../utils/firebase'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-    Card,
-    Button,
-    FormControl,
-    TextField,
     Typography,
-    OutlinedInput,
-    InputLabel,
-    InputAdornment,
-    IconButton,
     Dialog,
-    Grid
+    Grid,
+    Icon,
+    TextField,
+    InputAdornment,
+    Button,
+    Link
 } from '@material-ui/core'
 
-import { Close, Visibility, VisibilityOff } from "@material-ui/icons"
+import { Close } from "@material-ui/icons"
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { DiJqueryLogo } from 'react-icons/di';
 
 import { Alert } from "@material-ui/lab"
 
@@ -35,60 +35,46 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px 10px 20px 10px",
     },
     errorMessage: {
-        margin: "10px "
-    },
-    loginForm: {
-        display: 'flex',
-        flexDirection: 'column',
-        maxWidth: "700px",
-        width: '400px',
-        minWidth: '300px',
-        maxHeight: '1000px',
-    },
-    fields: {
-        margin: theme.spacing(1),
-        "@media (max-width: 600px)": {
-            fontSize: "1rem",
-            width: '240px',
-            minWidth: '100px',
-            marginLeft: '80px'
-        },
+        marginTop: -35,
+        fontSize: 12
     },
     closebtn: {
         position: "absolute",
         top: "20px",
-        right: "5px",
+        right: "20px",
         cursor: "pointer",
-        "@media (max-width: 600px)": {
-            position: "absolute",
-            right: "25px"
-        },
     },
     closebtnContainer: {
         display: "flex",
-        height: "40px",
         marginTop: "15px",
         padding: "0 10px"
     },
     textStyle: {
         fontSize: "20px",
-        "@media (max-width: 600px)": {
-            fontSize: "1.5 rem",
-            width: '240px',
-            minWidth: '100px',
-            marginLeft: '80px'
-        },
     },
     dialogContainer: {
-        width: '100%',
-        maxWidth: '100vw',
-        maxHeight: '100%',
-        position: 'fixed',
-        top: '80%',
-        left: '0',
-        transform: 'translate(0, 0)',
-        overflowY: 'auto'
-    }
+        padding: 20,
+        margin: "40px auto",
+        borderColor: 'none'
+    },
+    dialog: {
+        borderRadius: '40px',
+        padding: 20,
+        height: '600px',
+        margin: "30px auto",
+        width: 370,
+        "@media (max-width: 600px)": {
+            width: 300
+        },
+    },
+    iconStyle: {
+        height: 80,
+        width: 80,
+        marginTop: -50,
+    }, margin: {
+        marginTop: 10
+    },
+
 }))
 
 export default function Login() {
@@ -109,14 +95,6 @@ export default function Login() {
 
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value })
-    }
-
-    const handleClickShowPassword = (e) => {
-        setValues({ ...values, showPassword: !values.showPassword })
-    }
-
-    const handleMouseDownPassword = (e) => {
-        e.preventDefault();
     }
 
     const login = () => {
@@ -150,85 +128,107 @@ export default function Login() {
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createLoginDialog}
-            className={classes.dialogContainer}
+            className={classes.dialog}
+            PaperProps={{
+                style: { borderRadius: 30, }
+            }}
         >
-            <Grid className={classes.root}>
-                <Grid className={classes.container}>
+            <Grid container justify='center' alignItems='center' alignContent='center'>
+                <Grid className={classes.dialogContainer}>
                     <Grid container className={classes.closebtnContainer}>
-                        <Typography className={classes.textStyle}>Login Here</Typography>
                         <Close
                             className={classes.closebtn}
                             onClick={() => setCreateLoginDialog(false)}
                         />
                     </Grid>
+                    <Grid align='center'>
+                        <Icon >
+                            <DiJqueryLogo className={classes.iconStyle} />
+                        </Icon>
+                        <h2 style={{ marginTop: -15, color: 'blue', marginBottom: 50 }}>
+                            Welcome Back <br />
+                            <Typography variant='caption' style={{ color: 'black' }}>Sign in to continue</Typography>
+                        </h2>
+                    </Grid>
                     {values.errors && (
                         <Alert className={classes.errorMessage} severity="error">
                             {values.errors}
-                        </Alert>)
-                    }
-                    <Card>
-                        <form className={classes.loginForm}>
-                            <Grid container>
-                                <TextField
-                                    className={classes.fields}
-                                    id="email"
-                                    label="Email Address"
-                                    variant="outlined"
-                                    color="secondary"
-                                    value={values.email}
-                                    fullWidth
-                                    onChange={handleChange("email")}
-                                />
-                            </Grid>
-                            <FormControl className={classes.fields} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                <OutlinedInput
-                                    id="password"
-                                    label="Password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    color="secondary"
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
+                        </Alert>)}
+                    <Grid container justify='center' alignItems='center' alignContent='center'>
+                        <form>
+                            <TextField
+                                className={classes.margin}
+                                label="EMAIL"
+                                placeholder="Email"
+                                variant="outlined"
+                                onChange={handleChange("email")}
+                                value={values.email}
+                                size="small"
+                                margin="normal"
+                                autoFocus={true}
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineIcon style={{ color: 'blue' }} />
                                         </InputAdornment>
-                                    }
-                                    labelWidth={70}
-                                />
-                            </FormControl>
-                            <Button
-                                className={classes.fields}
-                                variant="contained"
-                                color="secondary"
-                                onClick={login}
-                            >Login</Button>
-                            <Typography
-                                variant="h7"
-                                color="secondary"
-                                align="center"
-
-                            >Forgot Password</Typography>
-                            <Button
-                                className={classes.fields}
-                                variant="contained"
-                                color="inherit"
-                                //component={Link}
-                                to="/signup"
-                                onClick={() => {
-                                    setCreateLoginDialog(false);
-                                    setCreateRegisterDialog(true);
+                                    ),
+                                    className: classes.textSize
                                 }}
-                            >Signup</Button>
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <TextField
+                                className={classes.margin}
+                                label="PASSWORD"
+                                type="password"
+                                placeholder="Password"
+                                variant="outlined"
+                                onChange={handleChange("password")}
+                                value={values.password}
+                                size="small"
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    className: classes.textSize
+                                }}
+                                InputLabelProps={{
+                                    className: classes.labelStyle
+                                }}
+                            />
+                            <Typography style={{ textAlign: 'end', color: 'blue', fontSize: '12px', marginTop: 12 }}>Forgot Password?</Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.margin}
+                                onClick={login}
+                                fullWidth
+                            >
+                                LOGIN
+                        </Button>
+                            <Typography style={{ textAlign: 'center', fontSize: '12px', marginTop: '20px' }} >
+                                Don't have account?
+                            <Link
+                                    to="/signup"
+                                    onClick={() => {
+                                        setCreateLoginDialog(false);
+                                        setCreateRegisterDialog(true);
+                                    }}
+                                    style={{ textDecoration: 'none' }}>
+                                    <span style={{
+                                        color: 'blue',
+                                        fontSize: '12px',
+                                        cursor: 'pointer'
+                                    }}>create new account</span>
+                                </Link>
+                            </Typography>
                         </form>
-                    </Card>
+                    </Grid>
                 </Grid>
             </Grid>
         </Dialog>
