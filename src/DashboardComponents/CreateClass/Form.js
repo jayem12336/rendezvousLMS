@@ -2,15 +2,38 @@ import React, { useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
 
-import { Button, DialogActions, TextField } from "@material-ui/core";
+import {
+  Button,
+  DialogActions,
+  IconButton,
+  TextField,
+  makeStyles
+} from "@material-ui/core";
+
 import { v4 as uuidV4 } from "uuid";
 import { db } from "../../utils/firebase";
 
 import { useLocalContext } from "../../context/context";
+import { Close } from '@material-ui/icons';
+
+const useStyles = makeStyles((theme) => ({
+  closebtn: {
+    fontSize: 30,
+  },
+  iconContainer: {
+    cursor: 'pointer',
+    position: 'absolute',
+    right: 15,
+    top: 3
+
+  }
+}))
 
 export default function Form() {
 
   const history = useHistory();
+
+  const classes = useStyles();
 
   const [className, setClassName] = useState("");
   const [Section, setSection] = useState("");
@@ -44,9 +67,18 @@ export default function Form() {
     }
   };
 
+  const closeTerm = () => {
+    setCreateClassDialog(false);
+  }
+
   return (
     <div className="form">
       <p className="class__title">Create Class</p>
+      <IconButton className={classes.iconContainer} onClick={closeTerm}>
+        <Close
+          className={classes.closebtn}
+        />
+      </IconButton>
       <div className="form__inputs">
         <TextField
           id="filled-basic"

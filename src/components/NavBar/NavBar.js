@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 //React router
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 //Material ui Components
 import {
@@ -16,17 +16,14 @@ import {
     Grid,
     Divider,
     Button,
-    Icon    
+    Icon
 } from '@material-ui/core'
 
 //React-icons
-import { FiBookOpen } from 'react-icons/fi'
-import { RiMoneyPoundCircleFill } from 'react-icons/ri'
-import {
-    BsFillPersonPlusFill,
-    BsFillBrightnessHighFill
-} from 'react-icons/bs'
-import { ImHappy } from 'react-icons/im'
+import { AiOutlineHome } from 'react-icons/ai'
+import { BsBook } from 'react-icons/bs'
+import { RiContactsLine } from 'react-icons/ri'
+import { ImNotification } from 'react-icons/im'
 
 //Components
 import DrawerComponent from './DrawerComponent/DrawerComponent'
@@ -61,12 +58,13 @@ const useStyles = makeStyles((theme) => ({
         height: '20px',
         color: '#000000',
         borderBlockStart: '',
-        maxWidth: '6400px',
+        margin: '10px',
         justifyContent: 'center',
     },
     accountButton: {
         height: '55px',
-        width: '80px',
+        width: '100px',
+        fontSize: '17px',
         marginLeft: 'auto',
         '&:hover': {
             background: '#4877c2',
@@ -75,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
     textTabs: {
         fontSize: '15px',
         fontWeight: 'bold',
+        margin: '30px',
+        color: 'black',
         '&:hover': {
             background: '#4877c2',
         }
@@ -82,6 +82,15 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 export default function NavBar() {
+
+    //BreakPoint
+    const theme = useTheme();
+
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+
+    const classes = useStyles();
+
+    const history = useHistory();
 
     const [anchorEl, setAnchorEl] = useState(null)
 
@@ -95,7 +104,6 @@ export default function NavBar() {
     const handleLogin = () => {
         handleClose()
         setCreateLoginDialog(true)
-        
     }
 
     const handleRegister = () => {
@@ -103,69 +111,52 @@ export default function NavBar() {
         setCreateRegisterDialog(true)
     }
 
-    //BreakPoint
-    const theme = useTheme();
-
-    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-
-    const classes = useStyles();
-
     return (
         <Grid container alignContent='center' alignitem='center' justify='center' className={classes.root}>
             <Grid className={classes.navContainer}>
-                <AppBar color='primary' position="static" /**className={classes[navRef.current]} */ style={{ backgroundColor: 'white' }}> 
+                <AppBar color='primary' position="static" /**className={classes[navRef.current]} */ style={{ backgroundColor: 'white' }}>
                     <Toolbar className={classes.customizeToolbar}>
                         <Typography>
                             <Icon>
-                                <img src={Logo} alt="logo" className={classes.iconLogo}/>
+                                <img src={Logo} alt="logo" className={classes.iconLogo} />
                             </Icon>
                         </Typography>
-                        <Typography style={{ fontSize: '20px' }}>
+                        <Typography style={{ fontSize: '25px', fontWeight: 'bold' }}>
                             Rendezvous
                         </Typography>
                         {isMatch ? <DrawerComponent /> : (
                             <>
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
-                                <Tabs style={{ marginLeft: '70px' }} value={1}>
+                                <Tabs
+                                    style={{ marginLeft: '70px' }}
+                                    textColor='secondary'
+                                >
                                     <Tab
                                         className={classes.textTabs}
-                                        icon={<FiBookOpen className={classes.icons} />}
+                                        icon={<AiOutlineHome className={classes.icons} />}
                                         disableRipple
                                         label="Home"
-                                        component={Link}
-                                        to='/home'
+                                        onClick={() => history.push('/home')}
                                     />
                                     <Tab
                                         className={classes.textTabs}
-                                        icon={<RiMoneyPoundCircleFill className={classes.icons} />}
+                                        icon={<BsBook className={classes.icons} />}
                                         disableRipple
-                                        label="Faqs"
-                                        component={Link}
-                                        to='/faqs'
-                                    />
-                                    <Tab
-                                        className={classes.textTabs}
-                                        icon={<BsFillPersonPlusFill className={classes.icons} />}
                                         label="Guide"
-                                        component={Link}
-                                        to='/guide'
-
+                                        onClick={() => history.push('/guide')}
                                     />
                                     <Tab
                                         className={classes.textTabs}
-                                        icon={<ImHappy className={classes.icons} />}
-                                        disableRipple
-                                        label="Smile"
-                                        component={Link}
-                                        to='/smile'
+                                        icon={<RiContactsLine className={classes.icons} />}
+                                        label="Contact"
+                                        onClick={() => history.push('/contact')}
                                     />
                                     <Tab
                                         className={classes.textTabs}
-                                        icon={<BsFillBrightnessHighFill className={classes.icons} />}
+                                        icon={<ImNotification className={classes.icons} />}
                                         disableRipple
-                                        label="About"
-                                        component={Link}
-                                        to='/about'
+                                        label='About'
+                                        onClick={() => history.push('/about')}
                                     />
                                 </Tabs>
                                 <Grid style={{ marginLeft: '50px' }}>

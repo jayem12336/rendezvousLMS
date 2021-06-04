@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 
 //Material-ui components
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    makeStyles,
+    useMediaQuery,
+    useTheme,
+} from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
@@ -24,13 +28,26 @@ import JoinClass from '../../JoinClass/JoinClass'
 const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
+        marginTop: 5
+    },
+    btnClasses: {
+        marginLeft: '10px auto',
+        marginRight: 30,
+        marginTop: 5,
+        fontSize: 18,
+        height: '60px',
+        width: '170px',
+        fontSize: '17px',
+        marginLeft: 'auto',
+        '&:hover': {
+            background: '#4877c2',
+        }
     }
 
 }));
 
-
-function Classroom() {
-
+const Classroom = () => {
+        
     const [anchorEl, setAnchorEl] = useState(null)
 
     const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -56,7 +73,7 @@ function Classroom() {
     return (
         <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
-                <BsPlusCircle style={{color: 'black',fontSize: '1.9rem'}} />
+                <BsPlusCircle style={{ color: 'black', fontSize: '1.9rem' }} />
             </Button>
             <Menu
                 id='simple-menu'
@@ -71,6 +88,9 @@ function Classroom() {
                 <MenuItem onClick={handleCreate}>
                     Create Class
                 </MenuItem>
+                <MenuItem onClick={handleCreate}>
+                    Create School
+                </MenuItem>
             </Menu>
         </div>
     );
@@ -78,7 +98,34 @@ function Classroom() {
 
 export default function ClassContent() {
 
+    //BreakPoint
+    const theme = useTheme();
+
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+
     const classes = useStyles();
+    
+    
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
+
+    const handleClose = () => setAnchorEl(null);
+
+    const {
+        setCreateClassDialog,
+        setJoinClassDialog,
+    } = useLocalContext();
+
+    const handleCreate = () => {
+        handleClose()
+        setCreateClassDialog(true)
+    }
+
+    const handleJoin = () => {
+        handleClose()
+        setJoinClassDialog(true)
+    }
 
     return (
         <div>
@@ -87,9 +134,20 @@ export default function ClassContent() {
                     <AppBar position="static" color='white'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
-                                Class
+                                Rendezvous Classroom
                             </Typography>
-                            <Classroom />
+                            {isMatch ? <Classroom /> : <>
+                                <Button className={classes.btnClasses} onClick={handleCreate}>
+                                    Create Class
+                                </Button>
+                                <Button className={classes.btnClasses} onClick={handleJoin}>
+                                    Join Class
+                                    </Button>
+                                <Button className={classes.btnClasses} onClick={handleCreate}>
+                                    Create School
+                                </Button>
+                            </>
+                            }
                         </Toolbar>
                     </AppBar>
                 </Grid>

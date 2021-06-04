@@ -2,13 +2,31 @@ import React, { useState } from "react"
 
 import { useLocalContext } from "../../context/context";
 
-import { Avatar, Button, TextField } from "@material-ui/core";
+import { useHistory } from 'react-router-dom'
+
+import { Avatar, Button, IconButton, TextField, makeStyles } from "@material-ui/core";
 import "./style.css";
 
 import { db, storage } from "../../utils/firebase";
 import firebase from "firebase";
 
-export default function Main({ classData }){
+import { MdArrowBack } from 'react-icons/md';
+
+const useStyles = makeStyles((theme) => ({
+    closebtn: {
+        fontSize: 40,
+    },
+    iconContainer: {
+        cursor: 'pointer'
+    }
+}))
+
+export default function Main({ classData }) {
+
+    const history = useHistory();
+
+    const classes = useStyles();
+
     const { loggedInMail } = useLocalContext();
 
     const [showInput, setShowInput] = useState(false);
@@ -42,9 +60,14 @@ export default function Main({ classData }){
                 });
         });
     };
-    
+
     return (
         <div className="main">
+            <IconButton className={classes.iconContainer} onClick={() => history.push('/dashboardclass')}>
+                <MdArrowBack
+                    className={classes.closebtn}    
+                />
+            </IconButton>
             <div className="main__wrapper">
                 <div className="main__content">
                     <div className="main__wrapper1">

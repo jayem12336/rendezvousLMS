@@ -13,12 +13,14 @@ import {
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu';
-import { FiBookOpen } from 'react-icons/fi';
-import { RiMoneyPoundCircleFill } from 'react-icons/ri';
-import { BsFillPersonPlusFill } from 'react-icons/bs';
-import { ImHappy } from 'react-icons/im';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import { FaRegRegistered } from "react-icons/fa";
+
+//React-icons
+import { AiOutlineHome } from 'react-icons/ai'
+import { BsBook , BsCardChecklist } from 'react-icons/bs'
+import { RiContactsLine } from 'react-icons/ri'
+import { ImNotification } from 'react-icons/im'
+import { CgLogIn } from 'react-icons/cg';
+
 
 //Components
 import Login from '../../../pages/Login'
@@ -82,19 +84,8 @@ export default function DrawerComponent() {
                         to='/home'
                     >
                         <ListItemIcon>
-                            <FiBookOpen className={classes.icons} />
+                            <AiOutlineHome className={classes.icons} />
                             <ListItemText>Home</ListItemText>
-                        </ListItemIcon>
-                    </ListItem>
-                    <ListItem
-                        divider
-                        button
-                        component={Link}
-                        to='/faqs'
-                    >
-                        <ListItemIcon>
-                            <RiMoneyPoundCircleFill className={classes.icons} />
-                            <ListItemText>Faqs</ListItemText>
                         </ListItemIcon>
                     </ListItem>
                     <ListItem
@@ -104,7 +95,7 @@ export default function DrawerComponent() {
                         to='/guide'
                     >
                         <ListItemIcon>
-                            <BsFillPersonPlusFill className={classes.icons} />
+                            <BsBook className={classes.icons} />
                             <ListItemText>Guide</ListItemText>
                         </ListItemIcon>
                     </ListItem>
@@ -112,11 +103,22 @@ export default function DrawerComponent() {
                         divider
                         button
                         component={Link}
-                        to='/smile'
+                        to='/contact'
                     >
                         <ListItemIcon>
-                            <ImHappy className={classes.icons} />
-                            <ListItemText>Smile</ListItemText>
+                            <RiContactsLine className={classes.icons} />
+                            <ListItemText>Contact</ListItemText>
+                        </ListItemIcon>
+                    </ListItem>
+                    <ListItem
+                        divider
+                        button
+                        component={Link}
+                        to='/About'
+                    >
+                        <ListItemIcon>
+                            <ImNotification className={classes.icons} />
+                            <ListItemText>About</ListItemText>
                         </ListItemIcon>
                     </ListItem>
                     <ListItem 
@@ -125,7 +127,7 @@ export default function DrawerComponent() {
                     onClick={handleLogin}
                     >
                         <ListItemIcon>
-                            <VpnKeyIcon className={classes.icons} />
+                            <CgLogIn className={classes.icons} />
                             <ListItemText>Login</ListItemText>
                         </ListItemIcon>
                     </ListItem>
@@ -135,7 +137,7 @@ export default function DrawerComponent() {
                     onClick={handleRegister}
                     >
                         <ListItemIcon>
-                            <FaRegRegistered className={classes.icons} />
+                            <BsCardChecklist className={classes.icons} />
                             <ListItemText>Register</ListItemText>
                         </ListItemIcon>
                     </ListItem>

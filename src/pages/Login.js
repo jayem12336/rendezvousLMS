@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useHistory } from 'react-router-dom'
 import firebase from '../utils/firebase'
@@ -17,11 +17,17 @@ import {
 import { Close } from "@material-ui/icons"
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { DiJqueryLogo } from 'react-icons/di';
+import Logo from '../components/assets/RendezvousLogo.png'
+
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+
 
 import { Alert } from "@material-ui/lab"
 
 import { useLocalContext } from '../context/context'
+import Forgot from './Forgot'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     errorMessage: {
         marginTop: -35,
-        fontSize: 12
+        fontSize: 15
     },
     closebtn: {
         position: "absolute",
@@ -55,26 +61,26 @@ const useStyles = makeStyles((theme) => ({
     dialogContainer: {
         padding: 20,
         margin: "40px auto",
-        borderColor: 'none'
+        borderColor: 'none',
     },
     dialog: {
         borderRadius: '40px',
         padding: 20,
-        height: '600px',
         margin: "30px auto",
-        width: 370,
+        width: 400,
+        height: '700px',
         "@media (max-width: 600px)": {
-            width: 300
+            width: 320
         },
     },
     iconStyle: {
-        height: 80,
-        width: 80,
+        height: 100,
+        width: 100,
         marginTop: -50,
-    }, margin: {
+    },
+    margin: {
         marginTop: 10
     },
-
 }))
 
 export default function Login() {
@@ -83,7 +89,17 @@ export default function Login() {
 
     const history = useHistory();
 
-    const { createLoginDialog, setCreateLoginDialog, setCreateRegisterDialog } = useLocalContext();
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClose = () => setAnchorEl(null);
+
+    const {
+        createLoginDialog,
+        setCreateLoginDialog,
+        setCreateRegisterDialog,
+        setCreateForgotDialog,
+
+    } = useLocalContext();
 
     const [values, setValues] = useState({
         email: "",
@@ -97,12 +113,26 @@ export default function Login() {
         setValues({ ...values, [prop]: e.target.value })
     }
 
-    const login = () => {
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+    const handleForgot = () => {
+        handleClose()
+        setCreateForgotDialog(true);
+    }
+
+    const login = (e) => {
+
+        e.preventDefault();
 
         setValues({ ...values, isLoading: true });
 
         if (!values.email || !values.password) {
-            setValues({ ...values, errors: "Please Complete all fields", isLoading: false })
+            setValues({ ...values, errors: "Please Complete all fields", isLoading: false, email: "", password: "" })
         }
         else {
 
@@ -120,17 +150,21 @@ export default function Login() {
                     //var errorCode = error.code;
                     var errorMessage = error.message;
 
-                    setValues({ ...values, errors: errorMessage, isLoading: false })
+                    setValues({ ...values, errors: errorMessage, isLoading: false, email: "", password: "" })
                 });
         };
     }
+
     return (
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createLoginDialog}
             className={classes.dialog}
+            maxWidth={false}
             PaperProps={{
-                style: { borderRadius: 30, }
+                style: {
+                    borderRadius: 30,
+                }
             }}
         >
             <Grid container justify='center' alignItems='center' alignContent='center'>
@@ -142,12 +176,11 @@ export default function Login() {
                         />
                     </Grid>
                     <Grid align='center'>
-                        <Icon >
-                            <DiJqueryLogo className={classes.iconStyle} />
+                        <Icon>
+                            <img src={Logo} className={classes.iconStyle} alt="Rendezvous" />
                         </Icon>
-                        <h2 style={{ marginTop: -15, color: 'blue', marginBottom: 50 }}>
-                            Welcome Back <br />
-                            <Typography variant='caption' style={{ color: 'black' }}>Sign in to continue</Typography>
+                        <h2 style={{ color: 'black', marginBottom: 50 }}>
+                            Login your Rendezvous <br />
                         </h2>
                     </Grid>
                     {values.errors && (
@@ -155,7 +188,7 @@ export default function Login() {
                             {values.errors}
                         </Alert>)}
                     <Grid container justify='center' alignItems='center' alignContent='center'>
-                        <form>
+                        <form onSubmit={login}>
                             <TextField
                                 className={classes.margin}
                                 label="EMAIL"
@@ -163,7 +196,7 @@ export default function Login() {
                                 variant="outlined"
                                 onChange={handleChange("email")}
                                 value={values.email}
-                                size="small"
+                                size="medium"
                                 margin="normal"
                                 autoFocus={true}
                                 fullWidth
@@ -182,17 +215,28 @@ export default function Login() {
                             <TextField
                                 className={classes.margin}
                                 label="PASSWORD"
-                                type="password"
                                 placeholder="Password"
                                 variant="outlined"
                                 onChange={handleChange("password")}
                                 value={values.password}
-                                size="small"
+                                type={values.showPassword ? 'text' : 'password'}
+                                size="medium"
                                 fullWidth
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
                                         </InputAdornment>
                                     ),
                                     className: classes.textSize
@@ -201,17 +245,28 @@ export default function Login() {
                                     className: classes.labelStyle
                                 }}
                             />
-                            <Typography style={{ textAlign: 'end', color: 'blue', fontSize: '12px', marginTop: 12 }}>Forgot Password?</Typography>
+                            <Typography style={{
+                                color: 'blue',
+                                fontSize: '14px',
+                                marginTop: 12,
+                                marginLeft: 136
+                            }}
+                                component={Button}
+                                onClick={handleForgot}
+                            >
+                                Forgot Password?
+                            </Typography>
                             <Button
                                 variant="contained"
                                 color="primary"
                                 className={classes.margin}
-                                onClick={login}
+                                type="submit"
+                                size="medium"
                                 fullWidth
                             >
                                 LOGIN
-                        </Button>
-                            <Typography style={{ textAlign: 'center', fontSize: '12px', marginTop: '20px' }} >
+                                </Button>
+                            <Typography style={{ textAlign: 'center', fontSize: '15px', marginTop: '20px' }} >
                                 Don't have account?
                             <Link
                                     to="/signup"
@@ -222,15 +277,16 @@ export default function Login() {
                                     style={{ textDecoration: 'none' }}>
                                     <span style={{
                                         color: 'blue',
-                                        fontSize: '12px',
+                                        fontSize: '15px',
                                         cursor: 'pointer'
-                                    }}>create new account</span>
+                                    }}>create here</span>
                                 </Link>
                             </Typography>
                         </form>
                     </Grid>
                 </Grid>
             </Grid>
+            <Forgot />
         </Dialog>
     )
 }

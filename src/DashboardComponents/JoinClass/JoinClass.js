@@ -2,19 +2,40 @@ import React, { useState } from "react";
 
 import { useHistory } from 'react-router-dom'
 
-import { Avatar, Button, Dialog, Slide, TextField } from "@material-ui/core";
+import { Avatar, Button, Dialog, Grid, Paper, Slide, TextField } from "@material-ui/core";
 import { useLocalContext } from "../../context/context";
 import { Close } from "@material-ui/icons";
 import "./style.css";
-import {db} from '../../utils/firebase';
+import { db } from '../../utils/firebase';
+import { makeStyles } from '@material-ui/core/styles'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-export default function JoinClass(){
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    // flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  margin: {
+    marginTop: 20
+  },
+  PaperStyle: {
+    height: 250,
+    width: 550,
+    padding: 20
+  },
+  dialogContainer: {
+    padding: 20,
+    margin: "40px auto",
+    borderColor: 'none',
+  },
+}))
+export default function JoinClass() {
 
   const history = useHistory();
+
+  const classes = useStyles();
 
   const {
     joinClassDialog,
@@ -69,7 +90,6 @@ export default function JoinClass(){
         fullScreen
         open={joinClassDialog}
         onClose={() => setJoinClassDialog(false)}
-        TransitionComponent={Transition}
       >
         <div className="joinClass">
           <div className="joinClass__wrapper">
@@ -80,69 +100,53 @@ export default function JoinClass(){
               <Close className="joinClass__svg" />
               <div className="joinClass__topHead">Join Class</div>
             </div>
-            <Button
-              className="joinClass__btn"
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-            >
-              Join
-            </Button>
           </div>
-          <div className="joinClass__form">
-            <p className="joinClass__formText">
-              You're currently signed in as {loggedInUser?.email}
-            </p>
-            <div className="joinClass__loginInfo">
-              <div className="joinClass__classLeft">
-                <Avatar src={loggedInUser?.photoURL} />
-                <div className="joinClass__loginText">
-                  <div className="joinClass__loginName">
-                    {loggedInUser?.displayName}
-                  </div>
-                  <div className="joinClass__loginEmail">
-                    {loggedInUser?.email}
-                  </div>
-                </div>
-              </div>
-              <Button variant="outlined" color="primary">
-                Logout
-              </Button>
-            </div>
-          </div>
-          <div className="joinClass__form">
-            <div
-              style={{ fontSize: "1.25rem", color: "#3c4043" }}
-              className="joinClass__formText"
-            >
-              Class Code
-            </div>
-            <div
-              style={{ color: "#3c4043", marginTop: "-5px" }}
-              className="joinClass__formText"
-            >
-              Ask your teacher for the class code, then enter it here.
-            </div>
-            <div className="joinClass__loginInfo">
-              <TextField
-                id="outlined-basic"
-                label="Class Code"
-                variant="outlined"
-                value={classCode}
-                onChange={(e) => setClassCode(e.target.value)}
-                error={error}
-                helperText={error && "No class was found"}
-              />
-              <TextField
-                id="outlined-basic"
-                label="Owner's email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-              />
-            </div>
-          </div>
+          <Grid container justify='center' alignItems='center' alignContent='center'>
+            <Grid container justify='center' alignItems='center' alignContent='center'>
+              <Grid container className={classes.dialogContainer} justify='center' alignItems='center' alignContent='center'>
+                  <Paper elevation={10} className={classes.PaperStyle}>
+                    <Grid item>
+                      <TextField
+                        className={classes.margin}
+                        label="Class Code"
+                        variant="outlined"
+                        value={classCode}
+                        onChange={(e) => setClassCode(e.target.value)}
+                        error={error}
+                        helperText={error && "No class was found"}
+                        autoFocus={true}
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        className={classes.margin}
+                        label="Owner's email"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setemail(e.target.value)}
+                        autoFocus={true}
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.margin}
+                        size="large"
+                        fullWidth
+                        onClick={handleSubmit}
+                      >
+                        Join
+                        </Button>
+                    </Grid>
+                  </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
         </div>
+
       </Dialog>
     </div>
   );

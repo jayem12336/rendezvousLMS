@@ -14,11 +14,12 @@ import NavBar from '../../components/NavBar/NavBar'
 
 import Graduation from '../../components/assets/graduation.png'
 import Chart from '../../components/assets/chart.jpg'
+import bgImage from '../../components/assets/bg.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: '#fff',
-        maxWidth: '2000px',
+        maxWidth: '1800px',
         flexGrow: 1
     },
     textMargin: {
@@ -60,15 +61,18 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "10px",
         marginBottom: "10px",
         borderRadius: "50px"
-
     },
     imageContainer: {
         alignContent: "center",
         alignitem: "center",
         justifyContent: "center",
         backgroundColor: "lightblue"
+    },
+    bgContainer: {
+        backgroundImage: `url(${bgImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
     }
-
 }));
 
 export default function Home() {
@@ -80,7 +84,7 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-        <Grid container alignContent='center' alignitem='center' justify='center'>
+        <Grid container alignContent='center' alignitem='center' justify='center' className={classes.bgContainer}>
             <NavBar />
             <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '90px', marginBottom: '20px' }}>
                 <Typography variant='h6'>We build community here in Rendezvous</Typography>
@@ -129,7 +133,7 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid>  
         </Grid>
     )
 }

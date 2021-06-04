@@ -13,7 +13,7 @@ import PrivateRoute from './routers/PrivateRoute'
 import PublicRoute from './routers/PublicRoute'
 
 //Homepage Components
-import { About, Faqs, Guide, Home, Smile } from './homepage'
+import { About, Contact, Guide, Home } from './homepage'
 
 //Non user Pages
 import UserDashboard from './DashboardComponents/Dashboardcomponent/UserDrawer'
@@ -142,20 +142,14 @@ function App({ isAuthenticated }) {
             restricted={true}
           />
           <PublicRoute
-            component={Faqs}
-            path='/faqs'
+            component={Contact}
+            path='/contact'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />
           <PublicRoute
             component={Guide}
             path='/guide'
-            isAuthenticated={values.isAuthenticated}
-            restricted={true}
-          />
-          <PublicRoute
-            component={Smile}
-            path='/smile'
             isAuthenticated={values.isAuthenticated}
             restricted={true}
           />

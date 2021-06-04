@@ -5,7 +5,7 @@ import { v4 as uuidV4 } from "uuid";
 
 import { useHistory } from 'react-router-dom'
 
-import { makeStyles, Grid } from '@material-ui/core'
+import { makeStyles, Grid, Icon } from '@material-ui/core'
 
 import {
     Button,
@@ -23,6 +23,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import { FcGoogle } from 'react-icons/fc';
 
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+
+import Logo from '../components/assets/RendezvousLogo.png'
 import { useLocalContext } from '../context/context'
 
 import { Alert } from "@material-ui/lab"
@@ -55,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '100px'
     },
     errorMessage: {
-        fontSize: 12,
+        fontSize: 15,
     },
     fields: {
         margin: theme.spacing(1),
@@ -80,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     closebtnContainer: {
         display: "flex",
         marginTop: "15px",
-        padding: "0 10px"
+        padding: 10
     },
     textStyle: {
         fontSize: "20px",
@@ -95,14 +100,14 @@ const useStyles = makeStyles((theme) => ({
         padding: 20,
         margin: "40px auto",
         borderColor: 'none',
-        height: '500px',
+        height: '650px',
     },
     dialog: {
         borderRadius: '40px',
         padding: 20,
-        height: '730px',
+        height: '860px',
         margin: "-50px auto",
-        width: 370,
+        width: 420,
         "@media (max-width: 600px)": {
             width: 300,
         },
@@ -111,9 +116,18 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 15
     },
     googleBtn: {
-        marginTop: 20,
-        fontSize: 12
-    }
+        marginTop: 10,
+        fontSize: 15,
+        "@media (max-width: 600px)": {
+            fontSize: 10,
+        },
+    },
+    iconStyle: {
+        height: 100,
+        width: 100,
+        marginTop: -100,
+        marginBottom: 20
+    },
 }))
 
 export default function Signup() {
@@ -147,7 +161,10 @@ export default function Signup() {
         e.preventDefault();
     }
 
-    const signup = () => {
+    const signup = (e) => {
+
+        e.preventDefault();
+
         if (!values.email || !values.password || !values.confirmPassword || !values.firstname || !values.lastname) {
             setValues({ ...values, errors: "Please Complete all fields" })
         } else if (values.password !== values.confirmPassword) {
@@ -207,7 +224,9 @@ export default function Signup() {
             open={createRegisterDialog}
             className={classes.dialog}
             PaperProps={{
-                style: { borderRadius: 30, }
+                style: {
+                    borderRadius: 30,
+                }
             }}
         >
             <Grid container justify='center' alignItems='center' alignContent='center'>
@@ -219,9 +238,12 @@ export default function Signup() {
                         />
                     </Grid>
                     <Grid align='center'>
-                        <h2 style={{ color: 'blue', marginTop: -40, marginBottom: 20 }}>
-                            Create Account <br />
-                            <Typography variant='caption' style={{ color: 'black' }}>Create new account</Typography>
+                        <Icon>
+                            <img src={Logo} className={classes.iconStyle} alt="Rendezvous" />
+                        </Icon>
+                        <h2 style={{ color: 'black', marginTop: -40, marginBottom: 20 }}>
+                            Create Rendezvous Account
+
                         </h2>
                     </Grid>
                     {values.errors && (
@@ -229,7 +251,7 @@ export default function Signup() {
                             {values.errors}
                         </Alert>)}
                     <Grid container justify='center' alignItems='center' alignContent='center'>
-                        <form>
+                        <form onSubmit={signup}>
                             <TextField
                                 className={classes.margin}
                                 label="FIRST NAME"
@@ -237,7 +259,7 @@ export default function Signup() {
                                 variant="outlined"
                                 onChange={handleChange("firstname")}
                                 value={values.firstname}
-                                size="small"
+                                size="medium"
                                 margin="normal"
                                 autoFocus={true}
                                 fullWidth
@@ -260,7 +282,7 @@ export default function Signup() {
                                 variant="outlined"
                                 onChange={handleChange("lastname")}
                                 value={values.lastname}
-                                size="small"
+                                size="medium"
                                 margin="normal"
                                 autoFocus={true}
                                 fullWidth
@@ -283,7 +305,7 @@ export default function Signup() {
                                 variant="outlined"
                                 onChange={handleChange("email")}
                                 value={values.email}
-                                size="small"
+                                size="medium"
                                 margin="normal"
                                 autoFocus={true}
                                 fullWidth
@@ -306,13 +328,25 @@ export default function Signup() {
                                 placeholder="Password"
                                 variant="outlined"
                                 onChange={handleChange("password")}
+                                type={values.showPassword ? 'text' : 'password'}
                                 value={values.password}
-                                size="small"
+                                size="medium"
                                 fullWidth
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
                                         </InputAdornment>
                                     ),
                                     className: classes.textSize
@@ -329,7 +363,8 @@ export default function Signup() {
                                 variant="outlined"
                                 onChange={handleChange("confirmPassword")}
                                 value={values.confirmPassword}
-                                size="small"
+                                type={values.showPassword ? 'text' : 'password'}
+                                size="medium"
                                 margin="normal"
                                 autoFocus={true}
                                 fullWidth
@@ -337,6 +372,17 @@ export default function Signup() {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <LockOutlinedIcon style={{ color: 'blue' }} />
+                                        </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
                                         </InputAdornment>
                                     ),
                                     className: classes.textSize
@@ -348,21 +394,24 @@ export default function Signup() {
                             <Button
                                 variant="contained"
                                 color="primary"
+                                size="large"
                                 className={classes.margin}
-                                onClick={signup}
+                                type="submit"
                                 fullWidth
                             >
                                 CREATE ACCOUNT
                             </Button>
+                            <h2 style={{textAlign:"center", marginTop:10}}>or</h2>
                             <Button
                                 variant="contained"
+                                size="large"
                                 className={classes.googleBtn}
                                 startIcon={<FcGoogle />}
                                 fullWidth
                             >
-                                Sign in with google
+                                Sign up with google
                             </Button>
-                            <Typography style={{ textAlign: 'center', fontSize: '12px', marginTop: '20px' }} >
+                            <Typography style={{ textAlign: 'center', fontSize: '15px', marginTop: '20px' }} >
                                 Already have a account?
                             <Link
                                     to="/login"
@@ -373,7 +422,7 @@ export default function Signup() {
                                     style={{ textDecoration: 'none' }}>
                                     <span style={{
                                         color: 'blue',
-                                        fontSize: '12px',
+                                        fontSize: '15px',
                                         cursor: 'pointer'
                                     }}>Login</span>
                                 </Link>

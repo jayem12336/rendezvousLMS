@@ -7,6 +7,8 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  IconButton,
+  makeStyles,
 } from "@material-ui/core";
 
 //Pop up dialog
@@ -14,12 +16,36 @@ import { useLocalContext } from "../../context/context";
 import Form from "./Form";
 import "./style.css";
 
-export default function CreateClass(){
+import { useHistory } from "react-router-dom";
+import { Close } from "@material-ui/icons";
+
+const useStyles = makeStyles((theme) => ({
+  closebtn: {
+    fontSize: 30,
+  },
+  iconContainer: {
+    cursor: 'pointer',
+    position: 'absolute',
+    right: 15,
+    top: 3
+
+  }
+}))
+
+export default function CreateClass() {
+
+  const history = useHistory();
+
+  const classes = useStyles();
 
   const { createClassDialog, setCreateClassDialog } = useLocalContext();
   const [check, setChecked] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  
+
+  const closeTerm = () => {
+    setCreateClassDialog(false);
+  }
+
   return (
     <div>
       <Dialog
@@ -35,7 +61,12 @@ export default function CreateClass(){
           <>
             <div className="class__title">
               Using Classroom at a school with students?
-              </div>
+              <IconButton className={classes.iconContainer} onClick={closeTerm}>
+                <Close
+                  className={classes.closebtn}
+                />
+              </IconButton>
+            </div>
             <DialogContent className="class__content">
               <p className="class__text">
                 <p>If so, your school must sign up for a free</p>
