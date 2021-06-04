@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useHistory } from 'react-router-dom'
 
-import { Avatar, Button, Dialog, Grid, Paper, Slide, TextField } from "@material-ui/core";
+import {Button, Dialog, Grid, Paper, TextField } from "@material-ui/core";
 import { useLocalContext } from "../../context/context";
 import { Close } from "@material-ui/icons";
 import "./style.css";

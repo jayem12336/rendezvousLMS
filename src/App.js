@@ -33,7 +33,6 @@ import {
   DashboardFaqs,
   DashboardFile,
   DashboardGuide,
-  DashboardSmile,
 } from './DashboardComponents/DashboardContent'
 
 function App({ isAuthenticated }) {
@@ -204,11 +203,6 @@ function App({ isAuthenticated }) {
           <PrivateRoute
             component={DashboardGuide}
             path='/dashboardguide'
-            isAuthenticated={values.isAuthenticated}
-          />
-          <PrivateRoute
-            component={DashboardSmile}
-            path='/dashboardsmile'
             isAuthenticated={values.isAuthenticated}
           />
         </Switch>

@@ -16,7 +16,6 @@ import { useLocalContext } from "../../context/context";
 import Form from "./Form";
 import "./style.css";
 
-import { useHistory } from "react-router-dom";
 import { Close } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateClass() {
 
-  const history = useHistory();
 
   const classes = useStyles();
 

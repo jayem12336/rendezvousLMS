@@ -127,15 +127,6 @@ function NestedList() {
                             Guide
                         </ListItemIcon>
                 </ListItem>
-                <ListItem
-                    button
-                    component={Link}
-                    to='/dashboardsmile'>
-                    <ListItemIcon className={classes.listItemIcon}>
-                        <HistoryIcon />
-                            Smile
-                        </ListItemIcon>
-                </ListItem>
             </List>
         </Grid>
     );
