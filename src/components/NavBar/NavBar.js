@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
     textTabs: {
         fontSize: '15px',
         fontWeight: 'bold',
-        margin: '30px',
         color: 'black',
         '&:hover': {
             background: '#4877c2',

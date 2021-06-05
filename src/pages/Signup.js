@@ -223,6 +223,7 @@ export default function Signup() {
             aria-labelledby="customized-dialog-title"
             open={createRegisterDialog}
             className={classes.dialog}
+            onClose={() => setCreateRegisterDialog(false)}
             PaperProps={{
                 style: {
                     borderRadius: 30,

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-import { useHistory } from 'react-router-dom'
-
-import { Avatar, Button, Dialog, Grid, InputAdornment, Slide, TextField, Paper, IconButton } from "@material-ui/core";
+import { Button, Dialog, Grid, InputAdornment, TextField, Paper, IconButton } from "@material-ui/core";
 import { useLocalContext } from "../context/context";
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from "@material-ui/icons"
@@ -41,15 +39,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function JoinCForgatlass() {
 
-    const history = useHistory();
-
     const classes = useStyles();
 
     const {
-        joinClassDialog,
         createForgotDialog,
         setCreateForgotDialog,
-        loggedInUser,
     } = useLocalContext();
     
     const [values, setValues] = useState({

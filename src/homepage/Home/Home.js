@@ -15,6 +15,7 @@ import NavBar from '../../components/NavBar/NavBar'
 import Graduation from '../../components/assets/graduation.png'
 import Chart from '../../components/assets/chart.jpg'
 import bgImage from '../../components/assets/bg.png'
+import Footer from '../../components/Footer/Footer'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -133,7 +134,8 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>  
+            </Grid> 
+            <Footer />
         </Grid>
     )
 }

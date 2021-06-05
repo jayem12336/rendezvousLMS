@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
 import firebase from '../utils/firebase'
@@ -11,7 +11,8 @@ import {
     TextField,
     InputAdornment,
     Button,
-    Link
+    Link,
+    CircularProgress
 } from '@material-ui/core'
 
 import { Close } from "@material-ui/icons"
@@ -106,7 +107,7 @@ export default function Login() {
         password: "",
         showPassword: false,
         errors: "",
-        isLoading: true,
+        isLoading: false,
     })
 
     const handleChange = (prop) => (e) => {
@@ -132,7 +133,7 @@ export default function Login() {
         setValues({ ...values, isLoading: true });
 
         if (!values.email || !values.password) {
-            setValues({ ...values, errors: "Please Complete all fields", isLoading: false, email: "", password: "" })
+            setValues({ ...values, errors: "Please Complete all fields", isLoading: false, password: "" })
         }
         else {
 
@@ -150,16 +151,34 @@ export default function Login() {
                     //var errorCode = error.code;
                     var errorMessage = error.message;
 
-                    setValues({ ...values, errors: errorMessage, isLoading: false, email: "", password: "" })
+                    setValues({ ...values, errors: errorMessage, isLoading: false, password: "" })
                 });
         };
     }
+
+    if (values.isLoading) {
+        return (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            justifyItems: 'center',
+            height: '100vh',
+            width: '100vw'
+          }}>
+            <CircularProgress color="primary" size={200} />
+          </div>
+        );
+      }
 
     return (
         <Dialog
             aria-labelledby="customized-dialog-title"
             open={createLoginDialog}
             className={classes.dialog}
+            onClose={() => setCreateLoginDialog(false)}
             maxWidth={false}
             PaperProps={{
                 style: {

@@ -147,7 +147,7 @@ export default function DrawerComponent() {
                 className={classes.menuIconContainer}
                 onClick={() => setOpenDrawer(!openDrawer)}
             >
-                <MenuIcon />
+            <MenuIcon />
             </IconButton>
             <Login />
             <Signup />

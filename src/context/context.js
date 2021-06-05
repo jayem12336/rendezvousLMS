@@ -17,11 +17,15 @@ export function ContextProvider({ children }) {
 
     const [createClassDialog, setCreateClassDialog] = useState(false);
 
+    const [createFormDialog, setCreateFormDialog] = useState(false);
+
     const [joinClassDialog, setJoinClassDialog] = useState(false);
 
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     const [loggedInMail, setloggedInMail] = useState(null)
+
+
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -45,12 +49,12 @@ export function ContextProvider({ children }) {
         setCreateRegisterDialog,
         createClassDialog,
         setCreateClassDialog,
+        createFormDialog,
+        setCreateFormDialog,
         joinClassDialog,
         setJoinClassDialog,
         loggedInMail,
         loggedInUser,
-
-
     };
 
     return (

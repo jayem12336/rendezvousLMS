@@ -27,13 +27,13 @@ import ClipDrawer from './DashboardComponents/Dashboardcomponent/Clipdrawer'
 //DashBoard Components
 import {
   DashboardAbout,
+  DashboardAccount,
   DashboardCalendar,
   DashboardClass,
   DashboardContent,
   DashboardFaqs,
   DashboardFile,
   DashboardGuide,
-  DashboardSmile,
 } from './DashboardComponents/DashboardContent'
 
 function App({ isAuthenticated }) {
@@ -187,6 +187,11 @@ function App({ isAuthenticated }) {
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
+            component={DashboardAccount}
+            path='/dashboardaccount'
+            isAuthenticated={values.isAuthenticated}
+          />
+          <PrivateRoute
             component={DashboardFile}
             path='/dashboardfile'
             isAuthenticated={values.isAuthenticated}
@@ -204,11 +209,6 @@ function App({ isAuthenticated }) {
           <PrivateRoute
             component={DashboardGuide}
             path='/dashboardguide'
-            isAuthenticated={values.isAuthenticated}
-          />
-          <PrivateRoute
-            component={DashboardSmile}
-            path='/dashboardsmile'
             isAuthenticated={values.isAuthenticated}
           />
         </Switch>

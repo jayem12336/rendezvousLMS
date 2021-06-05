@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { makeStyles, Grid } from '@material-ui/core';
+import { makeStyles, Grid, Button } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,6 +14,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 //Logo 
 import Logo from '../../components/assets/RendezvousLogo.png'
+import { useLocalContext } from '../../context/context'
+import Login from '../../pages/Login';
+import AccountContent from '../DashboardContent/DashboardAccount/AccountContent';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +45,20 @@ function NestedList() {
 
     const classes = useStyles();
 
+    const {
+        setCreateLoginDialog,
+        setCreateRegisterDialog,
+    } = useLocalContext();
+
+    const handleLogin = () => {
+        handleClose()
+        setCreateLoginDialog(true)
+    }
+
+    const handleClose = () => setAnchorEl(null);
+
+    const [anchorEl, setAnchorEl] = useState(null)
+
     return (
         <Grid container>
             <List
@@ -56,8 +73,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem
                     button
-                    component={Link}
-                    to='/dashboardcontent'>
+                    onClick={handleLogin}>
                     <ListItemIcon className={classes.listItemIcon} >
                         <AccountCircleIcon />
                         Account
@@ -127,15 +143,6 @@ function NestedList() {
                             Guide
                         </ListItemIcon>
                 </ListItem>
-                <ListItem
-                    button
-                    component={Link}
-                    to='/dashboardsmile'>
-                    <ListItemIcon className={classes.listItemIcon}>
-                        <HistoryIcon />
-                            Smile
-                        </ListItemIcon>
-                </ListItem>
             </List>
         </Grid>
     );
@@ -145,6 +152,7 @@ export default function DrawerList() {
     return (
         <div>
             <NestedList />
+            <AccountContent />
         </div>
     )
 }
