@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     dialog: {
         borderRadius: '40px',
         padding: 20,
-        margin: "30px auto",
+        margin: "0px auto",
         width: 400,
         height: '700px',
         "@media (max-width: 600px)": {
@@ -90,16 +90,11 @@ export default function Login() {
 
     const history = useHistory();
 
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleClose = () => setAnchorEl(null);
-
     const {
         createLoginDialog,
         setCreateLoginDialog,
         setCreateRegisterDialog,
         setCreateForgotDialog,
-
     } = useLocalContext();
 
     const [values, setValues] = useState({
@@ -122,7 +117,6 @@ export default function Login() {
         event.preventDefault();
     };
     const handleForgot = () => {
-        handleClose()
         setCreateForgotDialog(true);
     }
 

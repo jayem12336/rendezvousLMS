@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import firebase, { db } from '../utils/firebase'
-import { v4 as uuidV4 } from "uuid";
 
 import { useHistory } from 'react-router-dom'
 
@@ -146,8 +145,11 @@ export default function Signup() {
         isLoading: false,
         errors: "",
         firstname: "",
-        lastname: ""
+        lastname: "",
+        photo_url: ""
     })
+
+    
 
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value })
@@ -177,28 +179,23 @@ export default function Signup() {
                 .auth()
                 .createUserWithEmailAndPassword(values.email, values.password)
                 .then((userCredential) => {
-                    // Signed in 
-                    //var user = userCredential.user;
-
-                    //console.log(user);
-
-                    // ...
-                    const id = uuidV4();
-
-                    db.collection("users").doc(id).set({
-                        email: values.email,
-                        first_name: values.firstname,
-                        last_name: values.lastname
-                    })
-                        .then(() => {
-                            console.log("Document successfully written!");
+                    firebase.auth().onAuthStateChanged(function (user) {
+                        db.collection("users").doc(user.uid).set({
+                            email: values.email,
+                            first_name: values.firstname,
+                            last_name: values.lastname,
+                            photo_url: values.photo_url
                         })
-                        .catch((error) => {
-                            console.error("Error writing document: ", error);
-                        });
-                    setValues({ isLoading: false });
-                    history.push('/userdashboard')
-                    setCreateRegisterDialog(false);
+                            .then(() => {
+                                console.log("Document successfully written!");
+                            })
+                            .catch((error) => {
+                                console.error("Error writing document: ", error);
+                            });
+                        setValues({ isLoading: false });
+                        history.push('/dashboardcontent')
+                        setCreateRegisterDialog(false);
+                    })
                 })
                 .catch((error) => {
                     //var errorCode = error.code;
@@ -216,7 +213,7 @@ export default function Signup() {
             </div>
         );
     }
-
+    
 
     return (
         <Dialog
@@ -325,7 +322,6 @@ export default function Signup() {
                             <TextField
                                 className={classes.margin}
                                 label="PASSWORD"
-                                type="password"
                                 placeholder="Password"
                                 variant="outlined"
                                 onChange={handleChange("password")}
@@ -359,7 +355,6 @@ export default function Signup() {
                             <TextField
                                 className={classes.margin}
                                 label="CONFIRM PASSWORD"
-                                type="password"
                                 placeholder="Confirm Password"
                                 variant="outlined"
                                 onChange={handleChange("confirmPassword")}

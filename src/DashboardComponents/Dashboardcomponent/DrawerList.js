@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { makeStyles, Grid, Button } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -15,7 +15,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 //Logo 
 import Logo from '../../components/assets/RendezvousLogo.png'
 import { useLocalContext } from '../../context/context'
-import Login from '../../pages/Login';
 import AccountContent from '../DashboardContent/DashboardAccount/AccountContent';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,17 +46,12 @@ function NestedList() {
 
     const {
         setCreateLoginDialog,
-        setCreateRegisterDialog,
     } = useLocalContext();
 
     const handleLogin = () => {
-        handleClose()
         setCreateLoginDialog(true)
     }
 
-    const handleClose = () => setAnchorEl(null);
-
-    const [anchorEl, setAnchorEl] = useState(null)
 
     return (
         <Grid container>

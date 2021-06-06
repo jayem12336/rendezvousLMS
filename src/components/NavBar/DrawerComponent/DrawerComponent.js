@@ -47,24 +47,17 @@ export default function DrawerComponent() {
 
     const [openDrawer, setOpenDrawer] = useState(false);
 
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleClose = () => setAnchorEl(null);
-
     const {
         setCreateLoginDialog,
         setCreateRegisterDialog,
     } = useLocalContext();
 
     const handleLogin = () => {
-        handleClose()
         setCreateLoginDialog(true)
         setOpenDrawer(false)
-
     }
 
     const handleRegister = () => {
-        handleClose()
         setCreateRegisterDialog(true)
         setOpenDrawer(false)
     }

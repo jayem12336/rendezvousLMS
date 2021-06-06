@@ -36,7 +36,7 @@ import {
   DashboardGuide,
 } from './DashboardComponents/DashboardContent'
 
-function App({ isAuthenticated }) {
+function App({ classData }) {
 
   const { loggedInMail } = useLocalContext();
 

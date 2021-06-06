@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 //React router
 import { useHistory } from 'react-router-dom'
@@ -91,22 +91,16 @@ export default function NavBar() {
 
     const history = useHistory();
 
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleClose = () => setAnchorEl(null);
-
     const {
         setCreateLoginDialog,
         setCreateRegisterDialog,
     } = useLocalContext();
 
     const handleLogin = () => {
-        handleClose()
         setCreateLoginDialog(true)
     }
 
     const handleRegister = () => {
-        handleClose()
         setCreateRegisterDialog(true)
     }
 

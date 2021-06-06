@@ -55,6 +55,7 @@ const Classroom = () => {
     const {
         setCreateClassDialog,
         setJoinClassDialog,
+        
     } = useLocalContext();
 
     const handleCreate = () => {
@@ -102,13 +103,6 @@ export default function ClassContent() {
     const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
     const classes = useStyles();
-    
-    
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleClick = (event) => setAnchorEl(event.currentTarget);
-
-    const handleClose = () => setAnchorEl(null);
 
     const {
         setCreateClassDialog,
@@ -116,20 +110,18 @@ export default function ClassContent() {
     } = useLocalContext();
 
     const handleCreate = () => {
-        handleClose()
         setCreateClassDialog(true)
     }
 
     const handleJoin = () => {
-        handleClose()
         setJoinClassDialog(true)
     }
 
     return (
         <div>
             <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={6}>
-                    <AppBar position="static" color='white'>
+                <Grid container alignItems="center" alignContent="center" justify="center" spacing={6}>
+                    <AppBar position="static" color='secondary'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
                                 Rendezvous Classroom

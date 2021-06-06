@@ -35,12 +35,12 @@ export default function DashboardContent() {
             // An error happened.
         });
     }
-
+    
     return (
         <div>
             <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" justifyContent="center" spacing={4}>
-                    <AppBar position="static" color='white'>
+                <Grid container alignItems="center" alignContent="center" spacing={5}>
+                    <AppBar position="static" color='secondary'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
                                 DashBoard

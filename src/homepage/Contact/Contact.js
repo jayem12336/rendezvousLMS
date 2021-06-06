@@ -10,7 +10,7 @@ export default function Faqs() {
     return (
         <>
             <NavBar />
-            <Grid container alignContent='center' alignitem='center' justify='center' style={{marginTop: '100px'}}>
+            <Grid container alignContent='center' alignItems='center' justify='center' style={{marginTop: '100px'}}>
                 <Grid item>
                     <h1>Faqs</h1>
                 </Grid>
