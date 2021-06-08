@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import firebase, { db } from '../utils/firebase'
+import firebase, { db, provider } from '../utils/firebase'
 
 import { useHistory } from 'react-router-dom'
 
@@ -149,7 +149,7 @@ export default function Signup() {
         photo_url: ""
     })
 
-    
+
 
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value })
@@ -162,6 +162,43 @@ export default function Signup() {
     const handleMouseDownPassword = (e) => {
         e.preventDefault();
     }
+
+
+    const loginwithGoogle = () => {
+
+        const auth = firebase.auth();
+
+            auth.signInWithPopup(provider)
+            .then((user) => {
+
+                const firstName = user.additionalUserInfo.profile.given_name;
+                const lastName = user.additionalUserInfo.profile.family_name;
+
+                firebase.auth().onAuthStateChanged(function (user) {
+                    db.collection("users").doc(user.uid).set({
+                        email: user.email,
+                        first_name: firstName,
+                        last_name: lastName,
+                        photo_url: user.photoURL
+                    }).then(() => {
+                        console.log("document successfully Written")
+                    })
+                    setValues({ isLoading: false });
+                    history.push('/dashboardcontent')
+                    setCreateRegisterDialog(false);
+
+                });
+                   
+            });
+
+    }
+
+
+
+
+
+
+    //#region singupfunction
 
     const signup = (e) => {
 
@@ -206,6 +243,8 @@ export default function Signup() {
         }
     }
 
+    //#endregion
+
     if (values.isLoading) {
         return (
             <div className={classes.root}>
@@ -213,7 +252,7 @@ export default function Signup() {
             </div>
         );
     }
-    
+
 
     return (
         <Dialog
@@ -397,13 +436,14 @@ export default function Signup() {
                             >
                                 CREATE ACCOUNT
                             </Button>
-                            <h2 style={{textAlign:"center", marginTop:10}}>or</h2>
+                            <h2 style={{ textAlign: "center", marginTop: 10 }}>or</h2>
                             <Button
                                 variant="contained"
                                 size="large"
                                 className={classes.googleBtn}
                                 startIcon={<FcGoogle />}
                                 fullWidth
+                                onClick={loginwithGoogle}
                             >
                                 Sign up with google
                             </Button>

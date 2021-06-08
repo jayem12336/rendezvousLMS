@@ -26,7 +26,6 @@ export function ContextProvider({ children }) {
     const [loggedInMail, setloggedInMail] = useState(null)
 
 
-
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) {
@@ -54,7 +53,7 @@ export function ContextProvider({ children }) {
         joinClassDialog,
         setJoinClassDialog,
         loggedInMail,
-        loggedInUser,
+        loggedInUser
     };
 
     return (
