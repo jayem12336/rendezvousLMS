@@ -19,6 +19,10 @@ export function ContextProvider({ children }) {
 
     const [createFormDialog, setCreateFormDialog] = useState(false);
 
+    const [createaccountDialog, setCreateaccountDialog] = useState(false);
+
+    const [createManageDialog, setCreateManageDialog] = useState(false);
+
     const [joinClassDialog, setJoinClassDialog] = useState(false);
 
     const [loggedInUser, setLoggedInUser] = useState(null);
@@ -52,6 +56,10 @@ export function ContextProvider({ children }) {
         setCreateFormDialog,
         joinClassDialog,
         setJoinClassDialog,
+        createaccountDialog,
+        setCreateaccountDialog,
+        createManageDialog,
+        setCreateManageDialog,
         loggedInMail,
         loggedInUser
     };

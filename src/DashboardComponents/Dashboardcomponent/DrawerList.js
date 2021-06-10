@@ -16,6 +16,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Logo from '../../components/assets/RendezvousLogo.png'
 import { useLocalContext } from '../../context/context'
 import AccountContent from '../DashboardContent/DashboardAccount/AccountContent';
+import ManageAccount from '../DashboardContent/DashboardAccount/ManageAccount';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,13 +46,13 @@ function NestedList() {
     const classes = useStyles();
 
     const {
-        setCreateLoginDialog,
+        setCreateaccountDialog,
     } = useLocalContext();
 
-    const handleLogin = () => {
-        setCreateLoginDialog(true)
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setCreateaccountDialog(true)
     }
-
 
     return (
         <Grid container>
@@ -138,6 +139,8 @@ function NestedList() {
                         </ListItemIcon>
                 </ListItem>
             </List>
+            <AccountContent />
+            <ManageAccount />
         </Grid>
     );
 }
@@ -146,7 +149,6 @@ export default function DrawerList() {
     return (
         <div>
             <NestedList />
-            <AccountContent />
         </div>
     )
 }

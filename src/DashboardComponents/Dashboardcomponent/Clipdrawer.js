@@ -11,47 +11,20 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
+        overflow:'hidden'
     },
     drawerPaper: {
         width: drawerWidth,
-    },
-    drawerContainer: {
-        overflow: 'auto',
+        overflow:'hidden' 
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing(2.1),
+        overflow:'hidden' 
     },
-    iconLogo: {
-        color: 'skyblue',
-        fontSize: '3rem'
-    },
-    PaperStyle: {
-        height: "600px",
-        width: "700px"
-    },
-    textStyle: {
-        fontSize: "30px",
-        padding: 5
-    },
-    dashboariconStyle: {
-        color: 'black',
-        fontSize: '1.9rem',
-        marginRight:"15px",
-        
-    }
 }));
 
 export default function ClipDrawer( {children} ) {

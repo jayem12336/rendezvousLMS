@@ -193,11 +193,6 @@ export default function Signup() {
 
     }
 
-
-
-
-
-
     //#region singupfunction
 
     const signup = (e) => {
@@ -230,8 +225,8 @@ export default function Signup() {
                                 console.error("Error writing document: ", error);
                             });
                         setValues({ isLoading: false });
-                        history.push('/dashboardcontent')
                         setCreateRegisterDialog(false);
+                        history.push('/dashboardcontent');              
                     })
                 })
                 .catch((error) => {

@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
     btnClasses: {
         marginLeft: '10px auto',
         marginRight: 30,
-        marginTop: 5,
+        marginTop: 7,
         fontSize: 18,
-        height: '60px',
+        height: '70px',
         width: '170px',
         '&:hover': {
             background: '#4877c2',
@@ -70,9 +70,9 @@ const Classroom = () => {
 
 
     return (
-        <div style={{ marginLeft: 'auto', marginRight: '20px' }}>
+        <div style={{ marginLeft: 'auto', marginRight: '20px', marginTop: 15 }}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} >
-                <BsPlusCircle style={{ color: 'black', fontSize: '1.9rem' }} />
+                <BsPlusCircle style={{ color: 'black', fontSize: '1.9rem'}} />
             </Button>
             <Menu
                 id='simple-menu'
@@ -95,7 +95,7 @@ const Classroom = () => {
     );
 }
 
-export default function ClassContent() {
+export default function ClassContent( {children} ) {
 
     //BreakPoint
     const theme = useTheme();
@@ -121,20 +121,20 @@ export default function ClassContent() {
         <div>
             <ClipDrawer>
                 <Grid container alignItems="center" alignContent="center" justify="center" spacing={6}>
-                    <AppBar position="static" color='secondary'>
+                    <AppBar position="static" color='secondary' style={{height: 80}}>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
-                                Rendezvous Classroom
+                                RENDEZVOUS CLASSROOM
                             </Typography>
                             {isMatch ? <Classroom /> : <>
                                 <Button className={classes.btnClasses} onClick={handleCreate}>
-                                    Create Class
+                                    CREATE CLASS
                                 </Button>
                                 <Button className={classes.btnClasses} onClick={handleJoin}>
-                                    Join Class
+                                    JOIN CLASS
                                     </Button>
                                 <Button className={classes.btnClasses} onClick={handleCreate}>
-                                    Create School
+                                    CREATE SCHOOL
                                 </Button>
                             </>
                             }
@@ -143,6 +143,7 @@ export default function ClassContent() {
                 </Grid>
                 <CreateClass />
                 <JoinClass />
+                {children}
             </ClipDrawer>
         </div>
     )

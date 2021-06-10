@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useHistory } from 'react-router-dom'
 
-import {Button, Dialog, Grid, Paper, TextField } from "@material-ui/core";
+import { Button, Dialog, Grid, Paper, TextField } from "@material-ui/core";
 import { useLocalContext } from "../../context/context";
 import { Close } from "@material-ui/icons";
 import "./style.css";
@@ -62,26 +62,25 @@ export default function JoinClass() {
           setClassExists(true);
           setJoinedData(doc.data());
           setError(false);
+          if (classExists === true) {
+            db.collection("JoinedClasses")
+              .doc(loggedInUser.email)
+              .collection("classes")
+              .doc(classCode)
+              .set({
+                joinedData,
+              })
+              .then(() => {
+                setJoinClassDialog(false);
+                history.push(`/${classCode}`);
+              });
+          }
         } else {
           setError(true);
           setClassExists(false);
           return;
         }
       });
-
-    if (classExists === true) {
-      db.collection("JoinedClasses")
-        .doc(loggedInUser.email)
-        .collection("classes")
-        .doc(classCode)
-        .set({
-          joinedData,
-        })
-        .then(() => {
-          setJoinClassDialog(false);
-          history.push(`/${classCode}`);
-        });
-    }
   };
 
   return (
@@ -104,44 +103,44 @@ export default function JoinClass() {
           <Grid container justify='center' alignItems='center' alignContent='center'>
             <Grid container justify='center' alignItems='center' alignContent='center'>
               <Grid container className={classes.dialogContainer} justify='center' alignItems='center' alignContent='center'>
-                  <Paper elevation={10} className={classes.PaperStyle}>
-                    <Grid item>
-                      <TextField
-                        className={classes.margin}
-                        label="Class Code"
-                        variant="outlined"
-                        value={classCode}
-                        onChange={(e) => setClassCode(e.target.value)}
-                        error={error}
-                        helperText={error && "No class was found"}
-                        autoFocus={true}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item>
-                      <TextField
-                        className={classes.margin}
-                        label="Owner's email"
-                        variant="outlined"
-                        value={email}
-                        onChange={(e) => setemail(e.target.value)}
-                        autoFocus={true}
-                        fullWidth
-                      />
-                    </Grid>
-                    <Grid item>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.margin}
-                        size="large"
-                        fullWidth
-                        onClick={handleSubmit}
-                      >
-                        Join
+                <Paper elevation={10} className={classes.PaperStyle}>
+                  <Grid item>
+                    <TextField
+                      className={classes.margin}
+                      label="Class Code"
+                      variant="outlined"
+                      value={classCode}
+                      onChange={(e) => setClassCode(e.target.value)}
+                      error={error}
+                      helperText={error && "No class was found"}
+                      autoFocus={true}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item>
+                    <TextField
+                      className={classes.margin}
+                      label="Owner's email"
+                      variant="outlined"
+                      value={email}
+                      onChange={(e) => setemail(e.target.value)}
+                      autoFocus={true}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.margin}
+                      size="large"
+                      fullWidth
+                      onClick={handleSubmit}
+                    >
+                      Join
                         </Button>
-                    </Grid>
-                  </Paper>
+                  </Grid>
+                </Paper>
               </Grid>
             </Grid>
           </Grid>

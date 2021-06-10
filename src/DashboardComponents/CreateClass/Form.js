@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useHistory } from 'react-router-dom'
 
@@ -15,6 +15,8 @@ import { db } from "../../utils/firebase";
 
 import { useLocalContext } from "../../context/context";
 import { Close } from '@material-ui/icons';
+
+import firebase from '../../utils/firebase'
 
 const useStyles = makeStyles((theme) => ({
   closebtn: {
@@ -39,8 +41,31 @@ export default function Form() {
   const [Section, setSection] = useState("");
   const [Room, setRoom] = useState("");
   const [Subject, setSubject] = useState("");
+  const [values, setValues] = useState({
+    user: {}
+  })
 
   const { loggedInMail, setCreateClassDialog } = useLocalContext();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        const db = firebase.firestore();
+
+        db.collection("users")
+          .doc(user.uid)
+          .onSnapshot((doc) => {
+            setValues({ user: doc.data()})
+          });
+      } else {
+        // No user is signed in.
+      }
+    });
+    return () => {
+      setValues({}); // This worked for me
+    };
+  }, [])
+
 
   const addClass = (e) => {
     e.preventDefault();
@@ -55,10 +80,12 @@ export default function Form() {
         .doc(id)
         .set({
           owner: loggedInMail,
-          className: className,
+          classname: className,
+          subjectcode: Subject,
           section: Section,
           room: Room,
-          id: id,
+          classcode: id,
+          profilephoto: values.user.photo_url
         })
         .then(() => {
           setCreateClassDialog(false);

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { useHistory } from 'react-router-dom'
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Typography,
@@ -44,40 +46,62 @@ const useStyles = makeStyles((theme) => ({
     },
     textStyle: {
         fontSize: "20px",
-        marginBottom: 5
+        marginBottom: 5,
+        "@media (max-width: 600px)": {
+            fontSize: 15,
+            marginBottom: 10
+        },
     },
     dialogContainer: {
         padding: 20,
+        maxWidth: 400,
+        width: 400,
         margin: "40px auto",
         borderColor: 'none',
     },
     dialog: {
         width: 400,
-        height: '480px',
+        maxWidth: 400,
+        marginLeft: 50,
+        marginTop: 20,
+        overflow:"hidden",
+        height: '500px',
         "@media (max-width: 600px)": {
-            width: 340
+            width: 350,
+            marginLeft: -10,
         },
     },
     iconStyle: {
         height: 100,
         width: 100,
         marginBottom: 20
+
     },
     margin: {
         marginTop: 10
     },
     cameraIcon: {
         position: 'absolute',
-        right: 80,
+        right: 110,
         top: 130,
         backgroundColor: 'white',
         '&:hover': {
             background: '#4877c2',
-        }
+        },
+        "@media (max-width: 600px)": {
+            width: 40,
+            height: 40,
+            position: "absolute",
+            right: 90,
+            top: 140,
+        },
+
     }
 }))
 
 export default function AccountContent() {
+
+    const history = useHistory();
 
     const classes = useStyles();
 
@@ -89,6 +113,12 @@ export default function AccountContent() {
         user: {},
         userUid: "",
     });
+
+    const {
+        createaccountDialog,
+        setCreateaccountDialog,
+        setCreateManageDialog
+    } = useLocalContext();
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function (user) {
@@ -131,6 +161,7 @@ export default function AccountContent() {
         setUpload({
             open: false,
         })
+
 
         try {
             Resizer.imageFileResizer(
@@ -195,13 +226,23 @@ export default function AccountContent() {
 
     //#endregion
 
+    const manage = (e) => {
+        e.preventDefault();
+        setCreateaccountDialog(false);
+        setCreateManageDialog(true);
+    }
 
-    const {
-        createLoginDialog,
-        setCreateLoginDialog
+    const logout = (e) => {
 
-    } = useLocalContext();
-
+        e.preventDefault();
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            history.push('/home');
+            setCreateaccountDialog(false);
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
 
     if (values.isLoading) {
         return (
@@ -223,9 +264,9 @@ export default function AccountContent() {
     return (
         <Dialog
             aria-labelledby="customized-dialog-title"
-            open={createLoginDialog}
+            open={createaccountDialog}
             className={classes.dialog}
-            onClose={() => setCreateLoginDialog(false)}
+            onClose={() => setCreateaccountDialog(false)}
             maxWidth={false}
         >
             <Grid container justify='center' alignItems='center' alignContent='center'>
@@ -233,7 +274,7 @@ export default function AccountContent() {
                     <Grid container justify='center' alignItems='center' alignContent='center' className={classes.closebtnContainer}>
                         <Close
                             className={classes.closebtn}
-                            onClick={() => setCreateLoginDialog(false)}
+                            onClick={() => setCreateaccountDialog(false)}
                         />
                         {values.user && values.user.photo_url ? (
                             <Avatar
@@ -273,11 +314,34 @@ export default function AccountContent() {
                         <Typography className={classes.textStyle}>
                             {values.user && values.user.email}
                         </Typography>
-                        
+
                     </Grid>
                     <Grid container justify='center' alignItems='center' alignContent='center'>
-                        <Button variant="contained" color="primary" fullWidth style={{ marginTop: 10, borderRadius: 10 }}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={manage}
+                            fullWidth
+                            style={{
+                                marginTop: 10,
+                                borderRadius: 10
+                            }}
+                        >
                             Manage Account
+                        </Button>
+                    </Grid>
+                    <Grid container justify='center' alignItems='center' alignContent='center'>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={logout}
+                            fullWidth
+                            style={{
+                                marginTop: 20,
+                                borderRadius: 10
+                            }}
+                        >
+                            Logout
                         </Button>
                     </Grid>
                 </Grid>

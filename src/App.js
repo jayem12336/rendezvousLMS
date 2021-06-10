@@ -14,15 +14,11 @@ import PublicRoute from './routers/PublicRoute'
 
 //Homepage Components
 import { About, Contact, Guide, Home } from './homepage'
-
-//Non user Pages
-import UserDashboard from './DashboardComponents/Dashboardcomponent/UserDrawer'
 import Main from './DashboardComponents/main/Main'
 
 //Context Dialog
 import { useLocalContext } from './context/context'
 import JoinedClasses from './DashboardComponents/JoinedClasses/JoinedClasses'
-import ClipDrawer from './DashboardComponents/Dashboardcomponent/Clipdrawer'
 
 //DashBoard Components
 import {
@@ -36,7 +32,7 @@ import {
   DashboardGuide,
 } from './DashboardComponents/DashboardContent'
 
-function App({ classData }) {
+function App() {
 
   const { loggedInMail } = useLocalContext();
 
@@ -57,7 +53,6 @@ function App({ classData }) {
         .onSnapshot((snapshot) => {
           setCreatedClasses(snapshot.docs.map((doc) => doc.data()))
         })
-
       return () => unsubscribe();
     }
   }, [loggedInMail])
@@ -75,7 +70,6 @@ function App({ classData }) {
       return () => unsubscribe();
     }
   }, [loggedInMail]);
-
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -113,17 +107,13 @@ function App({ classData }) {
       <Router>
         <Switch>
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.id}`}>
-              <ClipDrawer>
-                <Main classData={item} />
-              </ClipDrawer>
+            <Route key={index} exact path={`/${item.classcode}`}>
+              <Main classData={item} />
             </Route>
           ))}
           {joinedClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.id}`}>
-              <ClipDrawer>
-                <Main classData={item} />
-              </ClipDrawer>
+            <Route key={index} exact path={`/${item.classcode}`}>
+              <Main classData={item} />
             </Route>
           ))}
           <Route path="/" exact >
@@ -154,11 +144,6 @@ function App({ classData }) {
             restricted={true}
           />
           <PrivateRoute
-            component={UserDashboard}
-            path='/userdashboard'
-            isAuthenticated={values.isAuthenticated}
-          />
-          <PrivateRoute
             component={DashboardContent}
             path='/dashboardcontent'
             isAuthenticated={values.isAuthenticated}
@@ -168,7 +153,6 @@ function App({ classData }) {
             component={DashboardClass}
             path='/dashboardclass'
             isAuthenticated={values.isAuthenticated}
-            exact
           >
             <DashboardClass />
             <ol className="joined">
@@ -179,7 +163,6 @@ function App({ classData }) {
                 <JoinedClasses classData={item} />
               ))}
             </ol>
-
           </PrivateRoute>
           <PrivateRoute
             component={DashboardCalendar}

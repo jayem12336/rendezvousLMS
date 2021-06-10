@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Dialog, Grid, InputAdornment, TextField, Paper, IconButton } from "@material-ui/core";
+import { Button, Dialog, Grid, InputAdornment, TextField, Paper, IconButton, Typography } from "@material-ui/core";
 import { useLocalContext } from "../context/context";
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from "@material-ui/icons"
@@ -45,7 +45,7 @@ export default function JoinCForgatlass() {
         createForgotDialog,
         setCreateForgotDialog,
     } = useLocalContext();
-    
+
     const [values, setValues] = useState({
         email: "",
         errors: "",
@@ -77,13 +77,13 @@ export default function JoinCForgatlass() {
                         <Paper elevation={10} className={classes.PaperStyle}>
                             <Grid align='center'>
                                 <h2 style={{ color: 'black', marginBottom: 20, marginTop: 20 }}>
-                                    Forgot Password
+                                    Forgot Password your Rendezvous Account
                                 </h2>
                             </Grid>
                             <Grid item>
+                                <Typography>Enter your email to recover your account</Typography>
                                 <TextField
                                     className={classes.margin}
-                                    label="EMAIL"
                                     placeholder="Email"
                                     variant="outlined"
                                     onChange={handleChange("email")}
@@ -106,12 +106,12 @@ export default function JoinCForgatlass() {
                             <Grid item>
                                 <Button
                                     variant="contained"
-                                    color="primary"
                                     className={classes.margin}
                                     size="large"
                                     fullWidth
+                                    style={{ backgroundColor: "#3bd44b" }}
                                 >
-                                    Forgot Password
+                                    Recover
                                 </Button>
                             </Grid>
                         </Paper>

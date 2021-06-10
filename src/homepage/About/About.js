@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Material ui
 import {
     Grid,
     makeStyles,
     Typography,
+    Modal,
+    Button
 } from '@material-ui/core'
 
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'
+
+import UserModal from '../modal/UserModal'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,6 +50,11 @@ export default function About() {
 
     const classes = useStyles();
 
+    const [open, setOpen] = useState(false);
+
+    const handleClose = () =>{
+        setOpen(false);
+    }
     return (
         <Grid container alignContent='center' alignitem='center' justify='center'>
             <NavBar />
@@ -56,9 +65,25 @@ export default function About() {
                         <Grid container alignContent='center' alignitem='center' justify='center' style={{ marginTop: '20px' }}>
                             <Typography variant='subtitle1' color='primary'>A online learning management platform for new normal education system and make appointment for school activities.</Typography>
                         </Grid>
+
+
                     </Grid>
                 </Grid>
             </Grid>
+
+            <Button
+                variant="contained"
+                fullWidth
+                onClick={() =>setOpen(true)}
+                >Wtf</Button>
+            <Modal
+                open={open}
+                aria-labelledby="aldrin-modal"
+                onClose={handleClose}
+            >
+                <UserModal setOpen={setOpen} />
+            </Modal>
+
         </Grid>
     )
 }
