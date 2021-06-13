@@ -89,7 +89,6 @@ export default function Form() {
         })
         .then(() => {
           setCreateClassDialog(false);
-          history.push(`/${id}`);
         });
     }
   };

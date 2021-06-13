@@ -120,42 +120,42 @@ function App() {
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/announcement">
+            <Route path={`/${item.classcode}/announcement`}>
               <Announcement classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/activities">
+            <Route path={`/${item.classcode}/activities`}>
               <Activities classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/createactivities">
+            <Route key={index} exact path={`/${item.classcode}/createactivities`}>
               <CreateActivities classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/assignactivities">
+            <Route key={index} exact path={`/${item.classcode}/assignactivities`}>
               <AssignActivities classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/quizzes">
+            <Route key={index} exact path={`/${item.classcode}/quizzes`}>
               <Quizzes classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/joinmeeting">
+            <Route key={index} exact path={`/${item.classcode}/joinmeeting`}>
               <JoinMeeting classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/people">
+            <Route key={index} exact path={`/${item.classcode}/people`}>
               <People classData={item} />
             </Route>
           ))}
           {createdClasses.map((item, index) => (
-            <Route key={index} exact path="/settings">
+            <Route key={index} exact path={`/${item.classcode}/settings`}>
               <Settings classData={item} />
             </Route>
           ))}

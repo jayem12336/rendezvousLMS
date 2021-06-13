@@ -43,10 +43,10 @@ export default function AssignActivities({ classData }) {
     })
 
     const prev = () =>{
-        history.push('/activities')
+        history.push(`/${classData.classcode}/activities`)
     }
     const assign = () =>{
-        history.push('/createactivities')
+        history.push(`/${classData.classcode}/createactivities`)
     }
 
     return (
@@ -66,7 +66,7 @@ export default function AssignActivities({ classData }) {
                         </Toolbar>
                     </AppBar>
                 </Grid>
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
                         <Grid container alignItems="center">
                             <Grid container className={classes.gridcontainer} justify='space-between'>

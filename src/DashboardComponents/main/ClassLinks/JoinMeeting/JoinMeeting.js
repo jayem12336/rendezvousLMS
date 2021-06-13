@@ -54,7 +54,7 @@ export default function JoinMeeting({ classData }) {
                         </Toolbar>
                     </AppBar>
                 </Grid>
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
                         <Grid container justify="flex-start" alignItems="center">
                             <Grid container style={{ marginBottom: 20 }}>
@@ -67,7 +67,7 @@ export default function JoinMeeting({ classData }) {
                             <Grid container className={classes.gridcontainer} justify='space-between'>
                                 <Grid container justify="space-between" spacing={5}>
                                     <Grid item sm={6}>
-                                        <TextField id="outlined-basic1" variant="outlined" fullWidth/>
+                                        <TextField id="outlined-basic1" variant="outlined" value={classData.classcode} fullWidth/>
                                     </Grid>
                                     <Grid item sm={6}>
                                         <Button variant="contained" color="primary" className={classes.btnStyle}>

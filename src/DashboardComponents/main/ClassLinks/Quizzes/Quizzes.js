@@ -51,7 +51,7 @@ export default function Quizzes({ classData }) {
                     </AppBar>
                 </Grid>
 
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
                         <Grid container justify="flex-start" alignItems="center">
                             <Grid container style={{ marginBottom: 20 }}>

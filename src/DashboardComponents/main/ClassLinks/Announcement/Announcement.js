@@ -47,7 +47,7 @@ export default function Announcement({ classData }) {
                     </Toolbar>
                 </AppBar>
             </Grid>
-            <ClassDrawer>
+            <ClassDrawer classData={classData.classcode}>
                 <Grid container justify="center" alignItems="center" style={{ marginTop: 20 }}>
                     <Grid container justify="flex-start" alignItems="center">
                         <Grid>

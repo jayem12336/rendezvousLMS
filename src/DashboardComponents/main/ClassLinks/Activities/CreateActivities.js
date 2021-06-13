@@ -34,7 +34,7 @@ export default function CreateActivities({ classData }) {
     const classes = useStyles();
 
     const assign = () =>{
-        history.push('/assignactivities')
+        history.push(`/${classData.classcode}/assignactivities`)
     }
 
     return (
@@ -55,7 +55,7 @@ export default function CreateActivities({ classData }) {
                     </AppBar>
                 </Grid>
 
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
                         <Grid container alignItems="center">
                             <Grid container className={classes.gridcontainer} justify='space-between'>

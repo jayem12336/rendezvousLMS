@@ -3,7 +3,7 @@ import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
 import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
 import { useHistory } from 'react-router-dom'
 
-import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button } from "@material-ui/core";
+import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button, Link } from "@material-ui/core";
 import { MdArrowBack } from 'react-icons/md';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ export default function Activities({ classData }) {
 
 
     const create = () => {
-        history.push('/createactivities')
+        history.push(`/${classData.classcode}/createactivities`)
     }
     
     return (
@@ -51,14 +51,14 @@ export default function Activities({ classData }) {
                         </Toolbar>
                     </AppBar>
                 </Grid>
-
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
                         <Grid container justify="flex-start" alignItems="center">
                             <Grid container style={{ marginBottom: 20 }}>
                                 <Button
                                     variant="contained"
                                     color="secondary"
+                                    component={Link}
                                     onClick={create}
                                 >
                                     Create Activity

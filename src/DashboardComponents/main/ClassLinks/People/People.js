@@ -38,7 +38,6 @@ export default function People({ classData }) {
     const classes = useStyles();
 
     const [state, setState] = useState({
-
         user: [],
         isLoading: false
     })
@@ -67,7 +66,7 @@ export default function People({ classData }) {
                         </Toolbar>
                     </AppBar>
                 </Grid>
-                <ClassDrawer>
+                <ClassDrawer classData={classData.classcode}>
                     <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40,  }}>
                         <Grid container alignItems="center" justify="center" >
                             <Grid container justify="flex-end" style={{ marginBottom: 20, width: '90%' }}>

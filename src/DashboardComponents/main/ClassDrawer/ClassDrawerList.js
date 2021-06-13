@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ClassDrawerList() {
+export default function ClassDrawerList({ classData }) {
 
     const classes = useStyles();
 
@@ -51,7 +51,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to="/announcement"
+                        to={`/${classData}/announcement`}
                     >
                         <ListItemIcon className={classes.listItemIcon} >
                             Announcement
@@ -61,7 +61,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to='/activities'
+                        to={`/${classData}/activities`}
                     >
                         <ListItemIcon className={classes.listItemIcon} >
                             Activities
@@ -71,7 +71,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to='/quizzes'
+                        to={`/${classData}/quizzes`}
                     >
                         <ListItemIcon className={classes.listItemIcon}>
                             Quizzes / Exams
@@ -81,7 +81,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to='/joinmeeting'
+                        to={`/${classData}/joinmeeting`}
                     >
                         <ListItemIcon className={classes.listItemIcon}>
                             Join Meeting
@@ -91,7 +91,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to='/people'
+                        to={`/${classData}/people`}
                     >
                         <ListItemIcon className={classes.listItemIcon}>
                             People
@@ -101,7 +101,7 @@ export default function ClassDrawerList() {
                         className={classes.listItem}
                         button
                         component={Link}
-                        to='/settings'
+                        to={`/${classData}/settings`}
                     >
                         <ListItemIcon className={classes.listItemIcon}>
                             Settings
