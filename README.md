@@ -1,3 +1,16 @@
+# Needed to install 
+
+npm install react-router-dom --save
+npm install firebase --save
+npm install @material-ui/core --save
+npm install @material-ui/icons --save
+npm insatll @material-ui/lab --save
+npm install react-icons --save
+
+//new install for upload photo
+npm install material-ui-dropzone --save
+npm i react-image-file-resizer --save
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
