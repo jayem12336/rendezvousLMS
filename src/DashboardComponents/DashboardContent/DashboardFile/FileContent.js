@@ -28,16 +28,16 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "lightblue"
     },
     fileContainer: {
-        marginLeft: 350,
-        marginTop: 50,
-        width: 800,
+        padding: 20,
+        justifyContent: 'center',
+        width: 1000
     },
 
 }));
 
 const columns = [
     { field: 'id', headerName: 'Date', width: 150 },
-    { field: 'email', headerName: 'File Name', width: 400 },
+    { field: 'email', headerName: 'File Name', width: 500 },
     { field: 'first_name', headerName: 'File Size', width: 200 },
 ];
 
@@ -80,17 +80,20 @@ export default function FileContent() {
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <Grid container className={classes.fileContainer} align="center" alignItems="center" alignContent="center">
-                        <DataGrid
-                            rows={state.user}
-                            columns={columns}
-                            pageSize={5}
-                            checkboxSelection
-                            autoHeight
-                            loading={state.isLoading}
-                        />
+                    <Grid container justify='center'>
+                        <Grid container justify='center' style={{ marginTop: 20, }}>
+                            <Typography variant="h5"> RECENT FILES </Typography>
+                        </Grid>
+                        <Grid container className={classes.fileContainer} justify='center'>
+                            <DataGrid
+                                rows={state.user}
+                                columns={columns}
+                                checkboxSelection
+                                autoHeight
+                                loading={state.isLoading}
+                            />
+                        </Grid>
                     </Grid>
-
                 </Grid>
             </ClipDrawer>
         </div>

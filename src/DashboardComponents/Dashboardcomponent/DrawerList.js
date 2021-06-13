@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         marginLeft: '-5px',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     iconLogo: {
         marginTop: '-25px',
@@ -71,7 +71,7 @@ function NestedList() {
                     onClick={handleLogin}>
                     <ListItemIcon className={classes.listItemIcon} >
                         <AccountCircleIcon />
-                        Account
+                        Profile
                     </ListItemIcon>
                 </ListItem>
                 <ListItem
@@ -80,7 +80,7 @@ function NestedList() {
                     to='/dashboardcontent'>
                     <ListItemIcon className={classes.listItemIcon} >
                         <DashboardIcon />
-                        Dash
+                        DashBoard
                     </ListItemIcon>
                 </ListItem>
                 <ListItem
@@ -108,26 +108,8 @@ function NestedList() {
                     to='/dashboardfile'>
                     <ListItemIcon className={classes.listItemIcon}>
                         <HistoryIcon />
-                        File
+                        Files
                     </ListItemIcon>
-                </ListItem>
-                <ListItem
-                    button
-                    component={Link}
-                    to='/dashboardabout'>
-                    <ListItemIcon className={classes.listItemIcon}>
-                        <DashboardIcon />
-                            About
-                        </ListItemIcon>
-                </ListItem>
-                <ListItem
-                    button
-                    component={Link}
-                    to='/dashboardfaqs'>
-                    <ListItemIcon className={classes.listItemIcon}>
-                        <ClassIcon />
-                            Faqs
-                        </ListItemIcon>
                 </ListItem>
                 <ListItem
                     button
@@ -136,6 +118,15 @@ function NestedList() {
                     <ListItemIcon className={classes.listItemIcon}>
                         <CalendarTodayIcon />
                             Guide
+                        </ListItemIcon>
+                </ListItem>
+                <ListItem
+                    button
+                    component={Link}
+                    to='/dashboardabout'>
+                    <ListItemIcon className={classes.listItemIcon}>
+                        <DashboardIcon />
+                            About
                         </ListItemIcon>
                 </ListItem>
             </List>

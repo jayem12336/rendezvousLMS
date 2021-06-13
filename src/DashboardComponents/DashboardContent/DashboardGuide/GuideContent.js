@@ -36,7 +36,7 @@ export default function GuideContent() {
                 <AppBar position="static" color='secondary'>
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            Guide
+                            GUIDE
                     </Typography>
                     </Toolbar>
                 </AppBar>

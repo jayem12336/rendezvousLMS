@@ -53,10 +53,6 @@ export default function JoinedClasses({ classData }) {
                                 Unenroll
                             </MenuItem>
                         </Menu>
-                        <Avatar
-                            className="joined__avatar"
-                            src={classData.profilephoto}
-                        />
                         <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={classes.burgerBtn}>
                             <BiDotsHorizontalRounded />
                         </IconButton>
@@ -68,10 +64,10 @@ export default function JoinedClasses({ classData }) {
                         <p className="joined__owner">{classData.room}</p>
                         <p style={{
                             textAlign: 'center',
-                            marginTop: 40,
+                            marginTop: 60,
                             color: 'white',
                             fontWeight: 400,
-                            fontSize: 15
+                            fontSize: 18
                         }}>{classData.owner}</p>
                     </div>
                 </div>

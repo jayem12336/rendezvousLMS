@@ -25,6 +25,8 @@ export function ContextProvider({ children }) {
 
     const [joinClassDialog, setJoinClassDialog] = useState(false);
 
+    const [createSchoolDialog, setCreateSchoolDialog] = useState(false);
+
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     const [loggedInMail, setloggedInMail] = useState(null)
@@ -60,6 +62,8 @@ export function ContextProvider({ children }) {
         setCreateaccountDialog,
         createManageDialog,
         setCreateManageDialog,
+        createSchoolDialog,
+        setCreateSchoolDialog,
         loggedInMail,
         loggedInUser
     };

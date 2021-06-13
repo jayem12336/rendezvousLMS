@@ -24,6 +24,7 @@ import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
 //Create and Join Class
 import CreateClass from '../../CreateClass/CreateClass'
 import JoinClass from '../../JoinClass/JoinClass'
+import CreateSchoolForm from '../CreateSchoolForm/CreateSchoolForm';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -55,7 +56,7 @@ const Classroom = () => {
     const {
         setCreateClassDialog,
         setJoinClassDialog,
-        
+        setCreateSchoolDialog
     } = useLocalContext();
 
     const handleCreate = () => {
@@ -68,6 +69,9 @@ const Classroom = () => {
         setJoinClassDialog(true)
     }
 
+    const handleCreateSchool = () => {
+        setCreateSchoolDialog(true)
+    }
 
     return (
         <div style={{ marginLeft: 'auto', marginRight: '20px', marginTop: 15 }}>
@@ -87,7 +91,7 @@ const Classroom = () => {
                 <MenuItem onClick={handleCreate}>
                     Create Class
                 </MenuItem>
-                <MenuItem onClick={handleCreate}>
+                <MenuItem onClick={handleCreateSchool}>
                     Create School
                 </MenuItem>
             </Menu>
@@ -107,6 +111,7 @@ export default function ClassContent( {children} ) {
     const {
         setCreateClassDialog,
         setJoinClassDialog,
+        setCreateSchoolDialog
     } = useLocalContext();
 
     const handleCreate = () => {
@@ -116,6 +121,16 @@ export default function ClassContent( {children} ) {
     const handleJoin = () => {
         setJoinClassDialog(true)
     }
+
+    const handleCreateSchool = () => {
+        setCreateSchoolDialog(true)
+    }
+
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
+
+    const handleClose = () => setAnchorEl(null);
 
     return (
         <div>
@@ -127,13 +142,28 @@ export default function ClassContent( {children} ) {
                                 RENDEZVOUS CLASSROOM
                             </Typography>
                             {isMatch ? <Classroom /> : <>
-                                <Button className={classes.btnClasses} onClick={handleCreate}>
+                                <Button className={classes.btnClasses} onClick={handleClick} color="inherit">
+                                    JOIN
+                                    </Button>
+                                <Menu
+                                    id='simple-menu'
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+
+                                    <MenuItem onClick={handleJoin}>
+                                        JOIN CLASSROOM
+                                  </MenuItem>
+                                    <MenuItem onClick={handleJoin}>
+                                        JOIN SCHOOL
+                                      </MenuItem>
+                                </Menu>
+                                <Button className={classes.btnClasses} onClick={handleCreate} color="inherit">
                                     CREATE CLASS
                                 </Button>
-                                <Button className={classes.btnClasses} onClick={handleJoin}>
-                                    JOIN CLASS
-                                    </Button>
-                                <Button className={classes.btnClasses} onClick={handleCreate}>
+                                <Button className={classes.btnClasses} onClick={handleCreateSchool} color="inherit">
                                     CREATE SCHOOL
                                 </Button>
                             </>
@@ -143,6 +173,7 @@ export default function ClassContent( {children} ) {
                 </Grid>
                 <CreateClass />
                 <JoinClass />
+                <CreateSchoolForm />
                 {children}
             </ClipDrawer>
         </div>

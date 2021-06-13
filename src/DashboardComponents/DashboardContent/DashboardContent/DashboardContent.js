@@ -28,11 +28,11 @@ export default function DashboardContent() {
     return (
         <div>
             <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" spacing={5}>
+                <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
                     <AppBar position="static" color='secondary'>
                         <Toolbar>
                             <Typography variant="h6" className={classes.title}>
-                                DASHBOARD
+                                    DASHBOARD
                             </Typography>
                         </Toolbar>
                     </AppBar>
@@ -49,7 +49,7 @@ export default function DashboardContent() {
                         <Typography style={{ marginTop: 30 }}>Deadline:June 6, 2021</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" style={{ marginTop: 15,}}>VIEW</Button>
+                        <Button variant="contained" style={{ marginTop: 15, }}>VIEW</Button>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.gridcontainer} justify='space-between'>
@@ -64,7 +64,7 @@ export default function DashboardContent() {
                         <Typography style={{ marginTop: 30 }}>Deadline:June 6, 2021</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" style={{ marginTop: 15,}}>VIEW</Button>
+                        <Button variant="contained" style={{ marginTop: 15, }}>VIEW</Button>
                     </Grid>
                 </Grid>
             </ClipDrawer>

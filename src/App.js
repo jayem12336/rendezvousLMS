@@ -14,7 +14,7 @@ import PublicRoute from './routers/PublicRoute'
 
 //Homepage Components
 import { About, Contact, Guide, Home } from './homepage'
-import Main from './DashboardComponents/main/Main'
+import MainClass from './DashboardComponents/main/MainClass'
 
 //Context Dialog
 import { useLocalContext } from './context/context'
@@ -27,10 +27,18 @@ import {
   DashboardCalendar,
   DashboardClass,
   DashboardContent,
-  DashboardFaqs,
   DashboardFile,
   DashboardGuide,
 } from './DashboardComponents/DashboardContent'
+
+import Announcement from './DashboardComponents/main/ClassLinks/Announcement/Announcement'
+import Activities from './DashboardComponents/main/ClassLinks/Activities/Activities'
+import CreateActivities from './DashboardComponents/main/ClassLinks/Activities/CreateActivities'
+import AssignActivities from './DashboardComponents/main/ClassLinks/Activities/AssignActivities'
+import Quizzes from './DashboardComponents/main/ClassLinks/Quizzes/Quizzes'
+import JoinMeeting from './DashboardComponents/main/ClassLinks/JoinMeeting/JoinMeeting'
+import People from './DashboardComponents/main/ClassLinks/People/People'
+import Settings from './DashboardComponents/main/ClassLinks/Settings/Settings'
 
 function App() {
 
@@ -108,12 +116,52 @@ function App() {
         <Switch>
           {createdClasses.map((item, index) => (
             <Route key={index} exact path={`/${item.classcode}`}>
-              <Main classData={item} />
+              <MainClass classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/announcement">
+              <Announcement classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/activities">
+              <Activities classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/createactivities">
+              <CreateActivities classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/assignactivities">
+              <AssignActivities classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/quizzes">
+              <Quizzes classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/joinmeeting">
+              <JoinMeeting classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/people">
+              <People classData={item} />
+            </Route>
+          ))}
+          {createdClasses.map((item, index) => (
+            <Route key={index} exact path="/settings">
+              <Settings classData={item} />
             </Route>
           ))}
           {joinedClasses.map((item, index) => (
             <Route key={index} exact path={`/${item.classcode}`}>
-              <Main classData={item} />
+              <MainClass classData={item} />
             </Route>
           ))}
           <Route path="/" exact >
@@ -182,11 +230,6 @@ function App() {
           <PrivateRoute
             component={DashboardAbout}
             path='/dashboardabout'
-            isAuthenticated={values.isAuthenticated}
-          />
-          <PrivateRoute
-            component={DashboardFaqs}
-            path='/dashboardfaqs'
             isAuthenticated={values.isAuthenticated}
           />
           <PrivateRoute
