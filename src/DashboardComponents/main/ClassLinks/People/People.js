@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
 import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
 import { useHistory } from 'react-router-dom'
@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom'
 import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button } from "@material-ui/core";
 import { MdArrowBack } from 'react-icons/md';
 import { DataGrid } from '@material-ui/data-grid'
+
+import { db } from '../../../../utils/firebase'
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -21,14 +23,18 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         padding: 20,
         border: "1px solid grey",
-    }
+    },
+    fileContainer: {
+        padding: 20,
+        justifyContent: 'center',
+        width: 1000
+    },
 }))
 
 const columns = [
-    { field: 'Name', headerName: 'Name', width: 300 },
-    { field: 'Email', headerName: '', width: 300 },
-    { field: 'Class', headerName: 'Class', width: 400 },
-    { field: '', headerName: '', width: 200 },
+    { field: 'id', headerName: 'Date', width: 150 },
+    { field: 'email', headerName: 'File Name', width: 500 },
+    { field: 'first_name', headerName: 'File Size', width: 200 },
 ];
 
 export default function People({ classData }) {
@@ -42,12 +48,21 @@ export default function People({ classData }) {
         isLoading: false
     })
 
-    const prev = () => {
-        history.push('/activities')
-    }
-    const assign = () => {
-        history.push('/createactivities')
-    }
+    useEffect(() => {
+
+        const fetchData = () => {
+            db.collection("users")
+                .onSnapshot((doc) => {
+
+                    let userList = [];
+                    doc.forEach((user) => {
+                        userList.push({ ...user.data(), id: user.id });
+                    })
+                    setState({ user: userList, isLoading: false })
+                })
+        }
+        fetchData();
+    }, [])
 
     return (
         <div>
@@ -67,9 +82,9 @@ export default function People({ classData }) {
                     </AppBar>
                 </Grid>
                 <ClassDrawer classData={classData.classcode}>
-                    <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40,  }}>
+                    <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40, }}>
                         <Grid container alignItems="center" justify="center" >
-                            <Grid container justify="flex-end" style={{ marginBottom: 20, width: '90%' }}>
+                            <Grid container justify="flex-end" style={{width: '90%', padding: 20 }}>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -77,13 +92,16 @@ export default function People({ classData }) {
                                     REQUEST
                                 </Button>
                             </Grid>
-                            <Grid container style={{width: '90%'}}>
-                                <DataGrid
-                                    rows={state.user}
-                                    columns={columns}
-                                    autoHeight
-                                    loading={state.isLoading}
-                                />
+                            <Grid container justify='center'>
+                                <Grid container className={classes.fileContainer} justify='center'>
+                                    <DataGrid
+                                        rows={state.user}
+                                        columns={columns}
+                                        checkboxSelection
+                                        autoHeight
+                                        loading={state.isLoading}
+                                    />
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>

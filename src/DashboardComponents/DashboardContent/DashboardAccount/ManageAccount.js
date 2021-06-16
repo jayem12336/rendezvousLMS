@@ -125,7 +125,6 @@ export default function ManageAccount() {
         open: false
     })
 
-
     //#region for dropzone
 
     const handleOpenDropzone = () => {
@@ -221,6 +220,7 @@ export default function ManageAccount() {
             </div>
         );
     }
+
     return (
         <div>
             <Dialog

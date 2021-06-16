@@ -18,7 +18,6 @@ import { useLocalContext } from "../../../context/context";
 import { Close } from "@material-ui/icons";
 
 import { deepOrange } from '@material-ui/core/colors';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 
 import { ImProfile, ImAddressBook } from 'react-icons/im';
 import { MdAssignmentInd } from 'react-icons/md';

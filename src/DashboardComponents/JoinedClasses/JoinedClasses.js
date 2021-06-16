@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Avatar, IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { BiDotsHorizontalRounded } from "react-icons/bi";

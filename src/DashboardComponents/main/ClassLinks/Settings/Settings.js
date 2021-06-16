@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         padding: 20,
         border: "1px solid grey",
+        width: 400,
+        marginLeft:15
     }
 }))
 
@@ -30,7 +32,7 @@ export default function Settings({ classData }) {
     const history = useHistory();
 
     const classes = useStyles();
-    
+
     return (
         <ClipDrawer>
             <Grid container alignItems="center" alignContent="center" spacing={5}>
@@ -50,13 +52,17 @@ export default function Settings({ classData }) {
             <ClassDrawer classData={classData.classcode}>
                 <Grid container justify="center" alignItems="center" style={{ marginTop: 20 }}>
                     <Grid container justify="flex-start" alignItems="center">
-                        <Grid item style={{marginTop: 20, borderRadius: 30, margin:20}}>
+                        <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
                             <Button variant="contained" color="secondary">DELETE CLASSROOM</Button>
                         </Grid>
-                        <Grid item style={{marginTop: 20, borderRadius: 30, margin:20}}>
+                        <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
                             <Button variant="contained" color="secondary">ARCHIVE CLASSROOM</Button>
                         </Grid>
                     </Grid>
+                </Grid>
+                <Grid container className={classes.gridcontainer} justify="flex-start">
+                    <Typography>Class Code: </Typography>
+                    <Typography>{classData.classcode}</Typography>
                 </Grid>
             </ClassDrawer>
         </ClipDrawer>

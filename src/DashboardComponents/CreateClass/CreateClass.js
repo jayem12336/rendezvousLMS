@@ -36,12 +36,13 @@ export default function CreateClass() {
 
   const classes = useStyles();
 
-  const { createClassDialog, setCreateClassDialog } = useLocalContext();
+  const {createClassDialog, setCreateClassDialog } = useLocalContext();
   const [check, setChecked] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
   const closeTerm = () => {
     setCreateClassDialog(false);
+    setChecked(!check);
   }
 
   return (
@@ -54,7 +55,7 @@ export default function CreateClass() {
         className="form__dialog"
       >
         {showForm ? (
-          <Form />
+          <Form setChecked={setChecked} setShowForm={setShowForm}/>
         ) : (
           <>
             <div className="class__title">

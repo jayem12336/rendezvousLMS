@@ -52,35 +52,41 @@ export default function JoinClass() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    db.collection("CreatedClasses")
-      .doc(email)
-      .collection("classes")
-      .doc(classCode)
-      .get()
-      .then((doc) => {
-        if (doc.exists && doc.owner !== loggedInUser.email) {
-          setClassExists(true);
-          setJoinedData(doc.data());
-          setError(false);
-          if (classExists === true) {
-            db.collection("JoinedClasses")
-              .doc(loggedInUser.email)
-              .collection("classes")
-              .doc(classCode)
-              .set({
-                joinedData,
-              })
-              .then(() => {
-                setJoinClassDialog(false);
-                history.push(`/${classCode}`);
-              });
+    if (email === "" || classCode === "") {
+      alert("Please fill up the following Fields");
+    }
+
+    else {
+      db.collection("CreatedClasses")
+        .doc(email)
+        .collection("classes")
+        .doc(classCode)
+        .get()
+        .then((doc) => {
+          if (doc.exists && doc.owner !== loggedInUser.email) {
+            setClassExists(true);
+            setJoinedData(doc.data());
+            setError(false);
+            if (classExists === true) {
+              db.collection("JoinedClasses")
+                .doc(loggedInUser.email)
+                .collection("classes")
+                .doc(classCode)
+                .set({
+                  joinedData,
+                })
+                .then(() => {
+                  setJoinClassDialog(false);
+                  history.push(`/${classCode}`);
+                });
+            }
+          } else {
+            setError(true);
+            setClassExists(false);
+            return;
           }
-        } else {
-          setError(true);
-          setClassExists(false);
-          return;
-        }
-      });
+        });
+    }
   };
 
   return (
@@ -138,7 +144,7 @@ export default function JoinClass() {
                       onClick={handleSubmit}
                     >
                       Join
-                        </Button>
+                    </Button>
                   </Grid>
                 </Paper>
               </Grid>

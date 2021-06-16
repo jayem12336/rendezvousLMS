@@ -114,53 +114,53 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}`}>
               <MainClass classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route path={`/${item.classcode}/announcement`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} path={`/${item.classcode}/announcement`}>
               <Announcement classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route path={`/${item.classcode}/activities`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} path={`/${item.classcode}/activities`}>
               <Activities classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/createactivities`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/createactivities`}>
               <CreateActivities classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/assignactivities`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/assignactivities`}>
               <AssignActivities classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/quizzes`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/quizzes`}>
               <Quizzes classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/joinmeeting`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/joinmeeting`}>
               <JoinMeeting classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/people`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/people`}>
               <People classData={item} />
             </Route>
           ))}
-          {createdClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}/settings`}>
+          {createdClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/settings`}>
               <Settings classData={item} />
             </Route>
           ))}
-          {joinedClasses.map((item, index) => (
-            <Route key={index} exact path={`/${item.classcode}`}>
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}`}>
               <MainClass classData={item} />
             </Route>
           ))}

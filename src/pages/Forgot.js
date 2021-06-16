@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Close } from "@material-ui/icons"
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
+import firebase from '../utils/firebase'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -56,6 +58,27 @@ export default function JoinCForgatlass() {
         setValues({ ...values, [prop]: e.target.value })
     }
 
+    const forgotBtn = (e) => {
+        e.preventDefault();
+        if (values.email === "") {
+            alert('Please Fill up the email')
+        } else {
+            firebase.auth().sendPasswordResetEmail(values.email)
+                .then(() => {
+                    // Password reset email sent!
+                    // ..
+                    alert('Please check your email...')
+                    setCreateForgotDialog(false);
+
+                })
+                .catch((error) => {
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                    // ..
+                });
+        }
+    }
+
     return (
         <div>
             <Dialog
@@ -88,7 +111,6 @@ export default function JoinCForgatlass() {
                                     variant="outlined"
                                     onChange={handleChange("email")}
                                     value={values.email}
-                                    size="large"
                                     margin="normal"
                                     autoFocus={true}
                                     fullWidth
@@ -107,17 +129,15 @@ export default function JoinCForgatlass() {
                                 <Button
                                     variant="contained"
                                     className={classes.margin}
-                                    size="large"
                                     fullWidth
                                     style={{ backgroundColor: "#3bd44b" }}
+                                    onClick={forgotBtn}
                                 >
                                     Recover
                                 </Button>
                             </Grid>
                         </Paper>
-
                     </Grid>
-
                 </Grid>
             </Dialog>
         </div>

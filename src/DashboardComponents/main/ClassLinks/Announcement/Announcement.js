@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
 import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
-
+import { Avatar } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-
-import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button } from "@material-ui/core";
+import { db } from '../../../../utils/firebase';
+import firebase from 'firebase';
+import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button, TextField } from "@material-ui/core";
 import { MdArrowBack } from 'react-icons/md';
+import { useLocalContext } from '../../../../context/context';
+import AnnouncementList from './AnnouncementList';
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -22,7 +25,13 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         padding: 20,
         border: "1px solid grey",
-    }
+        marginTop: 5
+    },
+    main: {
+        display: "flex",
+        cursor: "pointer",
+        alignItems: "center",
+    },
 }))
 
 export default function Announcement({ classData }) {
@@ -30,7 +39,35 @@ export default function Announcement({ classData }) {
     const history = useHistory();
 
     const classes = useStyles();
-    
+
+    const [showInput, setShowInput] = useState(false);
+
+    const [inputValue, setInputValue] = useState('');
+
+    const { loggedInMail } = useLocalContext();
+
+    const handleUpload = () => {
+
+        if (!inputValue) {
+            alert("Please fill up the fields");
+        } else {
+            db.collection("announcement")
+                .doc("classes")
+                .collection(classData.classcode)
+                .add({
+                    created_at: new Date(),
+                    text: inputValue,
+                    sender: loggedInMail,
+                    photourl: classData.profilephoto,
+                    firstname: classData.firstname,
+                    lastname: classData.lastname,
+                }).then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id)
+                })
+            setInputValue("");
+        }
+    }
+
     return (
         <ClipDrawer>
             <Grid container alignItems="center" alignContent="center" spacing={5}>
@@ -55,22 +92,51 @@ export default function Announcement({ classData }) {
                                 06-02-2021 05:20PM
                             </Typography>
                         </Grid>
-                        <Grid container className={classes.gridcontainer} justify='space-between'>
-                            <Grid item>
-                                <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                                <Typography style={{ marginTop: 5 }}>dsadsadsadsadsadsdsadsdasadsadsad</Typography>
+                        <Grid container className={classes.gridcontainer} spacing={3}>
+                            <Grid item sm={10}>
+                                {showInput ? (
+                                    <Grid container className={classes.main_form} spacing={3}>
+                                        <Grid item sm={1}>
+                                            <Avatar src={classData.profilephoto} />
+                                        </Grid>
+                                        <Grid item sm={11}>
+                                            <TextField
+                                                variant="filled"
+                                                multiline
+                                                label="Announce Something to the class"
+                                                value={inputValue}
+                                                onChange={(e) => setInputValue(e.target.value)}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                    </Grid>) : (
+                                    <Grid container className={classes.main}
+                                        onClick={() => setShowInput(true)}
+                                    >
+                                        <Avatar src={classData.profilephoto} />
+                                        <Typography style={{ paddingLeft: 20 }}>Announce Something To Class</Typography>
+
+                                    </Grid>
+                                )}
                             </Grid>
-                            <Grid item>
-                                <Button variant="contained" color="primary">
-                                    Remove
-                                </Button>
+                            <Grid item sm={2}>
+                                <Grid container justify="flex-end">
+                                    <Button variant="contained" color="primary">
+                                        Remove
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
-                        <Grid container justify="center" style={{marginTop: 20, borderRadius: 30}}>
-                            <Button variant="contained" color="primary">Announce</Button>
+                        <Grid container justify="center" style={{ marginTop: 20, borderRadius: 30 }}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleUpload}
+                            >Announce</Button>
                         </Grid>
                     </Grid>
                 </Grid>
+                <AnnouncementList classData={classData} />
             </ClassDrawer>
         </ClipDrawer>
     )

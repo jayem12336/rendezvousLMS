@@ -31,7 +31,7 @@ export default function Quizzes({ classData }) {
 
 
     const create = () => {
-        history.push('/createactivities')
+        history.push(`/${classData.classcode}/createactivities`)
     }
     return (
         <div>

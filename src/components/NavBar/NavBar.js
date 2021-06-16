@@ -16,7 +16,7 @@ import {
     Grid,
     Divider,
     Button,
-    Icon
+    Icon,
 } from '@material-ui/core'
 
 //React-icons
@@ -91,6 +91,13 @@ export default function NavBar() {
 
     const history = useHistory();
 
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        event.preventDefault();
+        setValue(newValue);
+    };
+
     const {
         setCreateLoginDialog,
         setCreateRegisterDialog,
@@ -122,7 +129,10 @@ export default function NavBar() {
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
                                 <Tabs
                                     style={{ marginLeft: '70px' }}
+                                    onChange={handleChange}
                                     textColor='secondary'
+                                    value={value}
+                                    variant="scrollable"
                                 >
                                     <Tab
                                         className={classes.textTabs}

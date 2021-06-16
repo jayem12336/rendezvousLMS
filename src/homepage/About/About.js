@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 //Material ui
 import {
     Grid,
     makeStyles,
     Typography,
-    Modal,
-    Button
 } from '@material-ui/core'
 
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'
-
-import UserModal from '../modal/UserModal'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,11 +46,6 @@ export default function About() {
 
     const classes = useStyles();
 
-    const [open, setOpen] = useState(false);
-
-    const handleClose = () =>{
-        setOpen(false);
-    }
     return (
         <Grid container alignContent='center' alignitem='center' justify='center'>
             <NavBar />
@@ -70,20 +61,6 @@ export default function About() {
                     </Grid>
                 </Grid>
             </Grid>
-
-            <Button
-                variant="contained"
-                fullWidth
-                onClick={() =>setOpen(true)}
-                >Wtf</Button>
-            <Modal
-                open={open}
-                aria-labelledby="aldrin-modal"
-                onClose={handleClose}
-            >
-                <UserModal setOpen={setOpen} />
-            </Modal>
-
         </Grid>
     )
 }

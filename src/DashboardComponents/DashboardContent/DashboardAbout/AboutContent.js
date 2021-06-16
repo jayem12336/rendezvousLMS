@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
-import { AppBar, Grid, makeStyles, Paper, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import logo from '../../../components/assets/RendezvousLogo.png'
 
 const useStyles = makeStyles((theme) => ({

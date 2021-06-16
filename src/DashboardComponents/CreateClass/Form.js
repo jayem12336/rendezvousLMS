@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import { useHistory } from 'react-router-dom'
-
 import {
   Button,
   DialogActions,
@@ -31,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Form() {
-
-  const history = useHistory();
+export default function Form( {setChecked, setShowForm} ) {
 
   const classes = useStyles();
 
@@ -85,7 +81,9 @@ export default function Form() {
           section: Section,
           room: Room,
           classcode: id,
-          profilephoto: values.user.photo_url
+          profilephoto: values.user.photo_url,
+          firstname: values.user.first_name,
+          lastname: values.user.last_name
         })
         .then(() => {
           setCreateClassDialog(false);
@@ -95,6 +93,8 @@ export default function Form() {
 
   const closeTerm = () => {
     setCreateClassDialog(false);
+    setChecked(false);
+    setShowForm(false);
   }
 
   return (
@@ -107,7 +107,7 @@ export default function Form() {
       </IconButton>
       <div className="form__inputs">
         <TextField
-          id="filled-basic"
+          id="filled-basic1"
           label="Class Name (required)"
           className="form__input"
           variant="filled"
@@ -115,7 +115,7 @@ export default function Form() {
           onChange={(e) => setClassName(e.target.value)}
         />
         <TextField
-          id="filled-basic"
+          id="filled-basic2"
           label="Section"
           className="form__input"
           variant="filled"
@@ -123,7 +123,7 @@ export default function Form() {
           onChange={(e) => setSection(e.target.value)}
         />
         <TextField
-          id="filled-basic"
+          id="filled-basic3"
           label="Subject Code"
           className="form__input"
           variant="filled"
@@ -131,7 +131,7 @@ export default function Form() {
           onChange={(e) => setSubject(e.target.value)}
         />
         <TextField
-          id="filled-basic"
+          id="filled-basic4"
           label="Room"
           className="form__input"
           variant="filled"

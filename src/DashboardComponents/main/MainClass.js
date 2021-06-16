@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default function Main({ classData }) {
+export default function Main({ classData,  }) {
 
     const history = useHistory();
 

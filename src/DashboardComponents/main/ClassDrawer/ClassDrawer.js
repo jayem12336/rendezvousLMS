@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, makeStyles, useTheme, useMediaQuery } from '@material-ui/core'
+import { Drawer, makeStyles } from '@material-ui/core'
 import ClassDrawerList from './ClassDrawerList';
 
 const drawerWidth = 160
@@ -31,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ClassDrawer({ children, classData }) {
 
     const classes = useStyles();
-
-    const theme = useTheme();
-
-    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
         <div className={classes.root}>

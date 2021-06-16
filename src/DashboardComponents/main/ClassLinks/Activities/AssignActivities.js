@@ -37,9 +37,8 @@ export default function AssignActivities({ classData }) {
     const classes = useStyles();
 
     const [state, setState] = useState({
-
         user: [],
-        isLoading: false
+        isLoading: true
     })
 
     const prev = () =>{
