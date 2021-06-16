@@ -11,6 +11,9 @@ npm install react-icons --save
 npm install material-ui-dropzone --save
 npm i react-image-file-resizer --save
 
+//new install for displaying timestamp
+npm install moment
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
