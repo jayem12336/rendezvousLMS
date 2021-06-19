@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Material ui
-import { Grid } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid';
 
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'

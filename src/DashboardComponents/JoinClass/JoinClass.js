@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 
-import { useHistory } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
-import { Button, Dialog, Grid, Paper, TextField } from "@material-ui/core";
 import { useLocalContext } from "../../context/context";
 import { Close } from "@material-ui/icons";
 import "./style.css";
 import { db } from '../../utils/firebase';
-import { makeStyles } from '@material-ui/core/styles'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function JoinClass() {
 
-  const history = useHistory();
-
   const classes = useStyles();
 
   const {
@@ -55,7 +57,6 @@ export default function JoinClass() {
     if (email === "" || classCode === "") {
       alert("Please fill up the following Fields");
     }
-
     else {
       db.collection("CreatedClasses")
         .doc(email)
@@ -77,7 +78,6 @@ export default function JoinClass() {
                 })
                 .then(() => {
                   setJoinClassDialog(false);
-                  history.push(`/${classCode}`);
                 });
             }
           } else {

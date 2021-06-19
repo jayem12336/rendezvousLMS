@@ -4,20 +4,18 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 //Material ui Components
-import {
-    AppBar,
-    Tab,
-    Tabs,
-    Toolbar,
-    Typography,
-    makeStyles,
-    useMediaQuery,
-    useTheme,
-    Grid,
-    Divider,
-    Button,
-    Icon,
-} from '@material-ui/core'
+
+import { makeStyles, useTheme} from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import AppBar from '@material-ui/core/AppBar';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
 //React-icons
 import { AiOutlineHome } from 'react-icons/ai'
@@ -52,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: '100px',
         position: 'fixed',
         backgroundColor: "#fff",
+        zIndex:100
 
     },
     customizeToolbar: {
@@ -68,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         '&:hover': {
             background: '#4877c2',
+            color: 'white'
         }
     },
     textTabs: {
@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         '&:hover': {
             background: '#4877c2',
+            color: 'white'
         }
     }
 
@@ -90,13 +91,6 @@ export default function NavBar() {
     const classes = useStyles();
 
     const history = useHistory();
-
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        event.preventDefault();
-        setValue(newValue);
-    };
 
     const {
         setCreateLoginDialog,
@@ -129,9 +123,7 @@ export default function NavBar() {
                                 {/* onChange={handleClickTab} indicatorColor='primary' value={value} */}
                                 <Tabs
                                     style={{ marginLeft: '70px' }}
-                                    onChange={handleChange}
                                     textColor='secondary'
-                                    value={value}
                                     variant="scrollable"
                                 >
                                     <Tab

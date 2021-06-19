@@ -1,10 +1,13 @@
 import React from 'react'
-import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
-import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
 import { useHistory } from 'react-router-dom'
 
-import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button, TextField } from "@material-ui/core";
-import { MdArrowBack } from 'react-icons/md';
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import SampleDrawer from '../../ClassDrawer/ClassDrawer';
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -33,98 +36,81 @@ export default function CreateActivities({ classData }) {
 
     const classes = useStyles();
 
-    const assign = () =>{
+    const assign = () => {
         history.push(`/${classData.classcode}/assignactivities`)
     }
 
     return (
         <div>
-            <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" spacing={5}>
-                    <AppBar position="static" color='secondary'>
-                        <Toolbar style={{ justifyContent: 'center' }}>
-                            <IconButton className={classes.iconContainer} onClick={() => history.push('/dashboardclass')}>
-                                <MdArrowBack
-                                    className={classes.closebtn}
-                                />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.title}>
-                                {classData.classname}
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                </Grid>
+            <SampleDrawer classData={classData}>
+                <Grid container justify="center" alignItems="center" style={{ padding: 40 }}>
+                    <Grid container alignItems="center">
+                        <Grid container className={classes.gridcontainer} justify='space-between'>
+                            <Grid container justify="flex-start">
+                                <Typography variant="subtitle1">
+                                    Title :
+                                </Typography>
+                                <TextField
+                                    variant="outlined"
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid container>
+                                <Typography variant="subtitle1">
+                                    Instruction :
+                                </Typography>
+                            </Grid>
+                            <Grid container style={{ paddingLeft: 40 }}>
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
 
-                <ClassDrawer classData={classData.classcode}>
-                    <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
-                        <Grid container alignItems="center">
-                            <Grid container className={classes.gridcontainer} justify='space-between'>
-                                <Grid container justify="flex-start">
-                                    <Typography variant="subtitle1">
-                                        Title :
-                                    </Typography>
-                                    <TextField
-                                        variant="outlined"
-                                    >
-                                    </TextField>
-                                </Grid>
-                                <Grid container>
-                                    <Typography variant="subtitle1">
-                                        Instruction :
-                                    </Typography>
-                                </Grid>
-                                <Grid container style={{ paddingLeft: 40 }}>
-                                    <TextField
-                                        variant="outlined"
-                                        fullWidth
-
-                                    >
-                                    </TextField>
-                                </Grid>
-                                <Grid container justify="flex-start" >
-                                    <Grid item sm={6}>
-                                        <Grid container style={{ padding: 40, width: "40%" }}>
-                                            <Typography variant="subtitle1">
-                                                Deadline :
-                                            </Typography>
-                                            <Grid container className={classes.deadlineContainer}>
-                                                dsadagaga
-                                            </Grid>
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid container justify="flex-start" >
+                                <Grid item sm={6}>
+                                    <Grid container style={{ padding: 40, width: "40%" }}>
+                                        <Typography variant="subtitle1">
+                                            Deadline :
+                                        </Typography>
+                                        <Grid container className={classes.deadlineContainer}>
+                                            dsadagaga
                                         </Grid>
-
                                     </Grid>
-                                    <Grid item sm={6}>
-                                        <Grid container style={{ padding: 40, width: "40%" }}>
 
-                                            <Typography variant="subtitle1">
-                                                Total Points :
-                                            </Typography>
+                                </Grid>
+                                <Grid item sm={6}>
+                                    <Grid container style={{ padding: 40, width: "40%" }}>
 
-                                            <TextField
-                                                variant="outlined"
-                                                fullWidth
-                                            >
+                                        <Typography variant="subtitle1">
+                                            Total Points :
+                                        </Typography>
 
-                                            </TextField>
-                                        </Grid>
+                                        <TextField
+                                            variant="outlined"
+                                            fullWidth
+                                        >
 
+                                        </TextField>
                                     </Grid>
+
                                 </Grid>
-                                <Grid container justify="flex-start" style={{ paddingTop: 20 }}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        size="large"
-                                        onClick={assign}
-                                    >
-                                        Next
-                                    </Button>
-                                </Grid>
+                            </Grid>
+                            <Grid container justify="flex-start" style={{ paddingTop: 20 }}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                    onClick={assign}
+                                >
+                                    Next
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>
-                </ClassDrawer>
-            </ClipDrawer>
+                </Grid>
+            </SampleDrawer>
         </div>
     )
 }

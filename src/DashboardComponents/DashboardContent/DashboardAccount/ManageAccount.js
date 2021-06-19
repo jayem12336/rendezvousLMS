@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Dialog, Grid, Paper, Typography, IconButton, Avatar, CircularProgress, TextField, InputAdornment } from "@material-ui/core";
-import { useLocalContext } from "../../../context/context";
 import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+import { useLocalContext } from "../../../context/context";
+
 import { Close, CameraAltOutlined } from "@material-ui/icons"
 import { DropzoneDialog } from 'material-ui-dropzone';
 import Resizer from 'react-image-file-resizer';
@@ -69,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     }
 
 }))
-export default function ManageAccount() {
+export default function ManageAccount({userData}) {
 
     const classes = useStyles();
 
@@ -242,7 +253,7 @@ export default function ManageAccount() {
                         </IconButton>
                         <h2 style={{ color: 'black', marginBottom: 20, marginTop: 50, fontSize: 40, marginLeft: 20 }}>
                             Manage Account
-                                </h2>
+                        </h2>
                     </Grid>
                     <Grid container className={classes.dialogContainer} justify='center' alignItems='center' alignContent='center'>
 

@@ -14,7 +14,6 @@ import PublicRoute from './routers/PublicRoute'
 
 //Homepage Components
 import { About, Contact, Guide, Home } from './homepage'
-import MainClass from './DashboardComponents/main/MainClass'
 
 //Context Dialog
 import { useLocalContext } from './context/context'
@@ -39,6 +38,8 @@ import Quizzes from './DashboardComponents/main/ClassLinks/Quizzes/Quizzes'
 import JoinMeeting from './DashboardComponents/main/ClassLinks/JoinMeeting/JoinMeeting'
 import People from './DashboardComponents/main/ClassLinks/People/People'
 import Settings from './DashboardComponents/main/ClassLinks/Settings/Settings'
+
+import ClipDrawer from './DashboardComponents/Dashboardcomponent/Clipdrawer'
 
 function App() {
 
@@ -90,6 +91,9 @@ function App() {
       }
       console.log("useEffect", user);
     });
+    return () => {
+      setValues({}); // This worked for me
+    };
   }, [])
 
 
@@ -114,11 +118,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          {createdClasses.map((item) => (
-            <Route key={item.classcode} exact path={`/${item.classcode}`}>
-              <MainClass classData={item} />
-            </Route>
-          ))}
+          <PrivateRoute
+            component={ClipDrawer}
+            path='/ClipDrawer'
+            isAuthenticated={values.isAuthenticated}
+          />
           {createdClasses.map((item) => (
             <Route key={item.classcode} path={`/${item.classcode}/announcement`}>
               <Announcement classData={item} />
@@ -160,8 +164,43 @@ function App() {
             </Route>
           ))}
           {joinedClasses.map((item) => (
-            <Route key={item.classcode} exact path={`/${item.classcode}`}>
-              <MainClass classData={item} />
+            <Route key={item.classcode} path={`/${item.classcode}/announcement`}>
+              <Announcement classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} path={`/${item.classcode}/activities`}>
+              <Activities classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/createactivities`}>
+              <CreateActivities classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/assignactivities`}>
+              <AssignActivities classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/quizzes`}>
+              <Quizzes classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/joinmeeting`}>
+              <JoinMeeting classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/people`}>
+              <People classData={item} />
+            </Route>
+          ))}
+          {joinedClasses.map((item) => (
+            <Route key={item.classcode} exact path={`/${item.classcode}/settings`}>
+              <Settings classData={item} />
             </Route>
           ))}
           <Route path="/" exact >
@@ -205,10 +244,10 @@ function App() {
             <DashboardClass />
             <ol className="joined">
               {createdClasses.map((item) => (
-                <JoinedClasses classData={item} />
+                <JoinedClasses key={item.classcode} classData={item} />
               ))}
               {joinedClasses.map((item) => (
-                <JoinedClasses classData={item} />
+                <JoinedClasses key={item.classcode} classData={item} />
               ))}
             </ol>
           </PrivateRoute>

@@ -3,17 +3,16 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import firebase from '../utils/firebase'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-    Typography,
-    Dialog,
-    Grid,
-    Icon,
-    TextField,
-    InputAdornment,
-    Button,
-    Link,
-    CircularProgress
-} from '@material-ui/core'
+
+import Typography from '@material-ui/core/Typography'
+import Dialog from '@material-ui/core/Dialog'
+import Grid from '@material-ui/core/Grid'
+import Icon from '@material-ui/core/Icon'
+import TextField from '@material-ui/core/TextField'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { Close } from "@material-ui/icons"
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
@@ -94,7 +93,7 @@ export default function Login() {
         createLoginDialog,
         setCreateLoginDialog,
         setCreateRegisterDialog,
-        setCreateForgotDialog,    
+        setCreateForgotDialog,
     } = useLocalContext();
 
     const [values, setValues] = useState({
@@ -130,7 +129,6 @@ export default function Login() {
             setValues({ ...values, errors: "Please Complete all fields", isLoading: false, password: "" })
         }
         else {
-
             firebase.auth().signInWithEmailAndPassword(values.email, values.password)
                 .then((userCredential) => {
                     // Signed  
@@ -139,33 +137,31 @@ export default function Login() {
                     setValues({ ...values, errors: "", isLoading: false })
                     history.push('/dashboardcontent')
                     setCreateLoginDialog(false);
-
                 })
                 .catch((error) => {
                     //var errorCode = error.code;
                     var errorMessage = error.message;
-
                     setValues({ ...values, errors: errorMessage, isLoading: false, password: "" })
                 });
         };
     }
-
     if (values.isLoading) {
         return (
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            justifyItems: 'center',
-            height: '100vh',
-            width: '100vw'
-          }}>
-            <CircularProgress color="primary" size={200} />
-          </div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'center',
+                justifyItems: 'center',
+                height: '100vh',
+                width: '100vw',
+                backgroundColor: 'white'
+            }}>
+                <CircularProgress color="primary" size={200} />
+            </div>
         );
-      }
+    }
 
     return (
         <Dialog
@@ -278,10 +274,10 @@ export default function Login() {
                                 fullWidth
                             >
                                 LOGIN
-                                </Button>
+                            </Button>
                             <Typography style={{ textAlign: 'center', fontSize: '15px', marginTop: '20px' }} >
                                 Don't have account?
-                            <Link
+                                <Link
                                     to="/signup"
                                     onClick={() => {
                                         setCreateLoginDialog(false);

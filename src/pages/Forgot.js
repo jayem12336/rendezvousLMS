@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 
-import { Button, Dialog, Grid, InputAdornment, TextField, Paper, IconButton, Typography } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+
 import { useLocalContext } from "../context/context";
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from "@material-ui/icons"
@@ -88,10 +96,9 @@ export default function JoinCForgatlass() {
             >
                 <Grid container justify='center' alignItems='center' alignContent='center'>
                     <Grid container className={classes.closebtnContainer}>
-                        <IconButton className={classes.iconContainer}>
+                        <IconButton className={classes.iconContainer} onClick={() => setCreateForgotDialog(false)}>
                             <Close
                                 className={classes.closebtn}
-                                onClick={() => setCreateForgotDialog(false)}
                             />
                         </IconButton>
                     </Grid>

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
-import { AppBar, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core'
+
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
 import { db } from '../../../utils/firebase'
 
 import { DataGrid } from '@material-ui/data-grid'

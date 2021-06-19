@@ -49,7 +49,7 @@ function NestedList() {
         setCreateaccountDialog,
     } = useLocalContext();
 
-    const handleLogin = (e) => {
+    const handleProfile = (e) => {
         e.preventDefault();
         setCreateaccountDialog(true)
     }
@@ -68,7 +68,7 @@ function NestedList() {
                 </ListItem>
                 <ListItem
                     button
-                    onClick={handleLogin}>
+                    onClick={handleProfile}>
                     <ListItemIcon className={classes.listItemIcon} >
                         <AccountCircleIcon />
                         Profile

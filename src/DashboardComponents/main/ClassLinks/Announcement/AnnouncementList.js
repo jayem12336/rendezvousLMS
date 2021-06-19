@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../../../../utils/firebase'
-import { Grid, Avatar, makeStyles, Typography, Button } from "@material-ui/core"
+
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 import moment from 'moment'
-import { Alert } from '@material-ui/lab'
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -17,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     gridcontainer: {
         display: "flex",
         padding: 20,
-        border: "1px solid grey",
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     },
     main: {
         display: "flex",
@@ -39,6 +44,7 @@ export default function AnnouncementList({ classData }) {
                 db.collection('announcement')
                     .doc('classes')
                     .collection(classData.classcode)
+                    .orderBy('created_at', 'desc')
                     .onSnapshot((snap) => {
                         setAnnouncement(snap.docs.map((doc) => doc.data()));
                     })
@@ -57,9 +63,10 @@ export default function AnnouncementList({ classData }) {
                 alert("error");
             })
             .catch((err) => {
-
+                console.log(err);
             })
     }
+
     return (
         <div>
             {announcement.map((item) => (
@@ -82,7 +89,6 @@ export default function AnnouncementList({ classData }) {
                                     {item.text}
                                 </Grid>
                             </Grid>
-
                             <Grid item>
                                 <Button
                                     variant="contained"

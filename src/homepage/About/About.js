@@ -1,12 +1,10 @@
 import React from 'react'
 
 //Material ui
-import {
-    Grid,
-    makeStyles,
-    Typography,
-} from '@material-ui/core'
 
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography';
 //Component Navbar
 import NavBar from '../../components/NavBar/NavBar'
 

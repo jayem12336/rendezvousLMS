@@ -1,12 +1,11 @@
 import React from 'react'
 
-import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
-import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles'
 
-import { useHistory } from 'react-router-dom'
-
-import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button } from "@material-ui/core";
-import { MdArrowBack } from 'react-icons/md';
+import SampleDrawer from '../../ClassDrawer/ClassDrawer';
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -23,48 +22,30 @@ const useStyles = makeStyles((theme) => ({
         padding: 20,
         border: "1px solid grey",
         width: 400,
-        marginLeft:15
+        marginLeft: 15
     }
 }))
 
 export default function Settings({ classData }) {
 
-    const history = useHistory();
-
     const classes = useStyles();
 
     return (
-        <ClipDrawer>
-            <Grid container alignItems="center" alignContent="center" spacing={5}>
-                <AppBar position="static" color='secondary'>
-                    <Toolbar style={{ justifyContent: 'center' }}>
-                        <IconButton className={classes.iconContainer} onClick={() => history.push('/dashboardclass')}>
-                            <MdArrowBack
-                                className={classes.closebtn}
-                            />
-                        </IconButton>
-                        <Typography variant="h6" className={classes.title}>
-                            {classData.classname}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </Grid>
-            <ClassDrawer classData={classData.classcode}>
-                <Grid container justify="center" alignItems="center" style={{ marginTop: 20 }}>
-                    <Grid container justify="flex-start" alignItems="center">
-                        <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
-                            <Button variant="contained" color="secondary">DELETE CLASSROOM</Button>
-                        </Grid>
-                        <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
-                            <Button variant="contained" color="secondary">ARCHIVE CLASSROOM</Button>
-                        </Grid>
+        <SampleDrawer classData={classData}>
+            <Grid container justify="center" alignItems="center" style={{ marginTop: 20 }}>
+                <Grid container justify="flex-start" alignItems="center">
+                    <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
+                        <Button variant="contained" color="secondary">DELETE CLASSROOM</Button>
+                    </Grid>
+                    <Grid item style={{ marginTop: 20, borderRadius: 30, margin: 20 }}>
+                        <Button variant="contained" color="secondary">ARCHIVE CLASSROOM</Button>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.gridcontainer} justify="flex-start">
-                    <Typography>Class Code: </Typography>
-                    <Typography>{classData.classcode}</Typography>
-                </Grid>
-            </ClassDrawer>
-        </ClipDrawer>
+            </Grid>
+            <Grid container className={classes.gridcontainer} justify="flex-start">
+                <Typography>Class Code: </Typography>
+                <Typography>{classData.classcode}</Typography>
+            </Grid>
+        </SampleDrawer>
     )
 }

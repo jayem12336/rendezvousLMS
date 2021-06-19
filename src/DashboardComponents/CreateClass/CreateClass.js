@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
 //Material ui Components
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  IconButton,
-  makeStyles,
-} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import IconButton from '@material-ui/core/IconButton';
+
 
 //Pop up dialog
 import { useLocalContext } from "../../context/context";

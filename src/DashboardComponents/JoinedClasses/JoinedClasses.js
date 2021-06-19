@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import { Link } from "react-router-dom";
 
 import { BiDotsHorizontalRounded } from "react-icons/bi";
@@ -56,7 +60,7 @@ export default function JoinedClasses({ classData }) {
                         <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} className={classes.burgerBtn}>
                             <BiDotsHorizontalRounded />
                         </IconButton>
-                        <Link className="joined__title" to={`/${classData.classcode}`}>
+                        <Link className="joined__title" to={`/${classData.classcode}/announcement`}>
                             <h3>{classData.classname}</h3>
                         </Link>
                         <p className="joined__owner">{classData.section}</p>

@@ -2,36 +2,42 @@ import React from 'react'
 import "./style.css";
 
 import ClipDrawer from '../../Dashboardcomponent/Clipdrawer';
-import { CalendarComponent } from '@syncfusion/ej2-react-calendars'
-import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import { makeStyles } from '@material-ui/core/styles'
+
+
+const useStyles = makeStyles((theme) => ({
+
+}))
 
 export default function CalendarContent() {
 
-    const dateValue = new Date(new Date().getFullYear(), new Date().getMonth(), 20);
-    const startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 6);
-    const endDate = new Date(new Date().getFullYear(), new Date().getMonth(), 25);
+    const classes = useStyles();
 
     return (
         <div>
             <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" spacing={5}>
+                <Grid container justify="center" alignItems="center" alignContent="center" spacing={5} style={{paddingBottom:30}}>
                     <AppBar position="static" color='secondary'>
                         <Toolbar>
-                            <Typography variant="h6">
-                                CALENDAR
+                            <Typography variant="h6" className={classes.title}>
+                                Calendar
                             </Typography>
                         </Toolbar>
                     </AppBar>
                 </Grid>
-                <Grid container alignItems="center" alignContent="center">
-                    <CalendarComponent
-                        value={dateValue}
-                        min={startDate}
-                        max={endDate}
-                        start="Decade"
-                        style={{ marginTop: 30,}}
-                    ></CalendarComponent>
-                </Grid>
+                    <FullCalendar
+                        defaultView="dayGridMonth" plugins={[dayGridPlugin]}
+                        events={[
+                            { title: 'US Independence Day', date: '2021-06-04' },
+                            { title: 'My Birthday', date: '2021-06-01' }
+                        ]}
+                    />
             </ClipDrawer>
         </div>
     )

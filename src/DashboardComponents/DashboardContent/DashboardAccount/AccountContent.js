@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom'
 
-import { makeStyles } from '@material-ui/core/styles';
-import {
-    Typography,
-    Dialog,
-    Grid,
-    Button,
-    CircularProgress,
-    Avatar,
-    IconButton
-} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { CameraAltOutlined, Close } from "@material-ui/icons";
 import { useLocalContext } from '../../../context/context';
 import { DropzoneDialog } from 'material-ui-dropzone';
@@ -124,7 +123,6 @@ export default function AccountContent() {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 const db = firebase.firestore();
-
                 db.collection("users")
                     .doc(user.uid)
                     .onSnapshot((doc) => {

@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import ClipDrawer from '../../../Dashboardcomponent/Clipdrawer'
-import ClassDrawer from '../../../main/ClassDrawer/ClassDrawer';
-import { useHistory } from 'react-router-dom'
+import React from 'react';
 
-import { IconButton, makeStyles, AppBar, Toolbar, Typography, Grid, Button } from "@material-ui/core";
-import { MdArrowBack } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
 import { DataGrid } from '@material-ui/data-grid'
+import SampleDrawer from '../../ClassDrawer/ClassDrawer';
 
 const useStyles = makeStyles((theme) => ({
     closebtn: {
@@ -30,90 +33,71 @@ const columns = [
     { field: 'first_name', headerName: 'Email', width: 200 },
 ];
 
+const rows = [
+    { id: 1, email: 'Snow', Name: 'Jon'},
+    { id: 2, email: 'Snow', Name: 'Jon' },
+  ];
+
 export default function AssignActivities({ classData }) {
 
     const history = useHistory();
 
     const classes = useStyles();
 
-    const [state, setState] = useState({
-        user: [],
-        isLoading: true
-    })
-
-    const prev = () =>{
+    const prev = () => {
         history.push(`/${classData.classcode}/activities`)
     }
-    const assign = () =>{
+    const assign = () => {
         history.push(`/${classData.classcode}/createactivities`)
     }
 
     return (
         <div>
-            <ClipDrawer>
-                <Grid container alignItems="center" alignContent="center" spacing={5}>
-                    <AppBar position="static" color='secondary'>
-                        <Toolbar style={{ justifyContent: 'center' }}>
-                            <IconButton className={classes.iconContainer} onClick={() => history.push('/dashboardclass')}>
-                                <MdArrowBack
-                                    className={classes.closebtn}
+            <SampleDrawer classData={classData}>
+                <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
+                    <Grid container alignItems="center">
+                        <Grid container className={classes.gridcontainer} justify='space-between'>
+                            <Grid container>
+                                <Typography variant="subtitle1">
+                                    Assign:
+                                </Typography>
+                            </Grid>
+                            <Grid container>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={columns}
+                                    checkboxSelection
+                                    autoHeight
                                 />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.title}>
-                                {classData.classname}
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                </Grid>
-                <ClassDrawer classData={classData.classcode}>
-                    <Grid container justify="center" alignItems="center" style={{ marginTop: 20, padding: 40 }}>
-                        <Grid container alignItems="center">
-                            <Grid container className={classes.gridcontainer} justify='space-between'>
-                                <Grid container>
-                                    <Typography variant="subtitle1">
-                                        Assign:
-                                    </Typography>
-                                </Grid>
-                                <Grid container>
-                                    <DataGrid
-                                        rows={state.user}
-                                        columns={columns}
-                                        checkboxSelection
-                                        autoHeight
-                                        loading={state.isLoading}
-                                    />
-                                </Grid>
-                                <Grid container justify="space-between">
-                                    <Grid item sm={6} style={{padding:20}}>
-                                        <Grid container justify="flex-start">
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={prev}
-                                            >
-                                                Prev
-                                            </Button>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item sm={6} style={{padding:20}}>
-                                        <Grid container justify="flex-end">
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={assign}
-                                            >
-                                                Assign
-                                            </Button>
-                                        </Grid>
+                            </Grid>
+                            <Grid container justify="space-between">
+                                <Grid item sm={6} style={{ padding: 20 }}>
+                                    <Grid container justify="flex-start">
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={prev}
+                                        >
+                                            Prev
+                                        </Button>
                                     </Grid>
                                 </Grid>
-
-
+                                <Grid item sm={6} style={{ padding: 20 }}>
+                                    <Grid container justify="flex-end">
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={assign}
+                                        >
+                                            Assign
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                </ClassDrawer>
-            </ClipDrawer>
+                </Grid>
+            </SampleDrawer>
         </div>
     )
 }

@@ -1,16 +1,14 @@
 import React from "react";
 
 //Material ui Components
-import {
-  Button,
-  Dialog,
-  Grid,
-  InputAdornment,
-  makeStyles,
-  TextField,
-  Typography,
-  Avatar
-} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 //Pop up dialog
 import { useLocalContext } from "../../../context/context";

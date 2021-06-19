@@ -4,17 +4,16 @@ import firebase, { db, provider } from '../utils/firebase'
 
 import { useHistory } from 'react-router-dom'
 
-import { makeStyles, Grid, Icon } from '@material-ui/core'
-
-import {
-    Button,
-    TextField,
-    Typography,
-    InputAdornment,
-    Dialog,
-    CircularProgress,
-    Link
-} from '@material-ui/core'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Dialog from '@material-ui/core/Dialog';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
 
 import { Close } from "@material-ui/icons"
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
@@ -38,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
         // flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        height: "100vh"
+        height: "100vh",
+        backgroundColor: 'white'
     },
     pageWrapper: {
         display: 'flex',
@@ -149,8 +149,6 @@ export default function Signup() {
         photo_url: ""
     })
 
-
-
     const handleChange = (prop) => (e) => {
         setValues({ ...values, [prop]: e.target.value })
     }
@@ -163,12 +161,11 @@ export default function Signup() {
         e.preventDefault();
     }
 
-
     const loginwithGoogle = () => {
 
         const auth = firebase.auth();
 
-            auth.signInWithPopup(provider)
+        auth.signInWithPopup(provider)
             .then((user) => {
 
                 const firstName = user.additionalUserInfo.profile.given_name;
@@ -188,11 +185,10 @@ export default function Signup() {
                     setCreateRegisterDialog(false);
 
                 });
-                   
+
             });
 
     }
-
     //#region singupfunction
 
     const signup = (e) => {
@@ -205,29 +201,28 @@ export default function Signup() {
             setValues({ ...values, errors: "Password do not match!" })
         }
         else {
-            setValues({ ...values, errors: "" })
+            setValues({ ...values, errors: "", isLoading: true })
 
-            firebase
-                .auth()
+            firebase.auth()
                 .createUserWithEmailAndPassword(values.email, values.password)
                 .then((userCredential) => {
-                    firebase.auth().onAuthStateChanged(function (user) {
-                        db.collection("users").doc(user.uid).set({
-                            email: values.email,
-                            first_name: values.firstname,
-                            last_name: values.lastname,
-                            photo_url: values.photo_url
-                        })
-                            .then(() => {
-                                console.log("Document successfully written!");
-                            })
-                            .catch((error) => {
-                                console.error("Error writing document: ", error);
-                            });
-                        setValues({ isLoading: false });
-                        setCreateRegisterDialog(false);
-                        history.push('/dashboardcontent');              
+                    var user = userCredential.user;
+                    db.collection("users").doc(user.uid).set({
+                        email: values.email,
+                        first_name: values.firstname,
+                        last_name: values.lastname,
+                        photo_url: values.photo_url
                     })
+                        .then(() => {
+                            console.log("Document successfully written!");
+                            setValues({ isLoading: false });
+                            setCreateRegisterDialog(false);
+                            history.push('/dashboardcontent');
+
+                        })
+                        .catch((error) => {
+                            console.error("Error writing document: ", error);
+                        });
                 })
                 .catch((error) => {
                     //var errorCode = error.code;
@@ -444,7 +439,7 @@ export default function Signup() {
                             </Button>
                             <Typography style={{ textAlign: 'center', fontSize: '15px', marginTop: '20px' }} >
                                 Already have a account?
-                            <Link
+                                <Link
                                     to="/login"
                                     onClick={() => {
                                         setCreateLoginDialog(true);

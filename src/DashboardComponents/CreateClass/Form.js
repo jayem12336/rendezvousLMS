@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import {
-  Button,
-  DialogActions,
-  IconButton,
-  TextField,
-  makeStyles
-} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 
 import { v4 as uuidV4 } from "uuid";
 import { db } from "../../utils/firebase";
