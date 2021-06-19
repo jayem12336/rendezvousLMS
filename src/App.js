@@ -40,6 +40,7 @@ import People from './DashboardComponents/main/ClassLinks/People/People'
 import Settings from './DashboardComponents/main/ClassLinks/Settings/Settings'
 
 import ClipDrawer from './DashboardComponents/Dashboardcomponent/Clipdrawer'
+import NotFound from './homepage/404'
 
 function App() {
 
@@ -276,6 +277,7 @@ function App() {
             path='/dashboardguide'
             isAuthenticated={values.isAuthenticated}
           />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </ThemeProvider>

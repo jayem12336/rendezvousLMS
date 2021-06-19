@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   },
   dialog: {
     borderRadius: '40px',
-    height: '700px',
   },
   textSize: {
     height: 35,
@@ -77,9 +76,10 @@ export default function CreateSchoolForm() {
         open={createSchoolDialog}
         className={classes.dialog}
         maxWidth={false}
+        scroll="body"
+        disableScrollLock 
         PaperProps={{
           style: {
-            height: 550,
             width: 600,
             padding:10
           }
