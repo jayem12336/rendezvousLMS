@@ -14,6 +14,11 @@ npm i react-image-file-resizer --save
 //new install for displaying timestamp
 npm install moment
 
+//new install for calendar 
+npm install @fullcalendar/daygrid
+npm install @fullcalendar/react
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
